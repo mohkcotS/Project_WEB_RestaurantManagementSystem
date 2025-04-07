@@ -1,0 +1,40 @@
+******************************************************************************************
+SET FOREIGN_KEY_CHECKS = 0; 
+DROP TABLE IF EXISTS Users, Tables, Dishes, Orders, Order_Details, Payments, Rewards;
+SET FOREIGN_KEY_CHECKS = 1;
+******************************************************************************************
+
+
+INSERT INTO Dishes (name, type, price, available, imageUrl, createdAt, updatedAt) 
+VALUES 
+    ('Pumpkin Soup with Fresh Cream', 'Appetizer', 5, TRUE, 
+     'https://i.pinimg.com/736x/0d/61/f7/0d61f7f900d59f690685496e1b58395f.jpg', NOW(), NOW()),
+     
+    ('Chicken Wings', 'Appetizer', 4, TRUE, 
+     'https://i.pinimg.com/736x/b8/3d/9b/b83d9b3feb513c8a2563ba646cf9919d.jpg', NOW(), NOW());
+
+INSERT INTO Tables (name, seats, status, createdAt, updatedAt) 
+VALUES 
+    ('A1', 2, 'available', NOW(), NOW()),
+    ('A2', 2, 'available', NOW(), NOW()),
+    ('A3', 2, 'available', NOW(), NOW()),
+    ('A4', 2, 'available', NOW(), NOW()),
+    ('A5', 2, 'available', NOW(), NOW()),
+    ('B1', 4, 'available', NOW(), NOW()),
+    ('B2', 4, 'available', NOW(), NOW()),
+    ('B3', 4, 'available', NOW(), NOW()),
+    ('B4', 4, 'available', NOW(), NOW()),
+    ('B5', 4, 'available', NOW(), NOW()),
+    ('C1', 6, 'available', NOW(), NOW()),
+    ('C2', 6, 'available', NOW(), NOW()),
+    ('C3', 6, 'available', NOW(), NOW()),
+    ('C4', 6, 'available', NOW(), NOW()),
+    ('D1', 8, 'available', NOW(), NOW()),
+    ('D2', 8, 'available', NOW(), NOW()),
+    ('D3', 8, 'available', NOW(), NOW()),
+    ('E1', 10, 'available', NOW(), NOW()),
+    ('E2', 10, 'available', NOW(), NOW()),
+    ('E3', 10, 'available', NOW(), NOW());
+
+   
+
