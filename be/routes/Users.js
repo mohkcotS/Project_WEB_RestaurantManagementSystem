@@ -151,6 +151,7 @@ router.put("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>
     }
 })
 
+//delete user by id
 router.delete("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>{
     try {
         const { id } = req.params;
