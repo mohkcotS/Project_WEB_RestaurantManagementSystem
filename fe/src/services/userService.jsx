@@ -15,7 +15,7 @@ export const getAllUsers = async () => {
       }
     });
 
-    return response.data;
+    return response;
 
   } catch (error) {
     console.error("Can not get User list:", error);
@@ -38,7 +38,7 @@ export const getUserCounted = async () => {
         }
       });
 
-      return response.data;
+      return response;
 
   
   } catch (error) {
@@ -79,6 +79,7 @@ export const updateUserById = async (id, userData) => {
   }
 };
 
+//Delete user by id
 export const deleteUserById = async (id) => {
   try {
     const token = sessionStorage.getItem("accessToken");

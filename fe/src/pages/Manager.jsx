@@ -1,5 +1,6 @@
 import { ManagerHome } from "./ManagerHome"
 import { ManagerUser } from "./ManagerUser"
+import { ManagerTable } from "./ManagerTable"
 import bgImage from '../assets/img/bg1.jpg';
 import { NavBarSide } from "../components/NavBarSide"
 import { NavBarTop } from "../components/NavBarTop"
@@ -28,7 +29,7 @@ export const Manager = () => {
                 <NavBarTop selectedIcon = {selectedIcon} currentUser = {currentUser}/>
                 {selectedIcon === 'home' && <ManagerHome />}
                 {selectedIcon === 'user' && <ManagerUser currentUser = {currentUser} setCurrentUser = {setCurrentUser}/>}
-                        
+                {selectedIcon === 'table' && <ManagerTable />}
                 {selectedIcon === 'logout' && <Logout/>}
             </div>
         </div>

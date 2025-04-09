@@ -7,7 +7,8 @@ export const ManagerHome = () => {
 
     useEffect (()=> {
         const countCustomer = async () => {
-            setUserCounted(await getUserCounted());
+            const response = await getUserCounted()
+            setUserCounted(response.data);
         };
         countCustomer();
 

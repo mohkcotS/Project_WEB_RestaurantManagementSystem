@@ -22,14 +22,14 @@ export const ManagerUser = ({currentUser,setCurrentUser}) => {
 
 
     const updateUserList = async () => {
-        const data = await getAllUsers();
-        setUsers(data);
+        const response = await getAllUsers();
+        setUsers(response.data);
     };
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getAllUsers();
-            setUsers(data);
+            const response = await getAllUsers();
+            setUsers(response.data);
         };
         fetchData();
     }, []);
@@ -74,7 +74,7 @@ export const ManagerUser = ({currentUser,setCurrentUser}) => {
 
 
             <div className="w-full">
-                <div className=" flex text-white text-center text-2xl font-bold">
+                <div className=" flex text-yellow-300  text-center text-2xl font-bold">
                     <div className="w-1/8">ID</div>
                     <div className="w-3/8">Name</div>
                     <div className="w-2/8">Role</div>
@@ -84,8 +84,8 @@ export const ManagerUser = ({currentUser,setCurrentUser}) => {
                 <hr className="text-white mt-5 mb-10" />
 
                 {filteredUsers.map(user => (
-                    <div key={user.id} className="flex text-white bg-white/20 text-xl border-2 py-4 items-center rounded-3xl 
-                                    text-center shadow-lg shadow-white mb-8 hover:scale-105 duration-500">
+                    <div key={user.id} className="flex text-white  text-xl bg-white/20 py-4 items-center rounded-3xl 
+                                    text-center mb-3 hover:scale-105 duration-500">
                         <div className="w-1/8 font-semibold">{user.id}</div>
                         <div className="w-3/8">{user.name}</div>
                         <div className={`w-2/8 font-bold 
