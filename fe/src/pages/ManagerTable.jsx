@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react"
 import { getAllTables } from "../services/tableService";
 import {TableCreateForm} from "../forms/TableCreateForm";
+import {TableEditForm} from "../forms/TableEditForm";
+import {TableDeleteForm} from "../forms/TableDeleteForm";
 import { Toast } from "../components/Toast";
 
 
 export const ManagerTable = () => {
     const [tables, setTables] = useState([])
     const [openCreate,setOpenCreate] = useState(false)
+    const [openEdit,setOpenEdit] = useState(false)
+    const [openDelete,setOpenDelete] = useState(false)
+
+    const [editId, seteditId] = useState(null);
+
     const [notification , setNotification] = useState({ message: "", status: "" })
 
     const updateTableList = async () => {
@@ -49,8 +56,12 @@ export const ManagerTable = () => {
                                     <h2 className={`text-center text-2xl mb-5 ${tb.status === "available" ? "text-green-500" : "text-red-500"}`}>{tb.status}</h2>
 
                                     <div className="flex justify-center gap-10">
-                                        <button className="rounded-xl border-2 border-blue-500 hover:cursor-pointer hover:bg-blue-500  hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Edit</button>
-                                        <button className="rounded-xl border-2 border-red-500 hover:cursor-pointer hover:bg-red-500 hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Delete</button>
+                                        <button 
+                                        onClick={()=>  {seteditId(tb.id); setOpenEdit(true)}}
+                                        className="rounded-xl border-2 border-blue-500 hover:cursor-pointer hover:bg-blue-500  hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 z-1">Edit</button>
+                                        <button 
+                                        onClick={()=>  {seteditId(tb.id); setOpenDelete(true)}}
+                                        className="rounded-xl border-2 border-red-500 hover:cursor-pointer hover:bg-red-500 hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Delete</button>
                                     </div>
 
                                     {tb.status === "occupied" && <div className="absolute inset-0 bg-black/60 rounded-3xl"></div>} 
@@ -67,6 +78,10 @@ export const ManagerTable = () => {
             </div>
             {/*create table */}
             {openCreate && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><TableCreateForm setOpenCreate={setOpenCreate} setNotification={setNotification} updateTableList = {updateTableList}/></div>}
+            {/*edit table */}
+            {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><TableEditForm editId = {editId} setOpenEdit={setOpenEdit} setNotification={setNotification} updateTableList = {updateTableList}/></div>}
+            {/* Delete form */}
+            {openDelete && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><TableDeleteForm editId={editId} setOpenDelete = {setOpenDelete} setNotification = {setNotification} updateTableList = {updateTableList} /></div>}
             {/* Toast */}
             {notification?.message && <div className="z-25"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}                 
         </div>

@@ -73,7 +73,6 @@ export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , u
                     value={user.role}
                     onChange={(e) => setUser({ ...user, role: e.target.value })}
                 >
-                    <option value="">Select Role</option>
                     <option value="Customer">Customer</option>
                     <option value="Manager">Manager</option>
                     <option value="Chef">Chef</option>

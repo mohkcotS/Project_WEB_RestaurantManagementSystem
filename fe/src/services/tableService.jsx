@@ -42,3 +42,54 @@ export const createTable = async (data) => {
         throw(error)
     }
 }
+
+//get table by id
+export const getTableById = async (id) => {
+    try {
+      const token = sessionStorage.getItem("accessToken");
+      if (!token) throw new Error("Don't have token, Login again");
+  
+      const response = await axios.get(`http://localhost:3001/tables/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      return response;
+    } catch (error) {
+      return error
+    }
+  };
+
+//Update table by id
+export const updateTableById = async (id, tableData) => {
+    try {
+      const token = sessionStorage.getItem("accessToken");
+      if (!token) throw new Error("Don't have token, Login again");
+  
+      const response = await axios.put(
+        `http://localhost:3001/tables/${id}`, tableData,  {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+  
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  //Delete table by id
+
+  //Delete user by id
+export const deleteTableById = async (id) => {
+  try {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) throw new Error("Don't have token, Login again");
+
+    const response = await axios.delete(`http://localhost:3001/tables/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
