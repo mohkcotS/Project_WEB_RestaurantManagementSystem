@@ -6,14 +6,16 @@ module.exports = (sequelize,DataTypes) => {
             allowNull: false
         },
 
-        seats:{
-            type: DataTypes.INTEGER,
-            allowNull: false
+        type:{
+            type: DataTypes.ENUM("S", "M", "L"),
+            allowNull: false,
+            defaultValue: "S"
         },
 
         status:{
             type: DataTypes.ENUM("available", "occupied"),
-            allowNull: false
+            allowNull: false,
+            defaultValue: "available"
         }
 
         
