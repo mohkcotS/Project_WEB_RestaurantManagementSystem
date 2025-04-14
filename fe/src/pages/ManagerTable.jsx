@@ -3,18 +3,15 @@ import { getAllTables } from "../services/tableService";
 import {TableCreateForm} from "../forms/TableCreateForm";
 import {TableEditForm} from "../forms/TableEditForm";
 import {TableDeleteForm} from "../forms/TableDeleteForm";
-import { Toast } from "../components/Toast";
 
 
-export const ManagerTable = () => {
+export const ManagerTable = ({setNotification}) => {
     const [tables, setTables] = useState([])
     const [openCreate,setOpenCreate] = useState(false)
     const [openEdit,setOpenEdit] = useState(false)
     const [openDelete,setOpenDelete] = useState(false)
 
     const [editId, seteditId] = useState(null);
-
-    const [notification , setNotification] = useState({ message: "", status: "" })
 
     const updateTableList = async () => {
             const response = await getAllTables();
@@ -31,7 +28,7 @@ export const ManagerTable = () => {
 
 
     return (
-        <div className="w-[80%] h-auto mx-auto flex flex-col my-10 gap-20 border-2">
+        <div className="w-[80%] h-auto mx-auto flex flex-col my-10 gap-20">
 
             <div className="flex justify-between">
                 <div>
@@ -82,8 +79,7 @@ export const ManagerTable = () => {
             {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><TableEditForm editId = {editId} setOpenEdit={setOpenEdit} setNotification={setNotification} updateTableList = {updateTableList}/></div>}
             {/* Delete form */}
             {openDelete && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><TableDeleteForm editId={editId} setOpenDelete = {setOpenDelete} setNotification = {setNotification} updateTableList = {updateTableList} /></div>}
-            {/* Toast */}
-            {notification?.message && <div className="z-25"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}                 
+            
         </div>
     )
 }

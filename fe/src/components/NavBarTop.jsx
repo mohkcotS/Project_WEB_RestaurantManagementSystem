@@ -4,7 +4,7 @@ export const NavBarTop = ({selectedIcon , currentUser}) => {
         { id: "user", text: "USER" },
         { id: "table", text: "TABLE" },
         { id: "order", text: "ORDER" },
-        { id: "food", text: "FOOD" },
+        { id: "food", text: "DISH" },
         { id: "logout"  },
     ]
 

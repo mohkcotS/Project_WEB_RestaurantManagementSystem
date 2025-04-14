@@ -20,9 +20,6 @@ function App() {
             <Route path="/manager/" element={<Manager />} />
             <Route path="/chef/" element={<Chef/>} />
             <Route path="/cashier/" element={<Cashier/>} />
-             
-            
-            
           </Routes> 
       </BrowserRouter>
     </div>

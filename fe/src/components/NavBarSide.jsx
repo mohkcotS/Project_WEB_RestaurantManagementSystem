@@ -1,4 +1,4 @@
-import { svg } from "../svg/svg.jsx"
+import { svg } from "../assets/managerPageSvg"
 
 export const NavBarSide = ({selectedIcon, setSelectedIcon}) => {
         const icons = [

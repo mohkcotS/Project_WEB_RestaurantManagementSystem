@@ -1,6 +1,9 @@
 import { ManagerHome } from "./ManagerHome"
 import { ManagerUser } from "./ManagerUser"
 import { ManagerTable } from "./ManagerTable"
+import { ManagerDish } from "./ManagerDish"
+import { Toast } from "../components/Toast";
+
 import bgImage from '../assets/img/bg1.jpg';
 import { NavBarSide } from "../components/NavBarSide"
 import { NavBarTop } from "../components/NavBarTop"
@@ -13,9 +16,7 @@ export const Manager = () => {
     const decode = jwtDecode(sessionStorage.getItem("accessToken"))
     const [selectedIcon, setSelectedIcon] = useState("home");
     const [currentUser,setCurrentUser] = useState({id : decode.id, name : decode.name , role: decode.role})
-
-    
-
+    const [notification , setNotification] = useState({ message: "", status: "" })
 
     return (
         <div className="max-w-screen h-auto flex relative bg-center" style={{ backgroundImage: `url(${bgImage})` }}>
@@ -28,10 +29,13 @@ export const Manager = () => {
             <div className="relative flex-1">
                 <NavBarTop selectedIcon = {selectedIcon} currentUser = {currentUser}/>
                 {selectedIcon === 'home' && <ManagerHome />}
-                {selectedIcon === 'user' && <ManagerUser currentUser = {currentUser} setCurrentUser = {setCurrentUser}/>}
-                {selectedIcon === 'table' && <ManagerTable />}
+                {selectedIcon === 'user' && <ManagerUser currentUser = {currentUser} setCurrentUser = {setCurrentUser} setNotification = {setNotification}/>}
+                {selectedIcon === 'table' && <ManagerTable setNotification = {setNotification}/>}
+                {selectedIcon === 'food' && <ManagerDish setNotification = {setNotification} />}
                 {selectedIcon === 'logout' && <Logout/>}
             </div>
+            {/* Toast */}
+            {notification?.message && <div className="z-25"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}                 
         </div>
     )
 }

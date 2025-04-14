@@ -77,8 +77,6 @@ export const updateTableById = async (id, tableData) => {
   };
 
   //Delete table by id
-
-  //Delete user by id
 export const deleteTableById = async (id) => {
   try {
     const token = sessionStorage.getItem("accessToken");

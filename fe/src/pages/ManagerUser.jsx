@@ -5,7 +5,7 @@ import { UserDeleteForm } from "../forms/UserDeleteForm";
 import { Toast } from "../components/Toast";
 import { Manager_UserEditForm } from "../forms/Manager_UserEditForm";
 
-export const ManagerUser = ({currentUser,setCurrentUser}) => {
+export const ManagerUser = ({currentUser,setCurrentUser,setNotification}) => {
     const [users, setUsers] = useState([]);
     // Open model
     const [openForm, setOpenForm] = useState(false);
@@ -16,8 +16,7 @@ export const ManagerUser = ({currentUser,setCurrentUser}) => {
     // Search
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedRole, setSelectedRole] = useState("All");
-    // Notification
-    const [notification , setNotification] = useState({ message: "", status: "" })
+
 
 
 
@@ -110,8 +109,6 @@ export const ManagerUser = ({currentUser,setCurrentUser}) => {
             {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Manager_UserEditForm editId={editId} setOpenEdit= {setOpenEdit} setNotification = {setNotification} updateUserList = {updateUserList} currentUser = {currentUser} setCurrentUser = {setCurrentUser} /></div>}
             {/* Delete form */}
             {openDelete && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserDeleteForm editId={editId} setOpenDelete = {setOpenDelete} setNotification = {setNotification} updateUserList = {updateUserList} /></div>}
-            {/* Toast */}
-            {notification?.message && <div className="z-25"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}
 
         </div>
     )

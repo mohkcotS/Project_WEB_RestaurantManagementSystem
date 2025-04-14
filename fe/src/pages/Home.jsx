@@ -7,7 +7,7 @@ import { Toast } from '../components/Toast';
 import * as yup from 'yup'
 import axios from 'axios'
 import Logo from "../assets/logo.svg";
-import { images } from "../images/homePageImg"
+import { images } from "../assets/homePageImg"
 
 
 export const Home = () => {
