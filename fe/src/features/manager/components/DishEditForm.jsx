@@ -1,4 +1,4 @@
-import { getDishById, updateDishById } from "../services/DishService";
+import { getDishById, updateDishById } from "../../../services/DishService";
 import { useEffect, useState } from "react";
  
 export const DishEditForm = ({ editId , setOpenEdit, setNotification , updateDishList}) => {

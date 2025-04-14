@@ -1,6 +1,6 @@
-import { svg } from "../assets/managerPageSvg"
+import { svg } from "../../../assets/managerPageSvg"
 
-export const NavBarSide = ({selectedIcon, setSelectedIcon}) => {
+export const ManagerNavBarSide = ({selectedIcon, setSelectedIcon}) => {
         const icons = [
             { id: "home", src: svg.home },
             { id: "user", src: svg.user },

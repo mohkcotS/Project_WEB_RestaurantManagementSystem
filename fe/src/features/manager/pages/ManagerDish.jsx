@@ -1,9 +1,9 @@
 import { useEffect, useState, useMemo } from "react"
-import { getAllDishes } from "../services/DishService"; 
-import {DishCreateForm} from "../forms/DishCreateForm";
-import { DishEditForm } from "../forms/DishEditForm";
+import { getAllDishes } from "../../../services/DishService"; 
+import {DishCreateForm} from "../components/DishCreateForm";
+import { DishEditForm } from "../components/DishEditForm";
 import { DishCategorySection } from "../components/DishCategorySection";
-import {DishDeleteForm} from "../forms/DishDeleteForm";
+import {DishDeleteForm} from "../components/DishDeleteForm";
 
 export const ManagerDish = ({ setNotification }) => {
     const [choose, setChoose] = useState("All")

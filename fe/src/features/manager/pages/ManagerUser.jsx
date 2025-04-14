@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { getAllUsers } from "../services/userService";
-import { UserCreateForm } from "../forms/UserCreateForm";
-import { UserDeleteForm } from "../forms/UserDeleteForm";
-import { Toast } from "../components/Toast";
-import { Manager_UserEditForm } from "../forms/Manager_UserEditForm";
+import { getAllUsers } from "../../../services/userService";
+import { UserCreateForm } from "../components/UserCreateForm";
+import { UserDeleteForm } from "../components/UserDeleteForm";
+import { Toast } from "../../../components/Toast";
+import { Manager_UserEditForm } from "../components/Manager_UserEditForm";
 
 export const ManagerUser = ({currentUser,setCurrentUser,setNotification}) => {
     const [users, setUsers] = useState([]);

@@ -1,4 +1,4 @@
-export const NavBarTop = ({selectedIcon , currentUser}) => {
+export const ManagerNavBarTop = ({selectedIcon , currentUser}) => {
     const icons = [
         { id: "home", text: "DASH BOARD" },
         { id: "user", text: "USER" },

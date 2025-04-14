@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getUserCounted } from "../services/userService.jsx";
+import { getUserCounted } from "../../../services/userService.jsx";
 
 export const ManagerHome = () => {
     const [userCounted,setUserCounted] = useState([])

@@ -1,4 +1,4 @@
-import { getTableById, updateTableById } from "../services/tableService";
+import { getTableById, updateTableById } from "../../../services/tableService";
 import { useEffect, useState } from "react";
 
 export const TableEditForm = ({ editId , setOpenEdit, setNotification , updateTableList}) => {

@@ -1,8 +1,8 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import { Manager} from './pages/Manager'
-import { Customer } from './pages/Customer'
-import { Cashier } from './pages/Cashier'
-import { Chef } from './pages/Chef'
+import { Manager} from './features/manager/pages/Manager'
+import { Customer } from './features/customer/pages/Customer'
+import { Cashier } from './features/cashier/pages/Cashier'
+import { Chef } from './features/chef/pages/Chef'
 
 import  {Home } from './pages/Home'
 

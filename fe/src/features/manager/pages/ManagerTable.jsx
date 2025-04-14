@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { getAllTables } from "../services/tableService";
-import {TableCreateForm} from "../forms/TableCreateForm";
-import {TableEditForm} from "../forms/TableEditForm";
-import {TableDeleteForm} from "../forms/TableDeleteForm";
+import { getAllTables } from "../../../services/tableService";
+import {TableCreateForm} from "../components/TableCreateForm";
+import {TableEditForm} from "../components/TableEditForm";
+import {TableDeleteForm} from "../components/TableDeleteForm";
 
 
 export const ManagerTable = ({setNotification}) => {

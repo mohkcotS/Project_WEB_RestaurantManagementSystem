@@ -1,15 +1,14 @@
-import { ManagerHome } from "./ManagerHome"
-import { ManagerUser } from "./ManagerUser"
-import { ManagerTable } from "./ManagerTable"
-import { ManagerDish } from "./ManagerDish"
-import { Toast } from "../components/Toast";
-
-import bgImage from '../assets/img/bg1.jpg';
-import { NavBarSide } from "../components/NavBarSide"
-import { NavBarTop } from "../components/NavBarTop"
+import { ManagerHome} from "../pages/ManagerHome";
+import { ManagerDish} from "../pages/ManagerDish";
+import { ManagerTable} from "../pages/ManagerTable";
+import { ManagerUser} from "../pages/ManagerUser";
+import { Toast } from "../../../components/Toast";
+import bgImage from '../../../assets/img/bg.jpg';
+import {ManagerNavBarSide} from "../components/ManagerNavBarSide"
+import {ManagerNavBarTop} from "../components/ManagerNavBarTop"
 import { useState } from "react"
 import { jwtDecode } from "jwt-decode"
-import { Logout } from "./Logout";
+import { Logout } from "../../../components/Logout";
 
 
 export const Manager = () => {
@@ -23,11 +22,11 @@ export const Manager = () => {
             {/* Overlay */}
             <div className="absolute top-0 left-0 w-full h-full bg-black/80 z-0"></div>
             {/* Nav bar */}
-            <NavBarSide selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
+            <ManagerNavBarSide selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
             {/* Main */}
             
             <div className="relative flex-1">
-                <NavBarTop selectedIcon = {selectedIcon} currentUser = {currentUser}/>
+                <ManagerNavBarTop selectedIcon = {selectedIcon} currentUser = {currentUser}/>
                 {selectedIcon === 'home' && <ManagerHome />}
                 {selectedIcon === 'user' && <ManagerUser currentUser = {currentUser} setCurrentUser = {setCurrentUser} setNotification = {setNotification}/>}
                 {selectedIcon === 'table' && <ManagerTable setNotification = {setNotification}/>}
