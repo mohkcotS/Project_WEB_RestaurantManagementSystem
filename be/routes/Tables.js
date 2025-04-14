@@ -43,7 +43,7 @@ router.put("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>
     }
 })
 
-//delete user by id
+//delete table by id
 router.delete("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>{
     try {
         const { id } = req.params;
@@ -59,7 +59,7 @@ router.delete("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next
     }
 })
 
-//get user from id
+//get table from id
 router.get("/:id", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
         const { id } = req.params; 

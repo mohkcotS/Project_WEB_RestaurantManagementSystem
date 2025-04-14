@@ -16,8 +16,8 @@ module.exports = (sequelize,DataTypes) => {
             allowNull: false
         },
 
-        available:{
-            type: DataTypes.BOOLEAN,
+        status:{
+            type: DataTypes.ENUM("available", "sold out"),
             allowNull: false
         },
 
