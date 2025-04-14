@@ -16,7 +16,6 @@ const svg = {
     table: svg5,
     user: svg6,
     money: svg7,
-
   };
   
   export {svg};
