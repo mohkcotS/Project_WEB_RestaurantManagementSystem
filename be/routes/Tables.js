@@ -43,6 +43,23 @@ router.put("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>
     }
 })
 
+//Edit table status by id
+router.patch("/:id/status", validateToken, checkRole(["Customer"]),  async(req,res,next)=>{
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const table = await Tables.findByPk(id);
+
+        await table.update({status});
+
+        return res.status(200).json({ message: "Table confirmation successfully" });
+
+    } catch (error) {
+        next({ statusCode: 500, message: "Internal server error" });
+    }
+})
+
 //delete table by id
 router.delete("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>{
     try {
