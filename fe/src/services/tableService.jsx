@@ -76,6 +76,26 @@ export const updateTableById = async (id, tableData) => {
     }
   };
 
+// Update table status only
+export const updateTableStatus = async (id, status) => {
+  try {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) throw new Error("Don't have token, Login again");
+
+    const response = await axios.patch(
+      `http://localhost:3001/tables/${id}/status`,
+      { status },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
   //Delete table by id
 export const deleteTableById = async (id) => {
   try {

@@ -1,40 +1,61 @@
-******************************************************************************************
 SET FOREIGN_KEY_CHECKS = 0; 
 DROP TABLE IF EXISTS Users, Tables, Dishes, Orders, Order_Details, Payments, Rewards;
 SET FOREIGN_KEY_CHECKS = 1;
-******************************************************************************************
-
+********************************************************************************************
 
 INSERT INTO Dishes (name, type, price, available, imageUrl, createdAt, updatedAt) 
 VALUES 
-    ('Pumpkin Soup with Fresh Cream', 'Appetizer', 5, TRUE, 
-     'https://i.pinimg.com/736x/0d/61/f7/0d61f7f900d59f690685496e1b58395f.jpg', NOW(), NOW()),
-     
-    ('Chicken Wings', 'Appetizer', 4, TRUE, 
-     'https://i.pinimg.com/736x/b8/3d/9b/b83d9b3feb513c8a2563ba646cf9919d.jpg', NOW(), NOW());
+('Pumpkin Soup with Fresh Cream', 'Appetizer', 5, 'available', 'https://i.pinimg.com/736x/0d/61/f7/0d61f7f900d59f690685496e1b58395f.jpg', NOW(), NOW()),
+('Caesar Salad', 'Appetizer', 7, 'available', 'https://i.pinimg.com/736x/19/ff/4b/19ff4b8d5392b1d384f8fbcf0c8e187d.jpg', NOW(), NOW()),
+('Bruschetta', 'Appetizer', 6, 'available', 'https://i.pinimg.com/736x/ec/fb/f7/ecfbf7d41f01ca0d8a4a016f4cc33211.jpg', NOW(), NOW()),
+('Garlic Bread', 'Appetizer', 4, 'available', 'https://i.pinimg.com/1200x/3b/f7/11/3bf71193666074c21826e70b7d5cfda7.jpg', NOW(), NOW()),
+('Smoked Salmon Crostini', 'Appetizer', 7, 'available', 'https://i.pinimg.com/736x/28/2b/88/282b88be6fb888da76a86ca60e174936.jpg', NOW(), NOW()),
+('Mozzarella Sticks', 'Appetizer', 5, 'available', 'https://i.pinimg.com/1200x/15/33/60/1533606cd3fbf6e70e5e08b5b10eb22e.jpg', NOW(), NOW()),
+('Beef Steak', 'Main Course', 22, 'available', 'https://i.pinimg.com/1200x/ff/ce/51/ffce5170cf9fd6ffc33c9fdd2fd5b717.jpg', NOW(), NOW()),
+('Grilled Salmon', 'Main Course', 18, 'available', 'https://i.pinimg.com/1200x/48/f7/f2/48f7f2d5c32c78d5bac93d574d070e56.jpg', NOW(), NOW()),
+('Spaghetti Carbonara', 'Main Course', 13, 'available', 'https://i.pinimg.com/1200x/f6/9c/b4/f69cb45d9a7ce795eda82fed18347bbf.jpg', NOW(), NOW()),
+('Roasted Lamb Rack', 'Main Course', 24, 'available', 'https://i.pinimg.com/1200x/6b/5c/31/6b5c31bc1e55b1305c28a81fcdce36d2.jpg', NOW(), NOW()),
+('Duck Confit', 'Main Course', 20, 'available', 'https://i.pinimg.com/1200x/a9/d6/d3/a9d6d390b3a649be217a98a0bc47e8ed.jpg', NOW(), NOW()),
+('BBQ rib', 'Main Course', 22, 'available', 'https://i.pinimg.com/1200x/4e/51/69/4e5169719418acea078cce73e74a2d97.jpg', NOW(), NOW()),
+('Tiramisu', 'Dessert', 7, 'available', 'https://i.pinimg.com/1200x/53/68/3f/53683fcc3b8248c6e6d3adf3801a7d02.jpg', NOW(), NOW()),
+('Panna Cotta', 'Dessert', 6, 'available', 'https://i.pinimg.com/1200x/33/04/5d/33045d34012feff40248a3e48332b0bc.jpg', NOW(), NOW()),
+('Chocolate Lava Cake', 'Dessert', 9, 'available', 'https://i.pinimg.com/1200x/5d/bf/8a/5dbf8a73662cc33a103fcc3d594972ce.jpg', NOW(), NOW()),
+('Cheesecake', 'Dessert', 7, 'available', 'https://i.pinimg.com/1200x/01/bf/f2/01bff2b0806f17c7a6a7507ed3bfaf5a.jpg', NOW(), NOW()),
+('Crème Brûlée', 'Dessert', 8, 'available', 'https://i.pinimg.com/1200x/3a/5e/d6/3a5ed6724eaadc25254cb79afbe37f70.jpg', NOW(), NOW()),
+('Profiteroles', 'Dessert', 5, 'available', 'https://i.pinimg.com/1200x/14/cf/f8/14cff88bcacd23278f27117cbefa7b5a.jpg', NOW(), NOW()),
+('Mashed Potatoes', 'Side Dish', 4, 'available', 'https://i.pinimg.com/1200x/02/e2/19/02e219cc73d4d4caca47df7fb2a112fa.jpg', NOW(), NOW()),
+('Ratatouille', 'Side Dish', 6, 'available', 'https://i.pinimg.com/1200x/f4/92/2b/f4922b461c55ffe98dd95573198d4661.jpg', NOW(), NOW()),
+('French Fries', 'Side Dish', 3, 'available', 'https://i.pinimg.com/1200x/73/7e/d9/737ed93987aae98a76fc2e5f12fc0ecc.jpg', NOW(), NOW()),
+('Chicken Wings', 'Side Dish', 4, 'available', 'https://i.pinimg.com/736x/b8/3d/9b/b83d9b3feb513c8a2563ba646cf9919d.jpg', NOW(), NOW()),
+('Coleslaw', 'Side Dish', 4, 'available', 'https://i.pinimg.com/1200x/a2/3a/51/a23a518e3acdc1a4c41ac450b10b2aa2.jpg', NOW(), NOW()),
+('Baked Asparagus', 'Side Dish', 4, 'available', 'https://i.pinimg.com/1200x/39/02/eb/3902eb0efefd1168981583590fa4f3c0.jpg', NOW(), NOW()),
+('Red Wine', 'Beverage', 10, 'available', 'https://i.pinimg.com/736x/f4/a0/53/f4a0539c797e7a5699ce5f88ef2d1c38.jpg', NOW(), NOW()),
+('White Wine', 'Beverage', 10, 'available', 'https://i.pinimg.com/1200x/5d/e5/93/5de593deef835812ffb3fe34eed14bf0.jpg', NOW(), NOW()),
+('Expresso', 'Beverage', 10, 'available', 'https://i.pinimg.com/1200x/a1/b7/23/a1b72390e4170207190419c1cd19d9cc.jpg', NOW(), NOW()),
+('Cappuccino', 'Beverage', 10, 'available', 'https://i.pinimg.com/1200x/f2/e0/35/f2e03545102a03e76e07ddaf5f0120a0.jpg', NOW(), NOW()),
+('Arnold Palmer', 'Beverage', 10, 'available', 'https://i.pinimg.com/736x/5f/2a/ae/5f2aae2e2024ce41260951165bfc155f.jpg', NOW(), NOW()),
+('Sparkling Water', 'Beverage', 3, 'available', 'https://i.pinimg.com/1200x/a7/e8/f5/a7e8f5d7af5f681e1268fc1ce06555e9.jpg', NOW(), NOW());
 
-INSERT INTO Tables (name, seats, status, createdAt, updatedAt) 
+
+INSERT INTO Tables (name, type, status, createdAt, updatedAt) 
 VALUES 
-    ('A1', 2, 'available', NOW(), NOW()),
-    ('A2', 2, 'available', NOW(), NOW()),
-    ('A3', 2, 'available', NOW(), NOW()),
-    ('A4', 2, 'available', NOW(), NOW()),
-    ('A5', 2, 'available', NOW(), NOW()),
-    ('B1', 4, 'available', NOW(), NOW()),
-    ('B2', 4, 'available', NOW(), NOW()),
-    ('B3', 4, 'available', NOW(), NOW()),
-    ('B4', 4, 'available', NOW(), NOW()),
-    ('B5', 4, 'available', NOW(), NOW()),
-    ('C1', 6, 'available', NOW(), NOW()),
-    ('C2', 6, 'available', NOW(), NOW()),
-    ('C3', 6, 'available', NOW(), NOW()),
-    ('C4', 6, 'available', NOW(), NOW()),
-    ('D1', 8, 'available', NOW(), NOW()),
-    ('D2', 8, 'available', NOW(), NOW()),
-    ('D3', 8, 'available', NOW(), NOW()),
-    ('E1', 10, 'available', NOW(), NOW()),
-    ('E2', 10, 'available', NOW(), NOW()),
-    ('E3', 10, 'available', NOW(), NOW());
-
-   
-
+(1, 'S', 'available', NOW(), NOW()),
+(2, 'L', 'occupied', NOW(), NOW()),
+(3, 'M', 'available', NOW(), NOW()),
+(4, 'M', 'occupied', NOW(), NOW()),
+(5, 'S', 'available', NOW(), NOW()),
+(6, 'L', 'available', NOW(), NOW()),
+(7, 'S', 'available', NOW(), NOW()),
+(8, 'M', 'available', NOW(), NOW()),
+(9, 'L', 'available', NOW(), NOW()),
+(10, 'S', 'available', NOW(), NOW()),
+(11, 'M', 'available', NOW(), NOW()),
+(12, 'S', 'available', NOW(), NOW()),
+(13, 'L', 'available', NOW(), NOW()),
+(14, 'M', 'available', NOW(), NOW()),
+(15, 'L', 'available', NOW(), NOW()),
+(16, 'M', 'available', NOW(), NOW()),
+(17, 'S', 'available', NOW(), NOW()),
+(18, 'S', 'available', NOW(), NOW()),
+(19, 'L', 'available', NOW(), NOW()),
+(20, 'M', 'available', NOW(), NOW());
