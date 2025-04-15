@@ -4,8 +4,10 @@ import {DishCreateForm} from "../components/DishCreateForm";
 import { DishEditForm } from "../components/DishEditForm";
 import { DishCategorySection } from "../components/DishCategorySection";
 import {DishDeleteForm} from "../components/DishDeleteForm";
+import { useOutletContext } from "react-router-dom"
 
-export const ManagerDish = ({ setNotification }) => {
+export const ManagerDish = () => {
+    const  setNotification  = useOutletContext()
     const [choose, setChoose] = useState("All")
     const [dishes, setDishes] = useState([])
     const [searchTerm, setSearchTerm] = useState("");

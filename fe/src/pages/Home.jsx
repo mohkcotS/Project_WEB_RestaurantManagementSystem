@@ -46,10 +46,10 @@ export const Home = () => {
 
           // Dieu huong trang
           if (decoded.role === 'Customer') {
-            navigate("/customer")
+            navigate("/customer/table")
           }
           else if (decoded.role === 'Manager') {
-            navigate("/manager")
+            navigate("/manager/home")
           }
           else if (decoded.role === 'Cashier') {
             navigate("/cashier")

@@ -1,14 +1,17 @@
+import { useLocation } from "react-router-dom"
+
 export const ManagerNavBarTop = ({selectedIcon , currentUser}) => {
+    const location = useLocation();
     const icons = [
         { id: "home", text: "DASH BOARD" },
         { id: "user", text: "USER" },
         { id: "table", text: "TABLE" },
         { id: "order", text: "ORDER" },
-        { id: "food", text: "DISH" },
+        { id: "dish", text: "DISH" },
         { id: "logout"  },
     ]
 
-    const title = icons.find(icon => icon.id === selectedIcon).text;
+    const title = icons.find(icon => icon.id === location.pathname.split("/")[2]).text;
 
     return(
         <div className="flex justify-between py-8 px-20">

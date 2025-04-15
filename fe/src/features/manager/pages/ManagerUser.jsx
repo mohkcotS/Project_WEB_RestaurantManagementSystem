@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { getAllUsers } from "../../../services/userService";
 import { UserCreateForm } from "../components/UserCreateForm";
 import { UserDeleteForm } from "../components/UserDeleteForm";
-import { Toast } from "../../../components/Toast";
 import { Manager_UserEditForm } from "../components/Manager_UserEditForm";
+import { useOutletContext } from "react-router-dom"
 
-export const ManagerUser = ({currentUser,setCurrentUser,setNotification}) => {
+export const ManagerUser = () => {
+    const { currentUser, setCurrentUser, setNotification } = useOutletContext()
     const [users, setUsers] = useState([]);
     // Open model
     const [openForm, setOpenForm] = useState(false);

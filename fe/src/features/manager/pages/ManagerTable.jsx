@@ -3,9 +3,10 @@ import { getAllTables } from "../../../services/tableService";
 import {TableCreateForm} from "../components/TableCreateForm";
 import {TableEditForm} from "../components/TableEditForm";
 import {TableDeleteForm} from "../components/TableDeleteForm";
+import { useOutletContext } from "react-router-dom"
 
-
-export const ManagerTable = ({setNotification}) => {
+export const ManagerTable = () => {
+    const setNotification  = useOutletContext()
     const [tables, setTables] = useState([])
     const [openCreate,setOpenCreate] = useState(false)
     const [openEdit,setOpenEdit] = useState(false)
