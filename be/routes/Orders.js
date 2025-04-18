@@ -15,8 +15,8 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         const post = req.body;
-        await Orders.create(post);
-        res.json(post);
+        const newOrder = await Orders.create(post);
+        res.status(201).json(newOrder);
     } catch (error) {
         next(error);
     }

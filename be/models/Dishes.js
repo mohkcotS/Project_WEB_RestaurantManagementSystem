@@ -29,9 +29,10 @@ module.exports = (sequelize,DataTypes) => {
 
     Dishes.associate = (models) => {
         Dishes.hasMany(models.Order_Details, {
-            onDelete: "cascade"
+            foreignKey: 'DishId',  
+            onDelete: 'cascade',   
         });
-    }
+    };
 
     return Dishes
 }

@@ -2,15 +2,16 @@ module.exports = (sequelize,DataTypes) => {
 
     const Orders = sequelize.define("Orders",{
         status:{
-            type: DataTypes.ENUM("pending", "preparing", "ready", "delivered"),
-            allowNull: false
+            type: DataTypes.ENUM("pending", "serving", "completed"),
+            allowNull: false,
+            defaultValue: "pending"
         },
 
         total_Price: {
             type: DataTypes.DECIMAL(10, 2),
-            allowNull: false
+            allowNull: false,
+            defaultValue: 0
         }
-
 
 
     })
