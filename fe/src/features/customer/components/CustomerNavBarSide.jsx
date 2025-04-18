@@ -18,7 +18,7 @@ export const CustomerNavBarSide = ({selectedIcon, setSelectedIcon}) => {
                             gap-y-6 items-center pt-32  min-h-screen z-20 sticky top-0 ">
 
 
-                <div className="absolute w-[72px] h-[72px] border-4  border-cyan-500 rounded-3xl transition-transform duration-500"
+                <div className="absolute w-[72px] h-[72px] border-4 border-cyan-500 rounded-3xl transition-transform duration-500"
                     style={{ transform: `translateY(${translateY}px)` }}></div>
 
 

@@ -6,7 +6,7 @@ import {TableDeleteForm} from "../components/TableDeleteForm";
 import { useOutletContext } from "react-router-dom"
 
 export const ManagerTable = () => {
-    const setNotification  = useOutletContext()
+    const {setNotification}  = useOutletContext()
     const [tables, setTables] = useState([])
     const [openCreate,setOpenCreate] = useState(false)
     const [openEdit,setOpenEdit] = useState(false)

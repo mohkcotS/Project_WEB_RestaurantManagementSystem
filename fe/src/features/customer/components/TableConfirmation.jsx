@@ -1,20 +1,28 @@
+import { createOrder } from "../../../services/orderService";
 import { updateTableStatus } from "../../../services/tableService";
 import { useNavigate } from "react-router-dom";
 
 
-export const TableConfirmation = ({selectedTable, setOpenEdit, setConfirmation, setNotification, updateTableList}) => {
+export const TableConfirmation = ({selectedTable, setOpenEdit, setConfirmation, setNotification, updateTableList,selectedUser, setCurrentOrderId}) => {
     const navigate = useNavigate();
+    
+    const data = {
+        TableId: selectedTable.id,
+        UserId: selectedUser
+      };
     const handleSubmit = async (e)   => {
             e.preventDefault();
             try {
                 const response = await updateTableStatus(selectedTable.id,"occupied")
+                const response1 = await createOrder(data)
+                setCurrentOrderId(response1.data)
                 updateTableList();
                 setOpenEdit(false)
                 setNotification({ message: response.data.message , status: "success" })
                 setConfirmation(true)
                 navigate(`/customer/order`);
             } catch (error) {
-                setNotification({ message: error.response.data.message, status: "error" })
+                setNotification(error)
             }
         }
 

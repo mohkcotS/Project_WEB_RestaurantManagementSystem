@@ -16,13 +16,14 @@ export const Customer= () => {
     const [notification , setNotification] = useState({ message: "", status: "" })
     const [selectedTable, setSelectedTable] = useState({});
     const [confirmation,setConfirmation] = useState(false)
+    const [currentOrderId, setCurrentOrderId] = useState({})
+    const [] = useState({dish: 0 , price: 0})
 
     useEffect(() => {
             if (location.pathname === '/customer') {
                 navigate('table')
             }
         }, [])
-
     return (
         <div className="max-w-screen h-auto flex relative bg-center" style={{ backgroundImage: `url(${bgImage})` }}>
             {/* Overlay */}
@@ -32,7 +33,8 @@ export const Customer= () => {
             {/* Main */}
             <div className="relative flex-1">
                 <CustomerNavBarTop selectedIcon = {selectedIcon} currentUser = {currentUser}/>
-                <Outlet context={{ currentUser, setCurrentUser, setNotification, selectedTable, setSelectedTable, confirmation ,setConfirmation }} />
+                <Outlet context={{ currentUser, setCurrentUser, setNotification, selectedTable, setSelectedTable, 
+                    confirmation ,setConfirmation,currentOrderId, setCurrentOrderId}} />
             </div>
             {/* Toast */}
             {notification?.message && <div className="z-25"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}                 

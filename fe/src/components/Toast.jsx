@@ -11,7 +11,7 @@ export const Toast = ({ message, status, onClose }) => {
     const timer = setTimeout(() => {
       setVisible(false); // Trượt ra
       setTimeout(onClose, 500); // Xóa Toast sau khi trượt ra xong
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [onClose]);
