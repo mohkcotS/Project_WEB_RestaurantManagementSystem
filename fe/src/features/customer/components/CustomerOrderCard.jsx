@@ -1,4 +1,4 @@
-import { addToCart,decreaseFromCart } from "../untils/cartUtils"
+import { addToCart, decreaseFromCart } from "../utils/CartUtils"
 export const CustomerOrderCard = ({order ,cart,setCart}) => {
     
     return (

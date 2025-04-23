@@ -7,7 +7,7 @@ import { CustomerTableCard } from "../components/CustomerTableCard";
 export const CustomerTable = () => {
     const [tables, setTables] = useState([])
     const [openEdit, setOpenEdit] = useState(false)
-    const {selectedTable, setSelectedTable, confirmation ,setConfirmation, setNotification,currentUser, setCurrentOrderId} = useOutletContext()
+    const {selectedTable, setSelectedTable, confirmation ,setConfirmation, setNotification,currentUser, setCurrentOrder} = useOutletContext()
     const updateTableList = async () => {
             const response = await getAllTables();
             setTables(response.data);
@@ -49,7 +49,7 @@ export const CustomerTable = () => {
             {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
             <TableConfirmation selectedTable={selectedTable} setOpenEdit={setOpenEdit} setConfirmation = {setConfirmation} 
             setNotification = {setNotification} updateTableList = {updateTableList} selectedUser={currentUser.id} 
-            setCurrentOrderId = {setCurrentOrderId}
+            setCurrentOrder = {setCurrentOrder}
             /></div>}
 
         </div>

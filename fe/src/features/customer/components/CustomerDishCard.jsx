@@ -1,4 +1,4 @@
-import { addToCart, decreaseFromCart } from "../untils/cartUtils";
+import { addToCart, decreaseFromCart } from "../utils/CartUtils";
 
 export const CustomerDishCard = ({ dish, cart , setCart }) => {
     const order = cart.find((item) => item.dish.id === dish.id);

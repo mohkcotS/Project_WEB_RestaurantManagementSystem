@@ -3,7 +3,7 @@ import { updateTableStatus } from "../../../services/tableService";
 import { useNavigate } from "react-router-dom";
 
 
-export const TableConfirmation = ({selectedTable, setOpenEdit, setConfirmation, setNotification, updateTableList,selectedUser, setCurrentOrderId}) => {
+export const TableConfirmation = ({selectedTable, setOpenEdit, setConfirmation, setNotification, updateTableList,selectedUser, setCurrentOrder}) => {
     const navigate = useNavigate();
     
     const data = {
@@ -15,7 +15,7 @@ export const TableConfirmation = ({selectedTable, setOpenEdit, setConfirmation, 
             try {
                 const response = await updateTableStatus(selectedTable.id,"occupied")
                 const response1 = await createOrder(data)
-                setCurrentOrderId(response1.data)
+                setCurrentOrder(response1.data)
                 updateTableList();
                 setOpenEdit(false)
                 setNotification({ message: response.data.message , status: "success" })

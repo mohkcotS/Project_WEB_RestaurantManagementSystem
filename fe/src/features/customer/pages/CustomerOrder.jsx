@@ -12,7 +12,7 @@ export const CustomerOrder = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [cart, setCart] = useState([])
     const [openPanel, setOpenPanel] = useState(false)
-    const {confirmation, setNotification, currentOrderId } = useOutletContext()
+    const {confirmation, setNotification, currentOrder } = useOutletContext()
     const navigate = useNavigate();
 
     if (!confirmation) {
@@ -50,7 +50,7 @@ export const CustomerOrder = () => {
                 quantity: od.quantity,
                 price: od.dish.price,
                 DishId: od.dish.id,
-                OrderId: currentOrderId.id
+                OrderId: currentOrder.id
             });
         });
 
@@ -116,7 +116,7 @@ export const CustomerOrder = () => {
                 </div>
 
                 <div className="fixed bottom-10 right-10 w-[30%]">
-                    <CustomerOrderPanel cart={cart} setCart={setCart} openPanel={openPanel} setOpenPanel={setOpenPanel} handleOrder={handleOrder} orderId={currentOrderId.id}/>
+                    <CustomerOrderPanel cart={cart} setCart={setCart} openPanel={openPanel} setOpenPanel={setOpenPanel} handleOrder={handleOrder} currentOrder={currentOrder}/>
                 </div>        
             </div>
         </div>
