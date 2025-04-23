@@ -2,7 +2,7 @@ module.exports = (sequelize,DataTypes) => {
 
     const Orders = sequelize.define("Orders",{
         status:{
-            type: DataTypes.ENUM("pending", "serving", "completed"),
+            type: DataTypes.ENUM("pending", "completed"),
             allowNull: false,
             defaultValue: "pending"
         },
