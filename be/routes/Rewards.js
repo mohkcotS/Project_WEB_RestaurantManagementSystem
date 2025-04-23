@@ -12,6 +12,7 @@ router.get("/", async (req, res, next) => {
 
 })
 
+
 router.post("/", async (req, res, next) => {
     try {
         const post = req.body;
@@ -23,6 +24,19 @@ router.post("/", async (req, res, next) => {
 
 })
 
+//get reward by userId
+router.get("/user/:id", async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const reward = await Rewards.findOne({
+            where: { UserId: id },
+            attributes: ['tier', 'currentPoints']
+        });
+        res.json(reward);
+    } catch (error) {
+        next(error);
+    }
 
+})
 
 module.exports = router
