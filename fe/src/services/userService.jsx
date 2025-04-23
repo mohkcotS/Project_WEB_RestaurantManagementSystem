@@ -68,7 +68,9 @@ export const updateUserById = async (id, userData) => {
     const token = sessionStorage.getItem("accessToken");
     if (!token) throw new Error("Don't have token, Login again");
 
-    const response = await axios.put(
+    console.log(userData)
+
+    const response = await axios.patch(
       `http://localhost:3001/users/${id}`, userData,  {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -95,3 +97,19 @@ export const deleteUserById = async (id) => {
   }
 };
 
+//get all customer's order by thier id
+
+export const getOrderByUserId = async (id) => {
+  try {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) throw new Error("Don't have token, Login again");
+
+    const response = await axios.get(`http://localhost:3001/users/${id}/orders`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response;
+  } catch (error) {
+    return error
+  }
+};
