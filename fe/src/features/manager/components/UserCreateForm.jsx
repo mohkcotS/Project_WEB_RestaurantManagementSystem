@@ -33,7 +33,7 @@ export const UserCreateForm = ({setOpenForm,setNotification,updateUserList}) => 
             }
 
         } catch (error) {
-            setNotification({ message: error.response.data.message, status: "error" })
+            setNotification(error)
             reset({ name: "", role: data.role, password: data.password, confirmedPassword: "" });
 
         }

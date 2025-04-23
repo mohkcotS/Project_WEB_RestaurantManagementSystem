@@ -1,11 +1,10 @@
-import axios from "axios";
 import { getUserById, updateUserById } from "../../../services/userService";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from "jwt-decode"
 
 
-export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , updateUserList, currentUser, setCurrentUser }) => {
+export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , updateUserList, currentUser, setCurrentUser, getUserInformation }) => {
     const [user, setUser] = useState({ name: "", role: "" });
     const [currentRole,setCurrentRole] = useState("")
     const navigate = useNavigate();
@@ -40,7 +39,7 @@ export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , u
                     const newToken = response.data.accessToken
                     sessionStorage.setItem("accessToken", newToken)
                     const decoded = jwtDecode(newToken);
-                    setCurrentUser({ id: decoded.id, name: decoded.name, role: decoded.role });
+                    getUserInformation(decoded.id)
                     setNotification({ message: response.data.message, status: "success" });
                 }
                 

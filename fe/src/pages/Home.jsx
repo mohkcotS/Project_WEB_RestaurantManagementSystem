@@ -36,12 +36,12 @@ export const Home = () => {
       const response = await axios.post("http://localhost:3001/auth/login", data);
 
       if (response.status === 200) {
-        const { accessToken } = response.data; // Nhan token tu be
+        const { accessToken } = response.data; 
 
-        if (accessToken) { // Check token co ton tai k?
-          sessionStorage.setItem("accessToken", accessToken); // luu token vao session storage de tiep tuc xac thuc api ve sau
+        if (accessToken) { 
+          sessionStorage.setItem("accessToken", accessToken); 
 
-          const decoded = jwtDecode(accessToken); // giai ma token de lay role dieu huong
+          const decoded = jwtDecode(accessToken);
           
 
           // Dieu huong trang

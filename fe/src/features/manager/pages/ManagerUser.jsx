@@ -6,7 +6,7 @@ import { Manager_UserEditForm } from "../components/Manager_UserEditForm";
 import { useOutletContext } from "react-router-dom"
 
 export const ManagerUser = () => {
-    const { currentUser, setCurrentUser, setNotification } = useOutletContext()
+    const { currentUser, setCurrentUser, setNotification, getUserInformation } = useOutletContext()
     const [users, setUsers] = useState([]);
     // Open model
     const [openForm, setOpenForm] = useState(false);
@@ -17,9 +17,6 @@ export const ManagerUser = () => {
     // Search
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedRole, setSelectedRole] = useState("All");
-
-
-
 
     const updateUserList = async () => {
         const response = await getAllUsers();
@@ -107,7 +104,7 @@ export const ManagerUser = () => {
             {/* form */}
             {openForm && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserCreateForm setOpenForm = {setOpenForm} setNotification = {setNotification} updateUserList = {updateUserList}/></div>}
             {/* Edit form */}
-            {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Manager_UserEditForm editId={editId} setOpenEdit= {setOpenEdit} setNotification = {setNotification} updateUserList = {updateUserList} currentUser = {currentUser} setCurrentUser = {setCurrentUser} /></div>}
+            {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Manager_UserEditForm editId={editId} setOpenEdit= {setOpenEdit} setNotification = {setNotification} updateUserList = {updateUserList} currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUserInformation={getUserInformation} /></div>}
             {/* Delete form */}
             {openDelete && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserDeleteForm editId={editId} setOpenDelete = {setOpenDelete} setNotification = {setNotification} updateUserList = {updateUserList} /></div>}
 

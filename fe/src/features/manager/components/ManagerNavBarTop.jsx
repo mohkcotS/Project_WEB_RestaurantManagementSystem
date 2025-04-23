@@ -25,7 +25,7 @@ export const ManagerNavBarTop = ({selectedIcon , currentUser}) => {
                             <div
                                 className="w-18 h-18 bg-white text-cyan-600 flex items-center justify-center text-2xl font-bold 
                                     hover:cursor-pointer rounded-full">
-                                    {currentUser.name.slice(0, 2).toUpperCase()}
+                                    {currentUser.name ? currentUser.name.slice(0, 2).toUpperCase() : "NN"}
                             </div>
 
                             <div className="text-white">
