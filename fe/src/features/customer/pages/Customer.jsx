@@ -8,7 +8,6 @@ import bgImage from '../../../assets/img/bg.jpg';
 import { jwtDecode } from "jwt-decode"
 import { getUserById } from '../../../services/userService';
 import { getRewardByUserId } from "../../../services/rewardService";
-
 export const Customer = () => {
     const navigate = useNavigate()
     const location = useLocation();
@@ -19,7 +18,6 @@ export const Customer = () => {
     const [selectedTable, setSelectedTable] = useState({});
     const [confirmation, setConfirmation] = useState(false)
     const [currentOrder, setCurrentOrder] = useState({})
-    const [] = useState({ dish: 0, price: 0 })
 
     const getUserInformation = async (id) => {
         try {
@@ -31,7 +29,7 @@ export const Customer = () => {
                 name: response.data.name,
                 role: response.data.role,
                 phoneNumber: response.data.phoneNumber || "",
-                currentPoint: response1.data.currentPoints,
+                currentPoints: response1.data.currentPoints,
                 tier: response1.data.tier
             });
         }
@@ -44,10 +42,10 @@ export const Customer = () => {
     };
 
     useEffect(() => {
+        getUserInformation(decode.id);
         if (location.pathname === '/customer') {
             navigate('table');
         }
-        getUserInformation(decode.id);
 
     }, [decode.id, location.pathname, navigate]);
 
@@ -59,7 +57,7 @@ export const Customer = () => {
             <CustomerNavBarSide selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
             {/* Main */}
             <div className="relative flex-1">
-                <CustomerNavBarTop selectedIcon={selectedIcon} currentUser={currentUser} />
+                <CustomerNavBarTop currentUser={currentUser} />
                 <Outlet context={{
                     currentUser, setCurrentUser, setNotification, selectedTable, setSelectedTable,
                     confirmation, setConfirmation, currentOrder, setCurrentOrder, getUserInformation

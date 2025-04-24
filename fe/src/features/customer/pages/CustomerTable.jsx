@@ -3,11 +3,14 @@ import { getAllTables } from "../../../services/tableService";
 import { useOutletContext } from "react-router-dom"
 import { TableConfirmation } from "../components/TableConfirmation";
 import { CustomerTableCard } from "../components/CustomerTableCard";
+import useCheckRole from "../../../Hooks/useCheckRole";
+
 
 export const CustomerTable = () => {
     const [tables, setTables] = useState([])
     const [openEdit, setOpenEdit] = useState(false)
-    const {selectedTable, setSelectedTable, confirmation ,setConfirmation, setNotification,currentUser, setCurrentOrder} = useOutletContext()
+    const {selectedTable, setSelectedTable, confirmation ,setConfirmation, setNotification, currentUser, setCurrentOrder} = useOutletContext()
+    useCheckRole(currentUser)
     const updateTableList = async () => {
             const response = await getAllTables();
             setTables(response.data);

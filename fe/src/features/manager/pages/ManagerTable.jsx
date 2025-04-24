@@ -4,15 +4,17 @@ import {TableCreateForm} from "../components/TableCreateForm";
 import {TableEditForm} from "../components/TableEditForm";
 import {TableDeleteForm} from "../components/TableDeleteForm";
 import { useOutletContext } from "react-router-dom"
+import useCheckRole from "../../../Hooks/useCheckRole";
 
 export const ManagerTable = () => {
-    const {setNotification}  = useOutletContext()
+    const {setNotification, currentUser}  = useOutletContext()
     const [tables, setTables] = useState([])
     const [openCreate,setOpenCreate] = useState(false)
     const [openEdit,setOpenEdit] = useState(false)
     const [openDelete,setOpenDelete] = useState(false)
 
     const [editId, seteditId] = useState(null);
+    useCheckRole(currentUser)
 
     const updateTableList = async () => {
             const response = await getAllTables();

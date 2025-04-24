@@ -4,6 +4,7 @@ import { UserCreateForm } from "../components/UserCreateForm";
 import { UserDeleteForm } from "../components/UserDeleteForm";
 import { Manager_UserEditForm } from "../components/Manager_UserEditForm";
 import { useOutletContext } from "react-router-dom"
+import useCheckRole from "../../../Hooks/useCheckRole";
 
 export const ManagerUser = () => {
     const { currentUser, setCurrentUser, setNotification, getUserInformation } = useOutletContext()
@@ -18,6 +19,7 @@ export const ManagerUser = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedRole, setSelectedRole] = useState("All");
 
+    useCheckRole(currentUser)
     const updateUserList = async () => {
         const response = await getAllUsers();
         setUsers(response.data);

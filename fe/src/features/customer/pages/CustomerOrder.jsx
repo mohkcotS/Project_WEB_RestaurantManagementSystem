@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { getAllDishes } from "../../../services/DishService";
 import { useOutletContext, useNavigate } from "react-router-dom"
 import { createOrderDetail } from "../../../services/order_detailService";
+import useCheckRole from "../../../Hooks/useCheckRole";
 
 export const CustomerOrder = () => {
 
@@ -12,9 +13,9 @@ export const CustomerOrder = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [cart, setCart] = useState([])
     const [openPanel, setOpenPanel] = useState(false)
-    const {confirmation, setNotification, currentOrder } = useOutletContext()
+    const {confirmation, setNotification, currentOrder , currentUser } = useOutletContext()
     const navigate = useNavigate();
-
+    useCheckRole(currentUser)
     if (!confirmation) {
         setNotification({ message: "Please select a table.", status: "error" })
         navigate("/customer/table")
@@ -24,9 +25,8 @@ export const CustomerOrder = () => {
         const fetchData = async () => {
             const response = await getAllDishes();
             setDishes(response.data)
-            console.log(response.data)
         };
-        fetchData()
+        fetchData() 
     }, [])
 
     const filteredDishes = dishes.filter(dish =>
@@ -72,8 +72,6 @@ export const CustomerOrder = () => {
             setNotification(error);
         }
     };
-
-
     return (
         <div className="w-[90%] h-auto mx-auto flex flex-col my-10 gap-20 p-10">
             <div className="flex flex-col gap-10">

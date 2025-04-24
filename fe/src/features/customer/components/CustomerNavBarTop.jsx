@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom"
-export const CustomerNavBarTop = ({selectedIcon , currentUser}) => {
+export const CustomerNavBarTop = ({currentUser}) => {
     const location = useLocation();
     const icons = [
         { id: "user", text: "USER" },

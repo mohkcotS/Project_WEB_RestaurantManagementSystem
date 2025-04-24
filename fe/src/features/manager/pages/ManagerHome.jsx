@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { getUserCounted } from "../../../services/userService.jsx";
+import useCheckRole from "../../../Hooks/useCheckRole.js";
+import { useOutletContext } from "react-router-dom"
+
 
 export const ManagerHome = () => {
     const [userCounted,setUserCounted] = useState([])
-
+    const  {currentUser}  = useOutletContext()
+    useCheckRole(currentUser)
     useEffect (()=> {
         const countCustomer = async () => {
             const response = await getUserCounted()

@@ -6,13 +6,15 @@ import { getOrderByUserId } from "../../../services/userService";
 import { CustomerOrderCard1 } from "../components/CustomerOrderCard1";
 import { OrderDetailCard } from "../components/OrderDetailCard";
 import { CustomerEditForm } from "../components/CustomerEditForm";
+import useCheckRole from "../../../Hooks/useCheckRole";
+
 export const CustomerUser = () => {
     const {currentUser, setNotification , getUserInformation} = useOutletContext()
     const [openEdit,setOpenEdit] = useState(false)
     const [openSeeDetail,setOpenSeeDetail] = useState(false)
     const [selectedOrder,setSelectedOrder] = useState({})
     const [orders, setOrders] = useState([])
-
+    useCheckRole(currentUser)
     const getUserOrder = async (id) => {
         try {
             const response = await getOrderByUserId(id)
@@ -27,10 +29,9 @@ export const CustomerUser = () => {
             getUserOrder(currentUser.id);
         }
     }, [currentUser.id]);
-
     return (
-        <div className="w-[80%] h-auto mx-auto flex flex-col p-10">
-            <div className="w-full grid grid-cols-2 pl-30 gap-10 mb-10 ">
+        <div className="w-[80%] h-auto mx-auto flex flex-col p-10 relative">
+            <div className="w-full grid grid-cols-2 pl-30 gap-10 ">
                 <div className="flex items-center gap-5">
                     <FaUser size={40} />
                     <h1 className="font-bold text-2xl text-gray-300">Username: <span className="pl-4 text-3xl text-red-300">{currentUser.name}</span> </h1>
@@ -51,14 +52,6 @@ export const CustomerUser = () => {
                     <h1 className="font-bold text-2xl text-gray-300">Current point: <span className="pl-4 text-3xl text-red-300">{currentUser.currentPoint}</span></h1>
                 </div>
             </div>
-
-            
-                <button 
-                onClick={()=>{setOpenEdit(true)}}
-                className="w-[250px] mx-auto px-4 py-3 border-2 border-white rounded-xl text-lg hover:cursor-pointer hover:text-green-400  
-                transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">Edit profile</button>
-
-            
 
             <h1 className="text-3xl text-yellow-300 text-center font-bold mt-20 mb-10">ORDER HISTORY</h1>
 
@@ -82,7 +75,15 @@ export const CustomerUser = () => {
             
             {openSeeDetail && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
             <OrderDetailCard setOpenSeeDetail ={setOpenSeeDetail} selectedOrder={selectedOrder} QRcode={false}/></div>}
-                
+            
+            <div className="absolute -top-10 -right-15">
+                <button 
+                onClick={()=>{setOpenEdit(true)}}
+                className="w-[180px] mx-auto px-4 py-3 border-2 border-white rounded-xl text-lg hover:cursor-pointer hover:text-green-400  
+                transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">Edit profile</button>
+            
+            </div>    
+
         </div>
     )
 }

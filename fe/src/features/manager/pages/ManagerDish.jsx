@@ -5,9 +5,10 @@ import { DishEditForm } from "../components/DishEditForm";
 import { DishCategorySection } from "../components/DishCategorySection";
 import {DishDeleteForm} from "../components/DishDeleteForm";
 import { useOutletContext } from "react-router-dom"
+import useCheckRole from "../../../Hooks/useCheckRole";
 
 export const ManagerDish = () => {
-    const  {setNotification}  = useOutletContext()
+    const  {setNotification,currentUser}  = useOutletContext()
     const [choose, setChoose] = useState("All")
     const [dishes, setDishes] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
@@ -24,6 +25,8 @@ export const ManagerDish = () => {
         { label: "Side Dish", value: "Side Dish" },
         { label: "Beverage", value: "Beverage" },
     ];
+
+    useCheckRole(currentUser)
 
     const filteredDishes = useMemo(() => {
         return dishes.filter(dish => {
