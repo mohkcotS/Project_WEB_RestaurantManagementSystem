@@ -31,8 +31,6 @@ export const Home = () => {
 
   const onLogin = async (data) => {
     try {
-
-      console.log(data)
       const response = await axios.post("http://localhost:3001/auth/login", data);
 
       if (response.status === 200) {

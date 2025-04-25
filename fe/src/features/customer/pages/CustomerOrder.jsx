@@ -13,12 +13,13 @@ export const CustomerOrder = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [cart, setCart] = useState([])
     const [openPanel, setOpenPanel] = useState(false)
-    const {confirmation, setNotification, currentOrder , currentUser } = useOutletContext()
+    const {setNotification, currentOrder , currentUser } = useOutletContext()
     const navigate = useNavigate();
     useCheckRole(currentUser)
+    const confirmation = JSON.parse(sessionStorage.getItem("confirmation"));
     if (!confirmation) {
-        setNotification({ message: "Please select a table.", status: "error" })
-        navigate("/customer/table")
+        setNotification({ message: "Please select a table.", status: "error" });
+        navigate("/customer/table");
     }
 
     useEffect(() => {
