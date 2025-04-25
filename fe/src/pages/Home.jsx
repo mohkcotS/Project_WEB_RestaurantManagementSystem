@@ -8,6 +8,7 @@ import * as yup from 'yup'
 import axios from 'axios'
 import Logo from "../assets/logo.svg";
 import { images } from "../assets/homePageImg"
+import { useCheckNotification } from '../hooks/useCheckNotification';
 
 
 export const Home = () => {
@@ -28,16 +29,17 @@ export const Home = () => {
   const [isVisible, setVisible] = useState(false)
   const [notification, setNotification] = useState({ message: "", status: "" })
   const navigate = useNavigate();
-
+  useCheckNotification(setNotification)
   const onLogin = async (data) => {
     try {
       const response = await axios.post("http://localhost:3001/auth/login", data);
 
       if (response.status === 200) {
-        const { accessToken } = response.data; 
+        const { accessToken , message } = response.data; 
 
         if (accessToken) { 
           sessionStorage.setItem("accessToken", accessToken); 
+          sessionStorage.setItem("message", JSON.stringify({message: message ,status: "success"}));
 
           const decoded = jwtDecode(accessToken);
           

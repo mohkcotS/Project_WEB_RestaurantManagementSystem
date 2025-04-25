@@ -5,7 +5,6 @@ export const CustomerNavBarTop = ({currentUser}) => {
         { id: "user", text: "USER" },
         { id: "table", text: "TABLE" },
         { id: "order", text: "ORDER" },
-        { id: "logout"  },
     ]
 
     const title = icons.find(icon => icon.id === location.pathname.split("/")[2]).text;

@@ -31,8 +31,8 @@ export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , u
             setOpenEdit(false)
             if(currentUser.id === editId){
                 if(currentRole !== user.role){
-                    setNotification({ message: "Role is changed. Please login again", status: "success" })
-                    sessionStorage.removeItem("accessToken");
+                    sessionStorage.clear()
+                    sessionStorage.setItem("message", JSON.stringify({message: "Your role is changed. Please login again." ,status: "error"}));
                     navigate("/")
                 }
                 else{

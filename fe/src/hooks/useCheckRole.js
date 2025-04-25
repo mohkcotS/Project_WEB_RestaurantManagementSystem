@@ -12,16 +12,11 @@ const useCheckRole = (currentUser) => {
       const response = await getUserById(currentUser?.id)
       const user = response.data
       const oldRole = decode.role
-
-      console.log(user.role + " " + currentUser.role)
-
       if (user.role !== oldRole) {
-        console.log("error")
         sessionStorage.clear()
+        sessionStorage.setItem("message", JSON.stringify({message: "Your role is changed. Please login again." ,status: "error"}));
         navigate("/")
-      } else {
-        console.log("success")
-      }
+      } 
     }
 
     if (currentUser?.id) check()

@@ -6,6 +6,7 @@ import { Toast } from "../../../components/Toast";
 import bgImage from '../../../assets/img/bg.jpg';
 import { jwtDecode } from "jwt-decode";
 import { getUserById } from '../../../services/userService';
+import { useCheckNotification } from '../../../hooks/useCheckNotification';
 
 export const Manager = () => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const Manager = () => {
     const [selectedIcon, setSelectedIcon] = useState("home");
     const [currentUser, setCurrentUser] = useState({ id: 0, name: "", role: ""});
     const [notification, setNotification] = useState({ message: "", status: "" });
-
+    useCheckNotification(setNotification)
     const getUserInformation = async (id) => {
         try {
             const response = await getUserById(id);
@@ -24,7 +25,6 @@ export const Manager = () => {
                 role : response.data.role
             
             });
-            console.log(response.data)
         }
         catch (error) {
             setNotification({ message: "Failed to load user data.", status: "error" });

@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { svg } from "../../../assets/managerPageSvg"
 import {useNavigate, useLocation } from "react-router-dom"
+import { Logout } from "../../../components/Logout";
 
-export const ManagerNavBarSide = ({ selectedIcon, setSelectedIcon }) => {
+export const ManagerNavBarSide = ({setSelectedIcon }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [openLogout, setOpenLogout] = useState(false)
     const icons = [
         { id: "home", src: svg.home },
         { id: "user", src: svg.user },
@@ -29,14 +32,15 @@ export const ManagerNavBarSide = ({ selectedIcon, setSelectedIcon }) => {
                         onClick={() => {
 
                             if (icon.id === "logout") {
-                                sessionStorage.removeItem("accessToken");
-                                navigate("/");
+                                setOpenLogout(true)
                             } else {
                                 setSelectedIcon(icon.id);
                                 navigate(`/manager/${icon.id}`);
                             }
                         }} />))}
             </div>
+            
+            {openLogout && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Logout setOpenLogout={setOpenLogout} /></div>  }
         </div>
 
     )

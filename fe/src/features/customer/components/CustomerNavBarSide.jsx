@@ -1,7 +1,9 @@
 import { svg } from "../../../assets/managerPageSvg"
 import { useNavigate, useLocation } from "react-router-dom"
+import { Logout } from "../../../components/Logout";
+import { useState } from "react";
 
-export const CustomerNavBarSide = ({selectedIcon, setSelectedIcon}) => {
+export const CustomerNavBarSide = ({setSelectedIcon}) => {
         const navigate = useNavigate();
         const location = useLocation();
         const icons = [
@@ -12,6 +14,8 @@ export const CustomerNavBarSide = ({selectedIcon, setSelectedIcon}) => {
         ]
         const selectedIndex = icons.findIndex((icon) => icon.id === location.pathname.split("/")[2]);
         const translateY = selectedIndex * 96;
+        const [openLogout, setOpenLogout] = useState(false)
+        
     return (
         <div>
             <div className="flex flex-col flex-shrink-0 px-4
@@ -27,8 +31,7 @@ export const CustomerNavBarSide = ({selectedIcon, setSelectedIcon}) => {
                         onClick={() => {
 
                             if (icon.id === "logout") {
-                                sessionStorage.clear();
-                                navigate("/");
+                                setOpenLogout(true)
                             } else {
                                 setSelectedIcon(icon.id);
                                 navigate(`/customer/${icon.id}`);
@@ -36,6 +39,7 @@ export const CustomerNavBarSide = ({selectedIcon, setSelectedIcon}) => {
                         }} 
                         />))}
             </div>
+            {openLogout && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Logout setOpenLogout={setOpenLogout} /></div>  }
         </div>
 
     )

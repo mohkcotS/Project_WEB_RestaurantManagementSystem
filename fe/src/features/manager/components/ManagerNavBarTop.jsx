@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
 
-export const ManagerNavBarTop = ({selectedIcon , currentUser}) => {
+export const ManagerNavBarTop = ({ currentUser}) => {
     const location = useLocation();
     const icons = [
         { id: "home", text: "DASH BOARD" },
@@ -8,7 +8,6 @@ export const ManagerNavBarTop = ({selectedIcon , currentUser}) => {
         { id: "table", text: "TABLE" },
         { id: "order", text: "ORDER" },
         { id: "dish", text: "DISH" },
-        { id: "logout"  },
     ]
 
     const title = icons.find(icon => icon.id === location.pathname.split("/")[2]).text;

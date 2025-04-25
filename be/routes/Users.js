@@ -99,7 +99,7 @@ router.post("/login", async (req, res, next) => {
         }
 
         const accessToken = sign({id: user.id, role : user.role},"importantsecret")
-        return res.status(200).json({ accessToken, message: "Login successful" });
+        return res.status(200).json({ accessToken, message: "Login Successfully" });
 
     } catch (error) {
         next(error); 

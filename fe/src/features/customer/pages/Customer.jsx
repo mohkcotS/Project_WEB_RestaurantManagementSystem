@@ -9,6 +9,7 @@ import { jwtDecode } from "jwt-decode"
 import { getUserById } from '../../../services/userService';
 import { getRewardByUserId } from "../../../services/rewardService";
 import { useGetData } from "../../../hooks/useGetData";
+import { useCheckNotification } from "../../../hooks/useCheckNotification";
 export const Customer = () => {
     const navigate = useNavigate()
     const location = useLocation();
@@ -19,8 +20,9 @@ export const Customer = () => {
     const [selectedTable, setSelectedTable] = useState({});
     const [confirmation, setConfirmation] = useState(false)
     const [currentOrder, setCurrentOrder] = useState({})
-    
+    useCheckNotification(setNotification)
     useGetData(selectedTable, setSelectedTable,confirmation, setConfirmation,currentOrder, setCurrentOrder)
+    
     const getUserInformation = async (id) => {
         try {
             const response = await getUserById(id);

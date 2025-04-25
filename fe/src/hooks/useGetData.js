@@ -3,7 +3,6 @@ import { useEffect } from "react"
 export const useGetData = (selectedTable, setSelectedTable,confirmation, setConfirmation,currentOrder, setCurrentOrder) => {
     useEffect(() => {
         try {
-            console.log("useGetData chạy!");
             const isTableEmpty = !selectedTable || Object.keys(selectedTable).length === 0;
             const isOrderEmpty = !currentOrder || Object.keys(currentOrder).length === 0;
             const isConfirmationFalse = confirmation === false;
