@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const { Orders } = require("../models")
+const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
+const { Op } = require('sequelize');
+const moment = require('moment');
 
 router.get("/", async (req, res, next) => {
     try {
@@ -11,6 +14,27 @@ router.get("/", async (req, res, next) => {
     }
 
 })
+
+router.get("/today", async (req, res, next) => {
+    try {
+        const todayStart = moment().startOf('day').toDate(); 
+        const todayEnd = moment().endOf('day').toDate(); 
+        
+        const orderCount = await Orders.count({
+            where: {
+                createdAt: {
+                    [Op.gte]: todayStart, // >= 00:00:00
+                    [Op.lte]: todayEnd,   // <= 23:59:59
+                }
+            }
+        });
+        res.json({ count: orderCount }); // Trả về số lượng đơn hàng
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 
 router.post("/", async (req, res, next) => {
     try {
@@ -23,29 +47,21 @@ router.post("/", async (req, res, next) => {
 
 })
 
-router.put("/:id", async (req, res, next) => {
+router.patch("/:id/status", validateToken, checkRole(["Manager"]),  async(req,res,next)=>{
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        const { status } = req.body;
 
-        const oldOrder = await Orders.findByPk(id);
-        if (!oldOrder) {
-            return res.status(404).json({ message: "Order not found" });
-        }
+        const order = await Orders.findByPk(id);
 
-        for (const key in updateData) {
-            if (updateData[key] !== null && updateData[key] !== undefined) {
-                oldOrder[key] = updateData[key];
-            }
-        }
-        await oldOrder.save();
-        res.json(oldOrder);
+        await order.update({status});
+
+        return res.status(200).json({ message: "Change order status successfully" });
+
     } catch (error) {
-        next(error);
+        next({ statusCode: 500, message: "Internal server error" });
     }
-
-
-});
+})
 
 
 
