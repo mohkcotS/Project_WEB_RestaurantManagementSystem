@@ -1,5 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0; 
 DROP TABLE IF EXISTS Users, Tables, Dishes, Orders, Order_Details, Payments, Rewards;
+TRUNCATE TABLE Orders;
 SET FOREIGN_KEY_CHECKS = 1;
 ********************************************************************************************
 
