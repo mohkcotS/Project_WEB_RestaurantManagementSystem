@@ -4,7 +4,7 @@ import { useState } from "react";
 import { getAllOrderDetails } from "../../../services/order_detailService";
 import { useMemo } from "react";
 import { OrderPanelFooter } from "./OrderPanelFooter";
-import { OrderDetailCard } from "../components/OrderDetailCard";
+import { OrderDetailCard } from "../../../components/OrderDetailCard";
 
 
 export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel,  handleOrder, currentOrder }) => {

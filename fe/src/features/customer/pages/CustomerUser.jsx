@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getOrderByUserId } from "../../../services/userService";
 import { CustomerOrderCard1 } from "../components/CustomerOrderCard1";
-import { OrderDetailCard } from "../components/OrderDetailCard";
+import { OrderDetailCard } from "../../../components/OrderDetailCard";
 import { CustomerEditForm } from "../components/CustomerEditForm";
 import useCheckRole from "../../../Hooks/useCheckRole";
 
@@ -55,19 +55,22 @@ export const CustomerUser = () => {
 
             <h1 className="text-3xl text-yellow-300 text-center font-bold mt-20 mb-10">ORDER HISTORY</h1>
 
-            <div className="w-full grid grid-cols-5 text-gray-300 text-xl font-bold place-items-center">
-                <h1>Order Id</h1>
+            <div className="w-full grid grid-cols-5 text-gray-300 text-2xl font-bold place-items-center px-10">
+                <h1>Order ID</h1>
                 <h1>Date</h1>
                 <h1>Total Price</h1>
                 <h1>Status</h1>
                 <h1>Action</h1>
             </div>
 
-            <hr className="text-gray-300 mt-5 mb-10"/>
+            <hr className="text-gray-300 m-5 "/>
 
+            <div className="overflow-y-auto max-h-[450px] overflow-x-visible px-10">
             {orders.map(order=> 
                 (<CustomerOrderCard1 order={order} setOpenSeeDetail={setOpenSeeDetail} setSelectedOrder={setSelectedOrder}/>)
             )}
+            </div>
+            
             
 
             {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 

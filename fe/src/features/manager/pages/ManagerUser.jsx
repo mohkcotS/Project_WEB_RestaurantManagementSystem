@@ -5,6 +5,7 @@ import { UserDeleteForm } from "../components/UserDeleteForm";
 import { Manager_UserEditForm } from "../components/Manager_UserEditForm";
 import { useOutletContext } from "react-router-dom"
 import useCheckRole from "../../../Hooks/useCheckRole";
+import { CustomerCard } from "../components/CustomerCard";
 
 export const ManagerUser = () => {
     const { currentUser, setCurrentUser, setNotification, getUserInformation } = useOutletContext()
@@ -13,7 +14,7 @@ export const ManagerUser = () => {
     const [openForm, setOpenForm] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
-    
+
     const [editId, seteditId] = useState(null);
     // Search
     const [searchTerm, setSearchTerm] = useState("");
@@ -37,7 +38,7 @@ export const ManagerUser = () => {
         const matchesName = user.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesRole = selectedRole === "All" || user.role === selectedRole;
         return matchesName && matchesRole;
-      });
+    });
 
     return (
         <div className="w-[80%] h-auto mx-auto flex flex-col my-10 gap-10 ">
@@ -64,8 +65,8 @@ export const ManagerUser = () => {
                 </div>
 
                 <div>
-                    <button onClick={()=> setOpenForm(true)}
-                     className="px-8 py-3 border-2 border-white rounded-xl text-xl hover:cursor-pointer hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
+                    <button onClick={() => setOpenForm(true)}
+                        className="px-8 py-3 border-2 border-white rounded-xl text-xl hover:cursor-pointer hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
                         Create user
                     </button>
                 </div>
@@ -73,42 +74,37 @@ export const ManagerUser = () => {
 
 
             <div className="w-full">
-                <div className=" flex text-yellow-300  text-center text-2xl font-bold">
-                    <div className="w-1/8">ID</div>
-                    <div className="w-3/8">Name</div>
-                    <div className="w-2/8">Role</div>
-                    <div className="w-2/8">Action</div>
+                <div className="grid grid-cols-[2fr_2fr_2fr_3fr] text-yellow-300 text-center text-2xl font-bold px-10 ">
+                    <div>ID</div>
+                    <div>NAME</div>
+                    <div>ROLE</div>
+                    <div>ACTION</div>
                 </div>
 
-                <hr className="text-white mt-5 mb-10" />
-
-                {filteredUsers.map(user => (
-                    <div key={user.id} className="flex text-white  text-xl bg-white/20 py-4 items-center rounded-3xl 
-                                    text-center mb-3 hover:scale-105 duration-500">
-                        <div className="w-1/8 font-semibold">{user.id}</div>
-                        <div className="w-3/8">{user.name}</div>
-                        <div className={`w-2/8 font-bold 
-                        ${user.role === "Customer" ? "text-[#AEEEEE]" : (user.role === "Manager" ? "text-[#FFDAB9]": (user.role === "Chef" ? "text-[#D8BFD8]": "text-[#B5EAD7]") ) }`}>
-                        {user.role}</div>
-
-
-                        <div className="w-2/8 flex gap-5 justify-center text-[16px] font-bold">
-                            <button onClick={()=>  {seteditId(user.id); setOpenEdit(true)}}
-                            className="rounded-xl border-2 border-blue-500 hover:cursor-pointer hover:bg-blue-500  hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Edit</button>
-                            <button onClick={()=> {seteditId(user.id);setOpenDelete(true)}} className="rounded-xl border-2 border-red-500 hover:cursor-pointer hover:bg-red-500 hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Delete</button>
+                <hr className="text-white m-5" />
+                <div className=" overflow-y-auto max-h-[600px] overflow-x-visible px-10">
+                    {filteredUsers && filteredUsers.length > 0 ? (
+                        filteredUsers.map(user => (
+                            <CustomerCard user={user}/>
+                        ))
+                    ) : (
+                        <div className="text-white text-2xl font-bold text-center mt-10">
+                            No customers found
                         </div>
-                    </div>
-                ))}
-                
+                    )}
+
+                </div>
+
+
 
             </div>
-            
+
             {/* form */}
-            {openForm && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserCreateForm setOpenForm = {setOpenForm} setNotification = {setNotification} updateUserList = {updateUserList}/></div>}
+            {openForm && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserCreateForm setOpenForm={setOpenForm} setNotification={setNotification} updateUserList={updateUserList} /></div>}
             {/* Edit form */}
-            {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Manager_UserEditForm editId={editId} setOpenEdit= {setOpenEdit} setNotification = {setNotification} updateUserList = {updateUserList} currentUser = {currentUser} setCurrentUser = {setCurrentUser} getUserInformation={getUserInformation} /></div>}
+            {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><Manager_UserEditForm editId={editId} setOpenEdit={setOpenEdit} setNotification={setNotification} updateUserList={updateUserList} currentUser={currentUser} setCurrentUser={setCurrentUser} getUserInformation={getUserInformation} /></div>}
             {/* Delete form */}
-            {openDelete && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserDeleteForm editId={editId} setOpenDelete = {setOpenDelete} setNotification = {setNotification} updateUserList = {updateUserList} /></div>}
+            {openDelete && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"><UserDeleteForm editId={editId} setOpenDelete={setOpenDelete} setNotification={setNotification} updateUserList={updateUserList} /></div>}
 
         </div>
     )

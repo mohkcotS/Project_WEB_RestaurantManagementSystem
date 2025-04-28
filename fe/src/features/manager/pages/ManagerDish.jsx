@@ -18,12 +18,12 @@ export const ManagerDish = () => {
     const [editId, seteditId] = useState(null);
 
     const foodCategory = [
-        { label: "All", value: "All" },
-        { label: "Appetizer", value: "Appetizer" },
-        { label: "Main Course", value: "Main Course" },
-        { label: "Dessert", value: "Dessert" },
-        { label: "Side Dish", value: "Side Dish" },
-        { label: "Beverage", value: "Beverage" },
+        { label: "ALL", value: "All" },
+        { label: "APPETIZER", value: "Appetizer" },
+        { label: "MAIN COURSE", value: "Main Course" },
+        { label: "DESSERT", value: "Dessert" },
+        { label: "SIDE DISH", value: "Side Dish" },
+        { label: "BEVERAGE", value: "Beverage" },
     ];
 
     useCheckRole(currentUser)
@@ -66,7 +66,7 @@ export const ManagerDish = () => {
                                 <div className="flex flex-col items-center">
                                     <span>{item.label}</span>
                                     <span className={`h-1 bg-cyan-300 transition-all duration-300 origin-left transform 
-                                ${choose === item.value ? "scale-x-100" : "scale-x-0"} w-[70%] rounded-3xl `}
+                                ${choose === item.value ? "scale-x-100" : "scale-x-0"} w-full rounded-3xl `}
                                     ></span>
                                 </div>
                             </div>
@@ -94,19 +94,19 @@ export const ManagerDish = () => {
 
             <div className="flex flex-col gap-10">
                 {(choose === 'Appetizer' || choose === 'All') &&
-                <DishCategorySection title="Appetizer" type="Appetizer" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
+                <DishCategorySection title="APPETIZER" type="Appetizer" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
                
                 {(choose === 'Main Course' || choose === 'All') &&
-                <DishCategorySection title="Main Course" type="Main Course" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
+                <DishCategorySection title="MAIN COURSE" type="Main Course" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
                
                 {(choose === 'Dessert' || choose === 'All') &&
-                <DishCategorySection title="Dessert" type="Dessert" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
+                <DishCategorySection title="DESSERT" type="Dessert" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
                
                 {(choose === 'Side Dish' || choose === 'All') &&
-                <DishCategorySection title="Side Dish" type="Side Dish" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
+                <DishCategorySection title="SIDE DISH" type="Side Dish" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
                
                 {(choose === 'Beverage' || choose === 'All') &&
-                <DishCategorySection title="Beverage" type="Beverage" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
+                <DishCategorySection title="BEVERAGE" type="Beverage" dishes={filteredDishes} seteditId={seteditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/> }
                
             </div>
 

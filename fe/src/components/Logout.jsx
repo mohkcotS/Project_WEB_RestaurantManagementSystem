@@ -19,7 +19,7 @@ export const Logout = ({setOpenLogout}) => {
             </div>
 
             <div className="flex flex-col items-center gap-5">
-                <h2 className="font-bold text-center text-xl"> Do you want to Logout? </h2>
+                <h2 className="font-bold text-center text-xl"> Do you want to log out? </h2>
                 <div className="flex gap-20">
                     <button onClick={()=>{setOpenLogout(false)}} className="rounded-xl hover:cursor-pointer bg-green-500  hover:scale-105 active:scale-95 duration-300 text-white font-bold px-8 py-2 ">Cancel</button>
                     <button onClick= {handleLogout}className="rounded-xl hover:cursor-pointer bg-red-500  hover:scale-105 active:scale-95 duration-300 text-white font-bold px-8 py-2 ">Log Out</button>

@@ -69,7 +69,6 @@ export const CustomerOrder = () => {
             }
 
         } catch (error) {
-            console.error(error);
             setNotification(error);
         }
     };
