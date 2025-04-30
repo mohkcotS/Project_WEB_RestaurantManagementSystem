@@ -44,12 +44,16 @@ router.put("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next)=>
 })
 
 //Edit table status by id
-router.patch("/:id/status", validateToken, checkRole(["Customer"]),  async(req,res,next)=>{
+router.patch("/:id/status", validateToken, checkRole(["Customer","Cashier"]),  async(req,res,next)=>{
     try {
         const { id } = req.params;
         const { status } = req.body;
 
         const table = await Tables.findByPk(id);
+
+        if (!table) {
+            return res.status(404).json({ message: "Table not found" });
+        } 
 
         await table.update({status});
 

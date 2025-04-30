@@ -34,7 +34,21 @@ router.get("/today", async (req, res, next) => {
     }
 });
 
-
+router.get("/table/:tableId", async (req, res, next) => {
+    const { tableId } = req.params;
+    try {
+        const order = await Orders.findOne({
+            where: {
+                tableId: tableId,
+                status: "pending" 
+            },
+            order: [["createdAt", "DESC"]]
+        });
+        res.json(order);
+    } catch (error) {
+        next(error);
+    }
+});
 
 router.post("/", async (req, res, next) => {
     try {
@@ -47,7 +61,7 @@ router.post("/", async (req, res, next) => {
 
 })
 
-router.patch("/:id/status", validateToken, checkRole(["Manager"]),  async(req,res,next)=>{
+router.patch("/:id/status", validateToken, checkRole(["Manager","Cashier"]),  async(req,res,next)=>{
     try {
         const { id } = req.params;
         const { status } = req.body;
