@@ -22,11 +22,7 @@ export const ManagerTable = () => {
         };
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await getAllTables();
-            setTables(response.data);
-        };
-        fetchData();
+        updateTableList()
     }, []);
 
 

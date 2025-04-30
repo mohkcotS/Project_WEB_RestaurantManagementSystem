@@ -1,21 +1,6 @@
 import { BestSellingCard } from "../components/BestSellingCard.jsx";
-import { useEffect, useState } from "react";
-import { getBestSelling } from "../../../services/order_detailService.jsx";
 
-export const BestSellingTable = () => {
-    const [bestSelling, setBestSelling] = useState([])
-    const fetchBestSelling = async () => {
-        try {
-            const response = await getBestSelling()
-            setBestSelling(response.data)
-        } catch (error) {
-            console.error("Error fetching", error);
-        }
-    }
-    useEffect(() => {
-        fetchBestSelling();
-
-    })
+export const BestSellingTable = ({bestSelling}) => {
     return (
         <div className="flex flex-col  items-center w-[30%] border-2 border-gray-200 rounded-3xl 
                 px-6 py-6 text-white">

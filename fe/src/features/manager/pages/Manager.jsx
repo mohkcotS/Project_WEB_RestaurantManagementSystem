@@ -12,7 +12,6 @@ export const Manager = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const decode = jwtDecode(sessionStorage.getItem("accessToken"));
-    const [selectedIcon, setSelectedIcon] = useState("home");
     const [currentUser, setCurrentUser] = useState({ id: 0, name: "", role: ""});
     const [notification, setNotification] = useState({ message: "", status: "" });
     useCheckNotification(setNotification)
@@ -44,10 +43,10 @@ export const Manager = () => {
             {/* Overlay */}
             <div className="absolute top-0 left-0 w-full h-full bg-black/80 z-0"></div>
             {/* Nav bar */}
-            <ManagerNavBarSide selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
+            <ManagerNavBarSide/>
             {/* Main */}
             <div className="relative flex-1">
-                <ManagerNavBarTop selectedIcon={selectedIcon} currentUser={currentUser} />
+                <ManagerNavBarTop currentUser={currentUser} />
                 <Outlet context={{ currentUser, setCurrentUser, setNotification, getUserInformation }} />
             </div>
             {/* Toast */}

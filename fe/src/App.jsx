@@ -14,6 +14,8 @@ import { CustomerUser } from "./features/customer/pages/CustomerUser";
 import { CustomerOrder } from "./features/customer/pages/CustomerOrder.jsx";
 
 import { Cashier } from './features/cashier/pages/Cashier';
+import { CashierHome } from './features/cashier/pages/CashierHome.jsx';
+
 import { Chef } from './features/chef/pages/Chef';
 
 import { Home } from './pages/Home';
@@ -44,12 +46,13 @@ function App() {
           </Route>
 
           <Route element={<PrivateRoute />}>
-            <Route path="/chef/" element={<Chef />} />
-            
+            <Route path="/chef" element={<Chef />} />
           </Route>
           
           <Route element={<PrivateRoute />}>
-            <Route path="/cashier/" element={<Cashier />} />
+            <Route path='/cashier' element={<Cashier />}>
+              <Route path='home' element={<CashierHome />} />
+            </Route>
           </Route>
         
         </Routes>

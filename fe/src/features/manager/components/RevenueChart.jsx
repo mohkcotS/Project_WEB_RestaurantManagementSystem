@@ -2,21 +2,28 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
-// Đăng ký các phần của Chart.js mà bạn muốn sử dụng
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const RevenueChart = ({selectedMonth}) => {
+export const RevenueChart = ({selectedMonth , salesMonthData}) => {
   const getDaysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
- 
-  const month = selectedMonth.getMonth() + 1; 
+  const salesMap = new Map(
+    salesMonthData.map(item => {
+      const day = new Date(item.date).getDate(); 
+      return [day, parseFloat(item.total)];
+    })
+  );
+  const month = selectedMonth.getMonth()+1; 
   const monthString = selectedMonth.toLocaleString('en-US', { month: 'long' }); 
   const year = selectedMonth.getFullYear();
 
   const daysInMonth = getDaysInMonth(month, year);
 
-  const revenueData = Array.from({ length: daysInMonth }, (_, index) => Math.floor(Math.random() * 500) + 100);
+  const revenueData = Array.from({ length: daysInMonth }, (_, index) => {
+  const day = index + 1;
+  return salesMap.get(day) || 0;
+});
   
   const daysOfMonth = Array.from({ length: daysInMonth }, (_, index) => index + 1);
 
@@ -48,8 +55,8 @@ const RevenueChart = ({selectedMonth}) => {
         label: 'Daily revenue',
         data: revenueData,
         backgroundColor: backgroundColors,  // Màu sắc của các cột dựa trên giá trị
-        borderColor: '#00ffff',      // Màu của viền cột
-        borderWidth: 1,              // Độ dày viền cột
+        borderColor: '#ffffff',      // Màu của viền cột
+        borderWidth: 2,              // Độ dày viền cột
         barThickness: 20,            // Độ dày của các cột
       },
     ],
@@ -136,10 +143,10 @@ const RevenueChart = ({selectedMonth}) => {
   };
 
   return (
-    <div style={{ width: '100%', height: '390px' }}>
+    <div style={{ width: '100%', height: '380px' }}>
       <Bar data={data} options={options} />
     </div>
   );
 };
 
-export default RevenueChart;
+
