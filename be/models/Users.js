@@ -25,13 +25,18 @@ module.exports = (sequelize, DataTypes) => {
 
     Users.associate = (models) => {
         Users.hasMany(models.Orders, {
-            foreignKey: {
-                allowNull: true 
-            },
-            onDelete: "SET NULL" 
+          foreignKey: {
+            allowNull: true
+          },
+          onDelete: "SET NULL"
         });
-    }
-
+      
+        Users.hasOne(models.Rewards, {
+          foreignKey: { allowNull: false, unique: true },
+          onDelete: "CASCADE"
+        });
+      };
+      
     return Users
 
 }

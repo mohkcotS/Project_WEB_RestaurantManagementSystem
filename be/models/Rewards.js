@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     const Rewards = sequelize.define("Rewards", {
-        currentPoints: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-            defaultValue: 0 
-        },
-
         totalPoints: {
             type: DataTypes.FLOAT,
             allowNull: false,

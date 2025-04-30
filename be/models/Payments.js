@@ -9,9 +9,9 @@ module.exports = (sequelize,DataTypes) => {
 
 
         status:{
-            type: DataTypes.ENUM("pending", "success", "failed", "refunded"),
+            type: DataTypes.ENUM("success", "failed", "refunded"),
             allowNull: false,
-            defaultValue: "pending"
+            defaultValue: "success"
         },
 
         method:{
@@ -22,11 +22,22 @@ module.exports = (sequelize,DataTypes) => {
         date:{
             type: DataTypes.DATEONLY,
             allowNull: false
-        }
+        },
 
+        note: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
 
         
     })
+
+    Payments.associate = (models) => {
+        Payments.belongsTo(models.Orders, {
+            foreignKey: 'OrderId',
+            onDelete: 'CASCADE' 
+        });
+    };
 
     return Payments
 }
