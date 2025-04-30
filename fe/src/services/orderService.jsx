@@ -41,7 +41,7 @@ export const getAllOrders = async () => {
     }
 }
 
-//Get all orders
+//Get all orders today 
 export const getTodayOrders = async () => {
     try {
         const token = sessionStorage.getItem("accessToken");
@@ -82,3 +82,23 @@ export const updateOrderStatus = async (id, status) => {
     }
   };
   
+  export const getOrderByTableId = async (tableId) => {
+    try {
+        const token = sessionStorage.getItem("accessToken");
+
+        if (!token) {
+            throw new Error("Don't have token, Login again");
+        }
+
+        const response = await axios.get(`http://localhost:3001/orders/table/${tableId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Error fetching order by tableId:", error);
+        throw error;
+    }
+};
