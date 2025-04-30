@@ -34,7 +34,6 @@ export const ManagerNavBarSide = ({setSelectedIcon }) => {
                             if (icon.id === "logout") {
                                 setOpenLogout(true)
                             } else {
-                                setSelectedIcon(icon.id);
                                 navigate(`/manager/${icon.id}`);
                             }
                         }} />))}

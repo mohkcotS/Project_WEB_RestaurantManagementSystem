@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { Logout } from "../../../components/Logout";
 import { useState } from "react";
 
-export const CustomerNavBarSide = ({setSelectedIcon}) => {
+export const CustomerNavBarSide = () => {
         const navigate = useNavigate();
         const location = useLocation();
         const icons = [
@@ -33,7 +33,6 @@ export const CustomerNavBarSide = ({setSelectedIcon}) => {
                             if (icon.id === "logout") {
                                 setOpenLogout(true)
                             } else {
-                                setSelectedIcon(icon.id);
                                 navigate(`/customer/${icon.id}`);
                             }
                         }} 

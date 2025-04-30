@@ -1,19 +1,6 @@
-import { useEffect, useState } from "react";
-import { getUserCounted } from "../../../services/userService.jsx";
 
-export const UserWidget = () => {
-    const [userCounted, setUserCounted] = useState([])
-    const countCustomer = async () => {
-            try {
-                const response = await getUserCounted();
-                setUserCounted(response.data);
-            } catch (error) {
-                console.error("Error fetching user count:", error);
-            }
-        };
-    useEffect(()=>{
-        countCustomer();
-    })
+
+export const UserWidget = ({userCounted}) => {
     return (
         <div className="border-2 h-44 border-white py-6 px-8 rounded-3xl text-center">
             <h3 className="text-xl font-semibold text-yellow-600">NO. OF USER</h3>

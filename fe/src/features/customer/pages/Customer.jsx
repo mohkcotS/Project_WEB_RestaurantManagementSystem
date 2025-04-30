@@ -15,7 +15,6 @@ export const Customer = () => {
     const location = useLocation();
     const decode = jwtDecode(sessionStorage.getItem("accessToken"))
     const [currentUser, setCurrentUser] = useState({ id: 0, name: "", role: "", phoneNumber: "", currentPoints: 0, tier: "" });
-    const [selectedIcon, setSelectedIcon] = useState("table");
     const [notification, setNotification] = useState({ message: "", status: "" })
     const [selectedTable, setSelectedTable] = useState({});
     const [confirmation, setConfirmation] = useState(false)
@@ -33,7 +32,7 @@ export const Customer = () => {
                 name: response.data.name,
                 role: response.data.role,
                 phoneNumber: response.data.phoneNumber || "",
-                currentPoints: response1.data.currentPoints,
+                currentPoints: response1.data.totalPoints,
                 tier: response1.data.tier
             });
         }
@@ -58,7 +57,7 @@ export const Customer = () => {
             {/* Overlay */}
             <div className="absolute top-0 left-0 w-full h-full bg-black/80 z-0"></div>
             {/* Nav bar */}
-            <CustomerNavBarSide selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
+            <CustomerNavBarSide/>
             {/* Main */}
             <div className="relative flex-1">
                 <CustomerNavBarTop currentUser={currentUser} />

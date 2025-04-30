@@ -49,7 +49,7 @@ export const CustomerUser = () => {
 
                 <div className="flex items-center gap-5">
                     <MdLoyalty size={40}/>
-                    <h1 className="font-bold text-2xl text-gray-300">Current point: <span className="pl-4 text-3xl text-red-300">{currentUser.currentPoint}</span></h1>
+                    <h1 className="font-bold text-2xl text-gray-300">Current point: <span className="pl-4 text-3xl text-red-300">{currentUser.currentPoints}</span></h1>
                 </div>
             </div>
 

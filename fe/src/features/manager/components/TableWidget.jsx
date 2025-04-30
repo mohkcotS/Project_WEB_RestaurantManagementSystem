@@ -1,24 +1,4 @@
-import { useEffect, useState } from "react";
-import { getAllTables } from "../../../services/tableService.jsx";
-
-export const TableWidget = () => {
-    const [tableCounted, setTableCounted] = useState({ available: 0, occupied: 0 })
-    const countTableStatus = async () => {
-        try {
-            const response = await getAllTables();
-            const tableData = response.data;
-
-            const availableCount = tableData.filter(table => table.status === 'available').length;
-            const occupiedCount = tableData.filter(table => table.status === 'occupied').length;
-
-            setTableCounted({ available: availableCount, occupied: occupiedCount });
-        } catch (error) {
-            console.error("Error fetching tables:", error);
-        }
-    };
-    useEffect(() => {
-        countTableStatus();
-    })
+export const TableWidget = ({tableCounted}) => {
     return (
         <div className="border-2 h-44 border-white py-6 px-8 rounded-3xl">
             <h3 className="text-xl font-semibold text-yellow-600">TABLES</h3>

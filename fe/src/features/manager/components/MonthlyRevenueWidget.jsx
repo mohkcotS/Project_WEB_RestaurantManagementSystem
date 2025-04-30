@@ -3,7 +3,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css'; 
 
-export const MonthlyRevenueWidget = ({setSelectedMonth}) => {
+export const MonthlyRevenueWidget = ({setSelectedMonth , totalMonthAmount}) => {
     const [openCalendar, setOpenCalendar] = useState(false)
     const [month, setMonth] = useState(new Date());
     const formatMonthAndYear = (date) => {
@@ -44,7 +44,7 @@ export const MonthlyRevenueWidget = ({setSelectedMonth}) => {
 
             <hr className="mb-6 mt-2 text-white" />
             <div className="flex justify-between ">
-                <h1 className="font-bold text-2xl text-green-500 items-center">100 $</h1>
+                <h1 className="font-bold text-2xl text-green-500 items-center">{totalMonthAmount} $</h1>
                 <h1 className="text-gray-400 text-lg">[{formatMonthAndYear(month).month} {formatMonthAndYear(month).year}  ]</h1>
             </div>
         </div>
