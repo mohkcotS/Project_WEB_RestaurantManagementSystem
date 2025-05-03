@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { Payments } = require("../models")
-const { fn, col, literal } = require("sequelize");
+const { fn, col, literal, Op } = require("sequelize");
+const moment = require('moment-timezone');
 
 router.get("/", async (req, res, next) => {
     try {
@@ -13,56 +14,67 @@ router.get("/", async (req, res, next) => {
 
 })
 
-// get sales today
 router.get("/salesToday", async (req, res, next) => {
-    const {date} = req.query
     try {
-        const payment = await Payments.findAll({
-            where: { date: date }
+        const today = moment().startOf('day').toDate();
+
+        const paymentTotal = await Payments.sum('amount', {
+            where: {
+                date: today }
         });
 
-        const total = payment.reduce((sum, { amount }) => sum + parseFloat(amount), 0);
-
-        res.json(total);
+        res.json({ total: paymentTotal || 0 });
     } catch (error) {
         next(error);
     }
-
-})
+});
 
 router.get("/salesMonth", async (req, res, next) => {
-    const { yearMonth } = req.query; // Ví dụ: "2025-04"
-  
     try {
-      const paymentByDay = await Payments.findAll({
-        attributes: [
-          [fn('DATE', col('date')), 'date'],
-          [fn('SUM', col('amount')), 'total']
-        ],
-        where: literal(`DATE_FORMAT(date, '%Y-%m') = '${yearMonth}'`),
-        group: [fn('DATE', col('date'))],
-        order: [[fn('DATE', col('date')), 'ASC']]
-      });
-  
-      res.json(paymentByDay);
+        const { yearMonth } = req.query;
+
+        if (!yearMonth) {
+            return res.status(400).json({ message: "yearMonth is required" });
+        }
+
+        const startOfMonth = moment(yearMonth, "YYYY-MM").startOf('month').toDate();
+        const endOfMonth = moment(yearMonth, "YYYY-MM").endOf('month').toDate();
+
+        const sales = await Payments.findAll({
+            attributes: [
+                [fn('DATE', col('Date')), 'date'],  
+                [fn('SUM', col('amount')), 'total']
+            ],
+            where: {
+                Date: {  
+                    [Op.gte]: startOfMonth,
+                    [Op.lte]: endOfMonth
+                }
+            },
+            group: [literal('DATE(Date)')],  
+            order: [[literal('DATE(Date)'), 'ASC']]  
+        });
+
+        res.json(sales);
     } catch (error) {
-      next(error);
+        next(error);
     }
-  });
+});
+
 
 
 // Create payment
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => { 
     try {
         const post = req.body;
-        await Payments.create(post);
+        await Payments.create(post);    
         res.status(201).json({ message: "Payment created successfully" });
     } catch (error) {
         console.error("Server error:", error);
         next({ statusCode: 500, message: "Internal server error" });
     }
+});
 
-})
 
 
 

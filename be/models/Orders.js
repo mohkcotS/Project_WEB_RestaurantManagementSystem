@@ -11,7 +11,12 @@ module.exports = (sequelize,DataTypes) => {
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             defaultValue: 0
-        }
+        },
+
+        date:{
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        },
 
 
     })

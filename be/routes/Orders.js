@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { Orders } = require("../models")
+const { Orders, Order_Details } = require("../models")
 const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
-const { Op } = require('sequelize');
 const moment = require('moment');
 
 router.get("/", async (req, res, next) => {
@@ -15,20 +14,56 @@ router.get("/", async (req, res, next) => {
 
 })
 
+router.get("/pending", async (req, res, next) => {
+    try {
+        const orders = await Orders.findAll({
+            where: { status: "pending" },
+            include: [{ model: Order_Details }],
+        });
+
+        // Chỉ giữ lại đơn hàng còn món chưa completed
+        const filtered = orders.filter(order =>
+            order.Order_Details.some(d => d.status !== "completed")
+        );
+
+        // Gắn thêm trường updatedAt sớm nhất của các món chưa completed để sort
+        const sorted = filtered
+            .map(order => {
+                const pendingDetails = order.Order_Details.filter(d => d.status !== "completed");
+                const earliestUpdate = pendingDetails.reduce((min, d) => {
+                    return new Date(d.updatedAt) < new Date(min) ? d.updatedAt : min;
+                }, pendingDetails[0]?.updatedAt);
+
+                return {
+                    order: order.toJSON(),
+                    sortTime: earliestUpdate
+                };
+            })
+            .sort((a, b) => new Date(a.sortTime) - new Date(b.sortTime)) // sắp xếp tăng dần theo thời gian
+            .map(entry => {
+                const { Order_Details, ...rest } = entry.order;
+                return rest;
+            });
+
+        res.json(sorted);
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 router.get("/today", async (req, res, next) => {
     try {
-        const todayStart = moment().startOf('day').toDate(); 
-        const todayEnd = moment().endOf('day').toDate(); 
-        
+
+        const today = moment().startOf('day').toDate();
+
         const orderCount = await Orders.count({
             where: {
-                createdAt: {
-                    [Op.gte]: todayStart, // >= 00:00:00
-                    [Op.lte]: todayEnd,   // <= 23:59:59
-                }
+                date: today
             }
         });
-        res.json({ count: orderCount }); // Trả về số lượng đơn hàng
+
+        res.json({ count: orderCount });
     } catch (error) {
         next(error);
     }

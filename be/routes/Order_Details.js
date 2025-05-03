@@ -1,11 +1,36 @@
 const express = require('express')
 const router = express.Router()
 const { Order_Details, Orders, Dishes } = require('../models')
+const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 const moment = require('moment');
 const { Op, Sequelize } = require('sequelize');
 
-//get All detail from orderId
 router.get("/", async (req, res, next) => {
+    try {
+        const { orderId } = req.query;
+
+        if (!orderId) {
+            return res.status(400).json({ error: "orderId is required" });
+        }
+        const orderDetails = await Order_Details.findAll({
+            where: { OrderId: orderId },
+            include: [
+                {
+                    model: Dishes, 
+                    attributes: ['name']
+                }
+            ]
+        });
+
+        res.json(orderDetails);
+
+    } catch (error) {
+        next(error);
+    }
+})
+
+//get All detail from orderId (reduced)
+router.get("/reduced", async (req, res, next) => {
     try {
         const { orderId } = req.query;
 
@@ -50,11 +75,11 @@ router.get("/", async (req, res, next) => {
 // get best selling
 router.get("/bestselling", async (req, res, next) => {
     try {
-        // Lấy thời gian bắt đầu và kết thúc của ngày hôm nay
+
         const todayStart = moment().startOf('day').toDate(); 
         const todayEnd = moment().endOf('day').toDate(); 
 
-        // Truy vấn Order_Details để tính tổng số lượng bán được của từng món ăn
+
         const bestSelling = await Order_Details.findAll({
             include: [
                 {
@@ -133,5 +158,23 @@ router.post("/", async (req, res, next) => {
     }
 });
 
+router.patch("/:id", validateToken, checkRole(["Chef"]),  async(req,res,next)=>{
+    try {
+        const { id } = req.params;
+
+        const od = await Order_Details.findByPk(id);
+
+        if (!od) {
+            return res.status(404).json({ message: "Order detail not found" });
+        } 
+
+        await od.update({status: "completed"});
+
+        return res.status(200).json({ message: "Dishes is ready" });
+
+    } catch (error) {
+        next({ statusCode: 500, message: "Internal server error" });
+    }
+})
 
 module.exports = router
