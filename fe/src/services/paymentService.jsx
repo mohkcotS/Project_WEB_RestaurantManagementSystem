@@ -28,7 +28,6 @@ export const getSalesToday = async () => {
         }
 
         const response = await axios.get("http://localhost:3001/payments/salesToday", {
-            params: { date: new Date().toISOString().split('T')[0] }, 
             headers: {
                 Authorization: `Bearer ${token}`
             }

@@ -40,6 +40,26 @@ export const getAllOrders = async () => {
         throw(error)
     }
 }
+//Get all pending orders
+export const getAllPendingOrders = async () => {
+    try {
+        const token = sessionStorage.getItem("accessToken");
+
+        if (!token) {
+            throw new Error("Don't have token, Login again");
+        }
+
+        const response = await axios.get("http://localhost:3001/orders/pending", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response;
+    } catch (error) {
+        throw(error)
+    }
+}
 
 //Get all orders today 
 export const getTodayOrders = async () => {
