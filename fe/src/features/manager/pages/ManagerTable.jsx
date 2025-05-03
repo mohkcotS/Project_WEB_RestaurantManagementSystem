@@ -54,10 +54,10 @@ export const ManagerTable = () => {
                                     <div className="flex justify-center gap-10">
                                         <button 
                                         onClick={()=>  {seteditId(tb.id); setOpenEdit(true)}}
-                                        className="rounded-xl border-2 border-blue-500 hover:cursor-pointer hover:bg-blue-500  hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 z-1">Edit</button>
+                                        className="rounded-xl bg-blue-700 hover:cursor-pointer hover:bg-blue-500  hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 z-1"> Edit</button>
                                         <button 
                                         onClick={()=>  {seteditId(tb.id); setOpenDelete(true)}}
-                                        className="rounded-xl border-2 border-red-500 hover:cursor-pointer hover:bg-red-500 hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Delete</button>
+                                        className="rounded-xl bg-red-700 hover:cursor-pointer hover:bg-red-500 hover:scale-105 active:scale-95 duration-300 text-white px-8 py-2 ">Delete</button>
                                     </div>
 
                                     {tb.status === "occupied" && <div className="absolute inset-0 bg-black/60 rounded-3xl"></div>} 

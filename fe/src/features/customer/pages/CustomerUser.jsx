@@ -77,7 +77,7 @@ export const CustomerUser = () => {
             <CustomerEditForm editId={currentUser.id} setOpenEdit={setOpenEdit} setNotification={setNotification} getUserInformation={getUserInformation}/></div>}
             
             {openSeeDetail && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
-            <OrderDetailCard setOpenSeeDetail ={setOpenSeeDetail} selectedOrder={selectedOrder} QRcode={false}/></div>}
+            <OrderDetailCard setOpenSeeDetail ={setOpenSeeDetail} selectedOrder={selectedOrder} isPayment={false}/></div>}
             
             <div className="absolute -top-10 -right-15">
                 <button 

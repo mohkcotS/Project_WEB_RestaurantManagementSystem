@@ -74,7 +74,7 @@ export const ManagerOrder = () => {
             </div>
 
             {openSeeDetail && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
-                <OrderDetailCard setOpenSeeDetail={setOpenSeeDetail} selectedOrder={selectedOrder} QRcode={false} /></div>}
+                <OrderDetailCard setOpenSeeDetail={setOpenSeeDetail} selectedOrder={selectedOrder} isPayment={false} /></div>}
 
             {openEdit && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
                 <OrderEditForm selectedOrder={selectedOrder} setOpenEdit={setOpenEdit} setNotification={setNotification} updateOrderList={updateOrderList} /></div>}

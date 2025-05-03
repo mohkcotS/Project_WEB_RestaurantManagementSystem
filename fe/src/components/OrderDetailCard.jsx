@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 import { getAllOrderDetails } from "../services/order_detailService"
 import { DateAndTimeUtils } from "../utils/DateAndTimeUtils";
 import { getTableById } from "../services/tableService";
+import { CompletedOrderForm } from "../features/customer/components/CompletedOrderForm";
 
-export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, QRcode }) => {
+export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) => {
     const [orderCart, setOrderCart] = useState([])
     const { date, time } = DateAndTimeUtils(selectedOrder.createdAt);
     const [table, setTable] = useState({});
-
+    const [openConfirmation, setOpenConfirmation] = useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,7 +39,7 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, QRcode }) => 
             <h1 className="text-xl font-bold text-center mt-4">La Ratatouille Restaurant</h1>
             <hr className="border-1 border-dashed border-gray-700 my-4" />
 
-            <div className="grid grid-cols-2 gap-x-10 text-lg ">
+            <div className="grid grid-cols-2 gap-x-20 text-lg ">
                 <h1> <strong>Date:</strong> {date} </h1>
                 <h1> <strong>Time:</strong> {time} </h1>
                 <h1> <strong>Order ID:</strong> {selectedOrder.id}</h1>
@@ -80,10 +81,20 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, QRcode }) => 
                 <button onClick={() => setOpenSeeDetail(false)} className='text-gray-500 hover:text-red-600 cursor-pointer'>&#10006;</button>
             </div>
 
-            {QRcode && <img
+            {isPayment && <img
                 src={qrURL}
                 alt="Payment QR Code"
                 className="w-60 mx-auto" />}
+
+            {isPayment && <div className="w-full mt-4 flex justify-center ">
+                <button 
+                onClick={()=> {setOpenConfirmation(true)}}
+                className="w-[80%] py-2 bg-green-600 rounded-xl text-lg hover:cursor-pointer  
+                transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">Confirmation</button>
+            </div>  }  
+
+            {openConfirmation && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
+            <CompletedOrderForm   setOpenConfirmation={setOpenConfirmation}         /></div>}
 
         </div>
     )

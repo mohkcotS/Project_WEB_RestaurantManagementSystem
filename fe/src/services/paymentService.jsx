@@ -1,5 +1,25 @@
 import axios from "axios";
 
+export const getAllPayments = async () => {
+    try {
+        const token = sessionStorage.getItem("accessToken");
+
+        if (!token) {
+            throw new Error("Don't have token, Login again");
+        }
+
+        const response = await axios.get("http://localhost:3001/payments/", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const createPayment = async (data) => {
     try {
         const token = sessionStorage.getItem("accessToken");
@@ -19,6 +39,7 @@ export const createPayment = async (data) => {
         throw(error)
     }
 }
+
 export const getSalesToday = async () => {
     try {
         const token = sessionStorage.getItem("accessToken");
@@ -59,3 +80,23 @@ export const getSalesMonth = async (yearMonth) => {
         throw error;
     }
 };
+
+//Update payment by id
+export const updatePaymentStatus = async (id, data) => {
+    try {
+      const token = sessionStorage.getItem("accessToken");
+      if (!token) throw new Error("Don't have token, Login again");
+  
+      const response = await axios.patch(
+        `http://localhost:3001/payments/${id}/status`,
+        data,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+  
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };

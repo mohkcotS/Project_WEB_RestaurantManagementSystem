@@ -53,7 +53,7 @@ export const TableCreateForm = ({setOpenCreate,setNotification, updateTableList}
                 </p>
 
                 <button className='mx-auto w-[50%] bg-gradient-to-r from-green-400 to-green-600 text-white py-2 rounded-lg font-semibold hover:from-green-600 hover:to-green-800 
-                    hover:w-[70%] transition-all duration-700 cursor-pointer'>Submit</button>
+                    hover:w-[70%] transition-all duration-700 cursor-pointer'>Create</button>
 
             </form>
             

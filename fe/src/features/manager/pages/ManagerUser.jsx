@@ -15,7 +15,7 @@ export const ManagerUser = () => {
     const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
 
-    const [editId, seteditId] = useState(null);
+    const [editId, setEditId] = useState(null);
     // Search
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedRole, setSelectedRole] = useState("All");
@@ -85,7 +85,7 @@ export const ManagerUser = () => {
                 <div className=" overflow-y-auto max-h-[600px] overflow-x-visible px-10">
                     {filteredUsers && filteredUsers.length > 0 ? (
                         filteredUsers.map(user => (
-                            <CustomerCard user={user}/>
+                            <CustomerCard user={user} setEditId={setEditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/>
                         ))
                     ) : (
                         <div className="text-white text-2xl font-bold text-center mt-10">

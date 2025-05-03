@@ -3,7 +3,7 @@ import { svg } from "../../../assets/managerPageSvg"
 import {useNavigate, useLocation } from "react-router-dom"
 import { Logout } from "../../../components/Logout";
 
-export const ManagerNavBarSide = ({setSelectedIcon }) => {
+export const ManagerNavBarSide = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [openLogout, setOpenLogout] = useState(false)
@@ -12,6 +12,7 @@ export const ManagerNavBarSide = ({setSelectedIcon }) => {
         { id: "user", src: svg.user },
         { id: "table", src: svg.table },
         { id: "order", src: svg.order },
+        { id: "payment", src: svg.payment },
         { id: "dish", src: svg.food },
         { id: "logout", src: svg.logout },
     ]

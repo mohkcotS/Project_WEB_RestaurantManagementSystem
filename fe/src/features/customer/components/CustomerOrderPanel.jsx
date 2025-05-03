@@ -7,7 +7,7 @@ import { OrderPanelFooter } from "./OrderPanelFooter";
 import { OrderDetailCard } from "../../../components/OrderDetailCard";
 
 
-export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel,  handleOrder, currentOrder }) => {
+export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel, currentOrder, setOrderConfirmation }) => {
     const [newOrder,setNewOrder] = useState(true)
     const [orderedCart, setOrderedCart] = useState([])
     const [openSeeDetail, setOpenSeeDetail] = useState(false)
@@ -31,7 +31,7 @@ export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel,  ha
     return (
         <>
             {openSeeDetail && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
-                <OrderDetailCard setOpenSeeDetail={setOpenSeeDetail} selectedOrder={currentOrder} QRcode={true}/>
+                <OrderDetailCard setOpenSeeDetail={setOpenSeeDetail} selectedOrder={currentOrder} isPayment={true}/>
             </div>}
             
             {openPanel ?
@@ -71,20 +71,20 @@ export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel,  ha
                         
                     </div>
 
-                    {newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} handle={handleOrder} 
-                    cart={cart} price={totalPrice} butTitle={"Place Order"} color={"bg-green-500"} style={""} rounded={""}/>}
+                    {newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} order={1} 
+                    cart={cart} price={totalPrice} butTitle={"Place Order"} color={"bg-green-500"} style={""} rounded={""} setOrderConfirmation={setOrderConfirmation}/>}
 
-                    {!newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} setOpenSeeDetail={setOpenSeeDetail}
-                    cart={orderedCart} price={totalPriceOrdered} butTitle={"Payment"} color={"bg-blue-500"} style={""} rounded={""}/>}
+                    {!newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} setOpenSeeDetail={setOpenSeeDetail} order={0}
+                    cart={orderedCart} price={totalPriceOrdered} butTitle={"Payment"} color={"bg-blue-500"} style={""} rounded={""} setOrderConfirmation={setOrderConfirmation}/>}
                     
                     
                 </div>) :
 
                 (      <OrderPanelFooter
-                        openPanel={openPanel} setOpenPanel={setOpenPanel} handle={handleOrder} setNewOrder={setNewOrder}
+                        openPanel={openPanel} setOpenPanel={setOpenPanel} order={1} setNewOrder={setNewOrder}
                         cart={cart} price={totalPrice} butTitle={"Place Order"} color={"bg-green-500"} 
                         style={"bg-black/80 rounded-2xl shadow-md shadow-white/50 hover:scale-105 active:scale-95"} 
-                        rounded={"rounded-r-2xl"}/>
+                        rounded={"rounded-r-2xl"} setOrderConfirmation={setOrderConfirmation}/>
                 )
             }
         </>

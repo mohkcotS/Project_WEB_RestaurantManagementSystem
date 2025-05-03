@@ -5,6 +5,7 @@ import { getAllDishes } from "../../../services/DishService";
 import { useOutletContext, useNavigate } from "react-router-dom"
 import { createOrderDetail } from "../../../services/order_detailService";
 import useCheckRole from "../../../Hooks/useCheckRole";
+import { OrderConfirmation } from "../components/OrderConfirmation";
 
 export const CustomerOrder = () => {
 
@@ -13,6 +14,7 @@ export const CustomerOrder = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [cart, setCart] = useState([])
     const [openPanel, setOpenPanel] = useState(false)
+    const [orderConfirmation, setOrderConfirmation] = useState(false)
     const {setNotification, currentOrder , currentUser } = useOutletContext()
     const navigate = useNavigate();
     useCheckRole(currentUser)
@@ -61,11 +63,12 @@ export const CustomerOrder = () => {
                 const response = await createOrderDetail(data);
                 setNotification({ message: response.data.message, status: "success" });
                 setCart([])
+                setOrderConfirmation(false)
             }
 
             else {
                 setNotification({ message: "Please choose your dish", status: "error" });
-
+                setOrderConfirmation(false)
             }
 
         } catch (error) {
@@ -113,10 +116,16 @@ export const CustomerOrder = () => {
                     ))}
                 </div>
 
-                <div className="fixed bottom-10 right-10 w-[30%]">
-                    <CustomerOrderPanel cart={cart} setCart={setCart} openPanel={openPanel} setOpenPanel={setOpenPanel} handleOrder={handleOrder} currentOrder={currentOrder}/>
+                <div className="fixed bottom-10 right-10 w-[30%] z-10">
+                    <CustomerOrderPanel cart={cart} setCart={setCart} openPanel={openPanel} setOpenPanel={setOpenPanel} 
+                     currentOrder={currentOrder} setOrderConfirmation={setOrderConfirmation}/>
                 </div>        
             </div>
+            
+            {orderConfirmation && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
+            <OrderConfirmation setOrderConfirmation={setOrderConfirmation} handleOrder={handleOrder} cart={cart} /></div>}
+            
+
         </div>
     )
 }

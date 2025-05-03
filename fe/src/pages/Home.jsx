@@ -123,8 +123,8 @@ export const Home = () => {
 
       </div>
       {/* end nav bar */}
-
-      {notification?.message && (<Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} />)}
+      
+      {notification?.message && <div className='z-20 absolute top-5 right-5'>(<Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)}  />)</div>}
 
 
       {/* img */}
@@ -205,7 +205,7 @@ export const Home = () => {
       {/* Form */}
       <div className={`w-[800px] h-[500px] rounded-3xl border-12 border-white bg-gray-200 flex justify-between overflow-hidden relative transition-all ease-out duration-700 ${isVisible ? 'opacity-100 z-20 -translate-y-[900px]' : 'opacity-0 z-0 -translate-y-full'}`}>
 
-        <button onClick={() => {setVisible(false);lReset();rReset();}} className={`text-2xl hover:text-red-600 absolute top-5 right-8 active:scale-95 transition-colors duration-300 z-30 ${isLogin ? 'text-[#ffd900]' : 'text-black'}`} >&#10006;</button>
+        <button onClick={() => {setVisible(false);lReset();rReset();}} className={`text-2xl hover:text-red-600 absolute top-5 right-8 active:scale-95 transition-colors duration-300 z-30 cursor-pointer ${isLogin ? 'text-[#ffd900]' : 'text-black'}`} >&#10006;</button>
 
         {/* Login Form */}
 

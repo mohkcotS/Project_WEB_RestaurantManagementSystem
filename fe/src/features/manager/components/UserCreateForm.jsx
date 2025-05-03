@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import axios from 'axios'
+import { createUser } from '../../../services/userService'
 
 export const UserCreateForm = ({setOpenForm,setNotification,updateUserList}) => {
 
@@ -19,15 +19,11 @@ export const UserCreateForm = ({setOpenForm,setNotification,updateUserList}) => 
 
     const onSubmit = async (data) => {
         delete data.confirmedPassword;
-        console.log(data);
-
         try {
-
-            const response = await axios.post("http://localhost:3001/users", data)
+            const response = await createUser(data)
 
             if (response.status === 201) {
                 updateUserList();
-                console.log(response.data.message)
                 setNotification({ message: response.data.message, status: "success" })
                 reset();
             }

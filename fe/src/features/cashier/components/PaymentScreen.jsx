@@ -18,6 +18,7 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
             try {
                 const response = await getOrderByTableId(selectedTable.id)
                 setOrder(response.data)
+                console.log(response.data)
                 const response1 = await getAllOrderDetails(response.data.id)
                 setCart(response1.data)
                 const response2 = await getRewardByUserId(response.data.UserId)

@@ -8,6 +8,7 @@ export const ManagerNavBarTop = ({ currentUser}) => {
         { id: "user", text: "USER" },
         { id: "table", text: "TABLE" },
         { id: "order", text: "ORDER" },
+        { id: "payment", text: "PAYMENT" },
         { id: "dish", text: "DISH" },
     ]
 

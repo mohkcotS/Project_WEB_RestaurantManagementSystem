@@ -5,6 +5,7 @@ import svg4 from "../assets/svg/pageicon/order.svg"
 import svg5 from "../assets/svg/pageicon/table.svg"
 import svg6 from "../assets/svg/pageicon/user.svg"
 import svg7 from "../assets/svg/pageicon/money.svg"
+import svg8 from "../assets/svg/pageicon/payment.svg"
 
 
 
@@ -16,6 +17,7 @@ const svg = {
     table: svg5,
     user: svg6,
     money: svg7,
+    payment: svg8,
   };
   
   export {svg};
