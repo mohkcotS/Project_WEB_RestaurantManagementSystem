@@ -7,6 +7,7 @@ export const TableConfirmation = ({ selectedTable, setOpenEdit, setConfirmation,
     const navigate = useNavigate();
 
     const data = {
+        date: new Date().toISOString().split('T')[0],
         TableId: selectedTable.id,
         UserId: selectedUser
     };

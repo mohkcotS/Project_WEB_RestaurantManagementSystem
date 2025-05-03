@@ -70,7 +70,7 @@ export const ManagerHome = () => {
     const fetchSalesToday = async () => {
         try {
             const response = await getSalesToday()
-            setSalesToday(response.data)
+            setSalesToday(response.data.total)
         } catch (error) {
             console.log(error)
         }
@@ -106,6 +106,10 @@ export const ManagerHome = () => {
         <div className="w-[90%] h-auto mx-auto flex flex-col  my-10 gap-10">
             <div className="w-full flex gap-10">
                 <div className="w-[70%] flex flex-col gap-10">
+                    <div className="w-full grid grid-cols-[4fr_6fr] gap-x-10">
+                        <TableWidget tableCounted={tableCounted} />
+                        <UserWidget userCounted={userCounted} />
+                    </div>
                     <div className="w-ful grid grid-cols-[4fr_6fr] gap-x-10">
                         <MonthlyRevenueWidget setSelectedMonth={setSelectedMonth} totalMonthAmount={totalMonthAmount} />
 
@@ -115,10 +119,7 @@ export const ManagerHome = () => {
                         </div>
                     </div>
 
-                    <div className="w-full grid grid-cols-[4fr_6fr] gap-x-10">
-                        <TableWidget tableCounted={tableCounted} />
-                        <UserWidget userCounted={userCounted} />
-                    </div>
+
                 </div>
                 <BestSellingTable bestSelling={bestSelling} />
             </div>

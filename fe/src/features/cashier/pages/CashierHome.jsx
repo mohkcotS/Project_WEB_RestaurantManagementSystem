@@ -7,7 +7,6 @@ import { getAllTables } from "../../../services/tableService";
 export const CashierHome = () => {
     const {setNotification, currentUser}  = useOutletContext()
     const [tables, setTables] = useState([])
-    const [editId, seteditId] = useState(null);
     useCheckRole(currentUser)
 
     const updateTableList = async () => {

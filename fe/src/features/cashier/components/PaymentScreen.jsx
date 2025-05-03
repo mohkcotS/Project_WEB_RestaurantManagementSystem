@@ -53,7 +53,7 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
         const payment = {
             amount: total, 
             method: paymentMethod, 
-            date: new Date(order.createdAt).toISOString().split('T')[0], 
+            date: order.date, 
             OrderId: order.id
           }; 
 
