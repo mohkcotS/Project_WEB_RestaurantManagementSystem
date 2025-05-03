@@ -4,7 +4,7 @@ const { Dishes } = require("../models")
 const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 
 
-router.get("/", async (req, res, next) => {
+router.get("/", validateToken, checkRole(["Manager","Customer"]), async (req, res, next) => {
     try {
         const listOfDishes = await Dishes.findAll();
         res.json(listOfDishes);
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 
 
 //Create new dish
-router.post("/", async (req,res,next)=>{
+router.post("/", validateToken, checkRole(["Manager"]), async (req,res,next)=>{
     try{
         const post = req.body;
         const newDish = await Dishes.create(post);

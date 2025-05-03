@@ -3,8 +3,9 @@ const router = express.Router()
 const { Payments } = require("../models")
 const { fn, col, literal, Op } = require("sequelize");
 const moment = require('moment-timezone');
+const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 
-router.get("/", async (req, res, next) => {
+router.get("/", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
         const listOfPayments = await Payments.findAll();
         res.json(listOfPayments);
@@ -14,13 +15,15 @@ router.get("/", async (req, res, next) => {
 
 })
 
-router.get("/salesToday", async (req, res, next) => {
+router.get("/salesToday", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
         const today = moment().startOf('day').toDate();
 
         const paymentTotal = await Payments.sum('amount', {
             where: {
-                date: today }
+                date: today,
+                status: "success"
+             }
         });
 
         res.json({ total: paymentTotal || 0 });
@@ -29,7 +32,7 @@ router.get("/salesToday", async (req, res, next) => {
     }
 });
 
-router.get("/salesMonth", async (req, res, next) => {
+router.get("/salesMonth", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
         const { yearMonth } = req.query;
 
@@ -49,7 +52,8 @@ router.get("/salesMonth", async (req, res, next) => {
                 Date: {  
                     [Op.gte]: startOfMonth,
                     [Op.lte]: endOfMonth
-                }
+                },
+                status: "success"
             },
             group: [literal('DATE(Date)')],  
             order: [[literal('DATE(Date)'), 'ASC']]  
@@ -64,7 +68,7 @@ router.get("/salesMonth", async (req, res, next) => {
 
 
 // Create payment
-router.post("/", async (req, res, next) => { 
+router.post("/", validateToken, checkRole(["Cashier"]), async (req, res, next) => { 
     try {
         const post = req.body;
         await Payments.create(post);    
@@ -75,6 +79,21 @@ router.post("/", async (req, res, next) => {
     }
 });
 
+router.patch("/:id/status", validateToken, checkRole(["Manager"]),  async(req,res,next)=>{
+    try {
+        const { id } = req.params;
+        const { status, note } = req.body;
+
+        const payment = await Payments.findByPk(id);
+
+        await payment.update({ status, note });
+
+        return res.status(200).json({ message: "Update payment status successfully" });
+
+    } catch (error) {
+        next({ statusCode: 500, message: "Internal server error" });
+    }
+})
 
 
 

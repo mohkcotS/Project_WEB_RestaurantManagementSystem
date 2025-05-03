@@ -4,7 +4,7 @@ const { Orders, Order_Details } = require("../models")
 const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 const moment = require('moment');
 
-router.get("/", async (req, res, next) => {
+router.get("/", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
         const listOfOrders = await Orders.findAll();
         res.json(listOfOrders);
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
 
 })
 
-router.get("/pending", async (req, res, next) => {
+router.get("/pending", validateToken, checkRole(["Chef"]),async (req, res, next) => {
     try {
         const orders = await Orders.findAll({
             where: { status: "pending" },
@@ -52,7 +52,7 @@ router.get("/pending", async (req, res, next) => {
 });
 
 
-router.get("/today", async (req, res, next) => {
+router.get("/today", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
 
         const today = moment().startOf('day').toDate();
@@ -69,7 +69,7 @@ router.get("/today", async (req, res, next) => {
     }
 });
 
-router.get("/table/:tableId", async (req, res, next) => {
+router.get("/table/:tableId", validateToken, checkRole(["Cashier"]), async (req, res, next) => {
     const { tableId } = req.params;
     try {
         const order = await Orders.findOne({
@@ -85,10 +85,17 @@ router.get("/table/:tableId", async (req, res, next) => {
     }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", validateToken, checkRole(["Customer"]), async (req, res, next) => {
     try {
         const post = req.body;
-        const newOrder = await Orders.create(post);
+
+        // Tự set ngày theo giờ địa phương, bỏ qua client gửi lên
+        const todayLocal = moment().format("YYYY-MM-DD");
+
+        const newOrder = await Orders.create({
+            ...post,
+            date: todayLocal,  // đảm bảo lưu đúng ngày theo giờ máy chủ
+        });
         res.status(201).json(newOrder);
     } catch (error) {
         next(error);

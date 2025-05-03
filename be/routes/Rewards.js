@@ -1,31 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const { Rewards } = require("../models")
-
-router.get("/", async (req, res, next) => {
-    try {
-        const listOfRewards = await Rewards.findAll();
-        res.json(listOfRewards);
-    } catch (error) {
-        next(error);
-    }
-
-})
-
-
-router.post("/", async (req, res, next) => {
-    try {
-        const post = req.body;
-        await Rewards.create(post);
-        res.json(post);
-    } catch (error) {
-        next(error);
-    }
-
-})
+const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 
 //get reward by userId
-router.get("/user/:id", async (req, res, next) => {
+router.get("/user/:id", validateToken, checkRole(["Customer","Cashier"]), async (req, res, next) => {
     const { id } = req.params;
     try {
         const reward = await Rewards.findOne({
@@ -40,7 +19,7 @@ router.get("/user/:id", async (req, res, next) => {
 })
 
 // update user loyalty point
-router.patch("/user/:id/totalPoints", async (req, res, next) => {
+router.patch("/user/:id/totalPoints", validateToken, checkRole(["Cashier"]), async (req, res, next) => {
     const { id } = req.params;
     const { newPoints } = req.body;
   

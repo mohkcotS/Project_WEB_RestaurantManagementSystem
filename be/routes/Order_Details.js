@@ -5,7 +5,7 @@ const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 const moment = require('moment');
 const { Op, Sequelize } = require('sequelize');
 
-router.get("/", async (req, res, next) => {
+router.get("/", validateToken, checkRole(["Chef"]), async (req, res, next) => {
     try {
         const { orderId } = req.query;
 
@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
 })
 
 //get All detail from orderId (reduced)
-router.get("/reduced", async (req, res, next) => {
+router.get("/reduced", validateToken, checkRole(["Manager","Customer","Cashier"]),async (req, res, next) => {
     try {
         const { orderId } = req.query;
 
@@ -73,7 +73,7 @@ router.get("/reduced", async (req, res, next) => {
 });
 
 // get best selling
-router.get("/bestselling", async (req, res, next) => {
+router.get("/bestselling", validateToken, checkRole(["Manager"]), async (req, res, next) => {
     try {
 
         const todayStart = moment().startOf('day').toDate(); 
@@ -123,7 +123,7 @@ router.get("/bestselling", async (req, res, next) => {
 });
 
 
-router.post("/", async (req, res, next) => {
+router.post("/",validateToken, checkRole(["Customer"]), async (req, res, next) => {
     try {
         const post = req.body;
 

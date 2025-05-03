@@ -4,7 +4,7 @@ const {Tables} = require("../models")
 const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 
 //get all Tables
-router.get("/",async (req,res,next)=>{
+router.get("/", validateToken, checkRole(["Manager","Customer","Cashier"]),async (req,res,next)=>{
     try{
         const listOfTables = await Tables.findAll();
         res.json(listOfTables);
@@ -14,7 +14,7 @@ router.get("/",async (req,res,next)=>{
 })
 
 //create new table
-router.post("/", async (req,res,next)=>{
+router.post("/", validateToken, checkRole(["Manager"]), async (req,res,next)=>{
     try{
         const post = req.body;
         const newTable = await Tables.create(post);

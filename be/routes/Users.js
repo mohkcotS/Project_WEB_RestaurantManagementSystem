@@ -49,7 +49,7 @@ router.get("/count", validateToken, checkRole(["Manager"]), async(req, res,next)
 
 //Create user
 
-router.post("/", async(req,res,next) => {
+router.post("/", validateToken, checkRole(["Manager"]), async(req,res,next) => {
     try {
         const { name, role, password } = req.body;
 
@@ -231,7 +231,7 @@ router.get("/:id", validateToken, checkRole(["Manager","Customer","Cashier","Che
     }
 });
 
-router.get("/:id/orders", async (req, res, next) => {
+router.get("/:id/orders", validateToken, checkRole(["Customer"]),async (req, res, next) => {
     try {
         const { id } = req.params; 
         const orders = await Orders.findAll({
