@@ -7,6 +7,7 @@ import { ManagerDish } from "./features/manager/pages/ManagerDish";
 import { ManagerTable } from "./features/manager/pages/ManagerTable";
 import { ManagerUser } from "./features/manager/pages/ManagerUser";
 import { ManagerOrder } from "./features/manager/pages/ManagerOrder";
+import { ManagerPayment } from './features/manager/pages/ManagerPayment.jsx';
 
 import { Customer } from './features/customer/pages/Customer';
 import { CustomerTable } from "./features/customer/pages/CustomerTable";
@@ -42,6 +43,7 @@ function App() {
               <Route path='user' element={<ManagerUser />} />
               <Route path='table' element={<ManagerTable />} />
               <Route path='order' element={<ManagerOrder />} />
+              <Route path='payment' element={<ManagerPayment />} />
               <Route path='dish' element={<ManagerDish />} />
             </Route>
           </Route>
