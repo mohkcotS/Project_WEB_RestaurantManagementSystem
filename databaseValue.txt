@@ -1,6 +1,7 @@
 SET FOREIGN_KEY_CHECKS = 0; 
 DROP TABLE IF EXISTS Users, Tables, Dishes, Orders, Order_Details, Payments, Rewards;
 TRUNCATE TABLE Orders;
+UPDATE Tables SET status = 'available' WHERE id = 2;
 SET FOREIGN_KEY_CHECKS = 1;
 ********************************************************************************************
 

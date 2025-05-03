@@ -62,14 +62,32 @@ export const getUserById = async (id) => {
   }
 };
 
+//create new table
+export const createUser = async (data) => {
+  try {
+      const token = sessionStorage.getItem("accessToken");
+
+      if (!token) {
+          throw new Error("Don't have token, Login again");
+      }
+
+      const response = await axios.post("http://localhost:3001/users", data, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
+
+      return response;
+  } catch (error) {
+      throw(error)
+  }
+}
+
 //Update user by id
 export const updateUserById = async (id, userData) => {
   try {
     const token = sessionStorage.getItem("accessToken");
     if (!token) throw new Error("Don't have token, Login again");
-
-    console.log(userData)
-
     const response = await axios.patch(
       `http://localhost:3001/users/${id}`, userData,  {
         headers: { Authorization: `Bearer ${token}` },
