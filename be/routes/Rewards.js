@@ -4,7 +4,7 @@ const { Rewards } = require("../models")
 const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
 
 //get reward by userId
-router.get("/user/:id", validateToken, checkRole(["Customer","Cashier"]), async (req, res, next) => {
+router.get("/user/:id", validateToken, checkRole(["Customer","Cashier","Manager"]), async (req, res, next) => {
     const { id } = req.params;
     try {
         const reward = await Rewards.findOne({
