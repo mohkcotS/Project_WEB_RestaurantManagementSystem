@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllOrderDetails } from "../services/order_detailService"
 import { DateAndTimeUtils } from "../utils/DateAndTimeUtils";
 import { getTableById } from "../services/tableService";
+import { getRewardByUserId } from "../services/rewardService";
 import { CompletedOrderForm } from "../features/customer/components/CompletedOrderForm";
 
 export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) => {
@@ -9,6 +10,7 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
     const { date, time } = DateAndTimeUtils(selectedOrder.createdAt);
     const [table, setTable] = useState({});
     const [openConfirmation, setOpenConfirmation] = useState(false)
+    const [tier, setTier] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,6 +19,8 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
                 setOrderCart(response.data)
                 const response1 = await getTableById(selectedOrder.TableId)
                 setTable(response1.data)
+                const response2 = await getRewardByUserId(selectedOrder.UserId)
+                setTier(response2.data.tier)
             } catch (error) {
                 console.log(error)
             }
@@ -24,8 +28,22 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
         fetchData();
     }, [])
 
-    const totalAmount = orderCart.reduce((sum, item) => sum + item.totalPrice, 0);
-    const formattedAmount = Number(totalAmount).toFixed(2); 
+    const subTotal = orderCart.reduce((sum, item) => sum + item.totalPrice, 0);
+    const loyaltyPoints = Math.floor((Number(subTotal) / 20) * 100) / 100;
+    const discount = () => {
+        let rate = 0;
+    
+        if (tier === "Bronze") rate = 0.03;
+        else if (tier === "Silver") rate = 0.05;
+        else if (tier === "Gold") rate = 0.07;
+        else if (tier === "Platinium") rate = 0.09;
+        else rate = 0.12;
+    
+        return Math.floor(subTotal * rate * 100) / 100;
+    };
+    
+    const total = subTotal - discount()
+    const formattedAmount = Number(total).toFixed(2); 
     const accountName = "Le Minh Duy";
     const addInfo = `Pay for Order ID: ${selectedOrder?.id ?? "unknown"}`;
 
@@ -46,10 +64,8 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
                 <h1> <strong>Table:</strong> {table.name} </h1>
             </div>
 
-
             <hr className="border-1 border-dashed border-gray-700 my-4" />
-
-            
+  
                 {orderCart.map(order => (
                     <div >
                         <h1 className="font-bold text-lg">{order.name}</h1>
@@ -63,16 +79,31 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
                     </div>
                 ))}
             
-            
-
-
             <hr className="border-1 border-dashed border-gray-700 my-4" />
 
             <div className="flex justify-between">
-                <h1 className="text-lg"> {orderCart.length} items</h1>
-                <div className="flex gap-10 text-2xl font-bold">
-                    <h1> TOTAL:  </h1>
-                    <h1>{formattedAmount}</h1>
+                <div className="flex flex-col gap-2 ">
+                    <h1 className="text-lg"> {orderCart.length} items</h1>
+                    <div className="flex gap-2 justify-between">
+                        <h1 className="font-bold "> Loyalty points  </h1>
+                        <h1 className="text-blue-600">{loyaltyPoints}</h1>
+                    </div>
+                </div>              
+                
+                <div className="w-[180px] text-lg flex flex-col ">
+                    <div className="flex gap-2 justify-between">
+                        <h1 className="font-bold"> Sub total  </h1>
+                        <h1>{subTotal.toFixed(2)}</h1>
+                    </div>
+                    <div className="flex gap-2 justify-between">
+                        <h1 className="font-bold "> Discount  </h1>
+                        <h1 className="text-red-600">{discount()}</h1>
+                    </div>
+
+                    <div className="flex gap-2 text-xl justify-between font-bold mt-2 mb-6">
+                        <h1 className=" "> TOTAL  </h1>
+                        <h1 className="text-green-700">{formattedAmount}</h1>
+                    </div>        
                 </div>
 
             </div>

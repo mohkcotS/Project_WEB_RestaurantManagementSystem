@@ -82,6 +82,27 @@ export const createUser = async (data) => {
       throw(error)
   }
 }
+//Login
+export const login = async (data) => {
+  try {
+    const response = await axios.post("http://localhost:3001/auth/login", data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Register
+export const register = async (data) => {
+  try {
+    const response = await axios.post("http://localhost:3001/auth/register", data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 //Update user by id
 export const updateUserById = async (id, userData) => {
@@ -130,4 +151,4 @@ export const getOrderByUserId = async (id) => {
   } catch (error) {
     return error
   }
-};
+}; 
