@@ -1,4 +1,3 @@
-import useCheckRole from "../../../Hooks/useCheckRole.js";
 import { useOutletContext } from "react-router-dom"
 import { ManagerOrderCard } from "../components/ManagerOrderCard.jsx";
 import { useEffect, useState } from "react";
@@ -9,8 +8,7 @@ import { CustomCalendar } from "../../../components/CustomCalendar.jsx";
 import { DateAndTimeUtils } from "../../../utils/DateAndTimeUtils.js";
 
 export const ManagerOrder = () => {
-    const { setNotification, currentUser } = useOutletContext()
-    useCheckRole(currentUser)
+    const { setNotification} = useOutletContext()
     const [orders, setOrders] = useState([])
     const [filteredOrders, setFilteredOrders] = useState([]);
     const [selectedDate, setSelectedDate] = useState()

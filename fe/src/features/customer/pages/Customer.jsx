@@ -10,6 +10,9 @@ import { getUserById } from '../../../services/userService';
 import { getRewardByUserId } from "../../../services/rewardService";
 import { useGetData } from "../../../hooks/useGetData";
 import { useCheckNotification } from "../../../hooks/useCheckNotification";
+import socket from "../../../socket";
+import useUserUpdate from "../../../hooks/useUserUpdate";
+
 export const Customer = () => {
     const navigate = useNavigate()
     const location = useLocation();
@@ -20,6 +23,7 @@ export const Customer = () => {
     const [confirmation, setConfirmation] = useState(false)
     const [currentOrder, setCurrentOrder] = useState({})
     useCheckNotification(setNotification)
+    useUserUpdate(socket,currentUser)
     useGetData(selectedTable, setSelectedTable,confirmation, setConfirmation,currentOrder, setCurrentOrder)
     
     const getUserInformation = async (id) => {
@@ -32,7 +36,7 @@ export const Customer = () => {
                 name: response.data.name,
                 role: response.data.role,
                 phoneNumber: response.data.phoneNumber || "",
-                currentPoints: response1.data.totalPoints,
+                currentPoints: response1.data.totalPoints || 0,
                 tier: response1.data.tier
             });
         }
@@ -49,6 +53,17 @@ export const Customer = () => {
         if (location.pathname === '/customer') {
             navigate('table');
         }
+
+        socket.on("receive-new-payment", (data) => {
+            if (data.UserId === currentUser.id) {
+                sessionStorage.clear()
+                navigate('/')
+            }
+        });
+    
+        return () => {
+            socket.off("receive-new-payment");
+        };
 
     }, [decode.id, location.pathname, navigate]);
 

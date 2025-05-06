@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import useCheckRole from "../../../Hooks/useCheckRole.js";
 import { useOutletContext } from "react-router-dom"
 import { RevenueChart } from "../components/RevenueChart.jsx";
 import { BestSellingTable } from "../components/BestSellingTable.jsx";
@@ -13,13 +12,10 @@ import { getAllTables } from "../../../services/tableService.jsx";
 import { getUserCounted } from "../../../services/userService.jsx";
 import { getBestSelling } from "../../../services/order_detailService.jsx";
 import { getSalesMonth, getSalesToday } from "../../../services/paymentService.jsx";
-
+import socket from "../../../socket.js";
 
 export const ManagerHome = () => {
-    const { currentUser } = useOutletContext()
     const [selectedMonth, setSelectedMonth] = useState(new Date())
-    useCheckRole(currentUser)
-
     const [todayOrder, setTodayOrder] = useState(0);
     const [tableCounted, setTableCounted] = useState({ available: 0, occupied: 0 })
     const [userCounted, setUserCounted] = useState([])
@@ -100,6 +96,37 @@ export const ManagerHome = () => {
     useEffect(() => {
         fetchSalesMonth()
     }, [selectedMonth])
+
+    const handleNewPayment = () => {
+        fetchSalesMonth();
+        fetchSalesToday();
+    };
+
+    const handleNewInitializedOrder = () => {
+        fetchOrderToday();
+    }
+
+    const handleNewPlacedOrder = () => {
+        fetchBestSelling();
+    }
+
+    const updateUser = () => {
+        countCustomer();
+    }
+
+    useEffect(() => {
+        socket.on("receive-new-payment", handleNewPayment);
+        socket.on("update-for-new-order",handleNewInitializedOrder)
+        socket.on("receive-new-order",handleNewPlacedOrder)
+        socket.on("receive-update-user-board",updateUser)
+
+        return () => {
+            socket.off("receive-new-payment", handleNewPayment);
+            socket.off("update-for-new-order",handleNewInitializedOrder);
+            socket.off("receive-new-order",handleNewPlacedOrder)
+            socket.off("receive-update-user-board",updateUser)
+        };
+    }, []);
 
     return (
 

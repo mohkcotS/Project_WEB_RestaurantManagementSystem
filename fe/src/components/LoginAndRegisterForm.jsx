@@ -4,9 +4,10 @@ import { jwtDecode } from 'jwt-decode';
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { login, register } from '../services/userService';
+import socket from '../socket';
 
 
-export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin}) => {
+export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin, setNotification}) => {
 
     const schema = yup.object().shape({
         name: yup.string().required("Name is required!"),
@@ -59,8 +60,7 @@ export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin}) => {
             setNotification({ message: response.data.message, status: "success" })
 
         } catch (error) {
-            console.log(error.response.data.message)
-            setNotification({ message: error.response.data.message, status: "error" })
+          setNotification({ message: error.response.data.message, status: "error" })
         }
     };
 
@@ -76,6 +76,7 @@ export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin}) => {
 
             const response = await register(formatData)
             setNotification({ message: response.data.message, status: "success" })
+            socket.emit("update-user-board")
             rReset();
             clearErrors();
 

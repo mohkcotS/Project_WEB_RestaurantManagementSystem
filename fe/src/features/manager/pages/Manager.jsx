@@ -7,6 +7,8 @@ import bgImage from '../../../assets/img/bg.jpg';
 import { jwtDecode } from "jwt-decode";
 import { getUserById } from '../../../services/userService';
 import { useCheckNotification } from '../../../hooks/useCheckNotification';
+import socket from '../../../socket';
+import useUserUpdate from '../../../hooks/useUserUpdate';
 
 export const Manager = () => {
     const navigate = useNavigate();
@@ -15,6 +17,7 @@ export const Manager = () => {
     const [currentUser, setCurrentUser] = useState({ id: 0, name: "", role: ""});
     const [notification, setNotification] = useState({ message: "", status: "" });
     useCheckNotification(setNotification)
+    useUserUpdate(socket,currentUser)
     const getUserInformation = async (id) => {
         try {
             const response = await getUserById(id);
@@ -31,11 +34,8 @@ export const Manager = () => {
     };
 
     useEffect(() => {
-        if (location.pathname === '/customer') {
-            navigate('table');
-        }
         getUserInformation(decode.id);
-
+        socket.emit("user-join", { userId: decode.id });
     }, [decode.id, location.pathname, navigate]);
 
     return (

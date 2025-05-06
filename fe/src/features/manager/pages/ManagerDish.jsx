@@ -5,7 +5,6 @@ import { DishEditForm } from "../components/DishEditForm";
 import { DishCategorySection } from "../components/DishCategorySection";
 import {DishDeleteForm} from "../components/DishDeleteForm";
 import { useOutletContext } from "react-router-dom"
-import useCheckRole from "../../../Hooks/useCheckRole";
 
 export const ManagerDish = () => {
     const  {setNotification,currentUser}  = useOutletContext()
@@ -25,8 +24,6 @@ export const ManagerDish = () => {
         { label: "SIDE DISH", value: "Side Dish" },
         { label: "BEVERAGE", value: "Beverage" },
     ];
-
-    useCheckRole(currentUser)
 
     const filteredDishes = useMemo(() => {
         return dishes.filter(dish => {

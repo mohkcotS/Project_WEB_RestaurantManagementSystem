@@ -7,6 +7,9 @@ import { getUserById } from '../../../services/userService';
 import { useCheckNotification } from '../../../hooks/useCheckNotification';
 import { useState, useEffect } from 'react';
 import { ChefNavBarSide } from '../components/ChefNavBarSide';
+import useUserUpdate from '../../../hooks/useUserUpdate';
+import socket from '../../../socket';
+
 export const Chef = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,6 +17,7 @@ export const Chef = () => {
     const [currentUser, setCurrentUser] = useState({ id: 0, name: "", role: ""});
     const [notification, setNotification] = useState({ message: "", status: "" });
     useCheckNotification(setNotification)
+    useUserUpdate(socket,currentUser)
     const getUserInformation = async (id) => {
         try {
             const response = await getUserById(id);
@@ -49,7 +53,7 @@ export const Chef = () => {
                 <Outlet context={{currentUser, setNotification}} />
             </div>
             {/* Toast */}
-            {notification?.message && <div className="z-105"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}
+            {notification?.message && <div className="z-10"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}
         </div>
     )
 }
