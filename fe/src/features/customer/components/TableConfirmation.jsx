@@ -1,7 +1,7 @@
 import { createOrder } from "../../../services/orderService";
 import { updateTableStatus } from "../../../services/tableService";
 import { useNavigate } from "react-router-dom";
-
+import socket from "../../../socket";
 
 export const TableConfirmation = ({ selectedTable, setOpenEdit, setConfirmation, setNotification, updateTableList, selectedUser, setCurrentOrder }) => {
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ export const TableConfirmation = ({ selectedTable, setOpenEdit, setConfirmation,
         try {
             const response = await updateTableStatus(selectedTable.id, "occupied")
             const response1 = await createOrder(data)
+            socket.emit("new-order-initialized");
             setCurrentOrder(response1.data); 
             sessionStorage.setItem("order", JSON.stringify(response1.data)); 
             sessionStorage.setItem("table", JSON.stringify(selectedTable)); 
@@ -38,9 +39,9 @@ export const TableConfirmation = ({ selectedTable, setOpenEdit, setConfirmation,
             </div>
 
             <div className="flex flex-col items-center gap-5">
-                <h2 className="font-bold text-center text-xl"> Do you want to choose table {selectedTable.name} </h2>
+                <h2 className="font-bold text-center text-xl"> Do you want to choose Table {selectedTable.name} </h2>
                 <div className="flex gap-20">
-                    <button onClick={handleSubmit} className="rounded-xl hover:cursor-pointer bg-green-500  hover:scale-105 active:scale-95 duration-300 text-white font-bold px-8 py-2 ">Submit</button>
+                    <button onClick={handleSubmit} className="rounded-xl hover:cursor-pointer bg-green-500  hover:scale-105 active:scale-95 duration-300 text-white font-bold px-8 py-2 ">Choose</button>
                 </div>
             </div>
 

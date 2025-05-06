@@ -5,6 +5,7 @@ import { getAllOrderDetails } from "../../../services/order_detailService"
 import { getRewardByUserId, updateLoyaltyPointByUserId } from "../../../services/rewardService"
 import { createPayment } from "../../../services/paymentService"
 import { updateTableStatus } from "../../../services/tableService"
+import socket from "../../../socket"
 
 export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, updateTableList }) => {
     const [order, setOrder] = useState({})
@@ -18,7 +19,6 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
             try {
                 const response = await getOrderByTableId(selectedTable.id)
                 setOrder(response.data)
-                console.log(response.data)
                 const response1 = await getAllOrderDetails(response.data.id)
                 setCart(response1.data)
                 const response2 = await getRewardByUserId(response.data.UserId)
@@ -64,6 +64,7 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
             await updateLoyaltyPointByUserId(order.UserId,{ newPoints: loyaltyPoints })
             await updateTableStatus(order.TableId,  "available")
             await updateOrderStatus(order.id, "completed")
+            socket.emit("new-payment-completed",{UserId: order.UserId, TableId: order.TableId})
             setOpenPayment(false)
             updateTableList()
         } catch (error) {

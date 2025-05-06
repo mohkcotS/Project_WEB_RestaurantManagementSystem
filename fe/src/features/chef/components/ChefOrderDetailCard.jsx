@@ -5,7 +5,7 @@ import { getFullAllOrderDetail} from "../../../services/order_detailService";
 import { DishCompletedForm } from "../components/DishCompletedForm";
 import { OrderCompletedForm } from "./OrderCompletedForm";
 
-export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification, reload, setReload , fetchOrder}) => {
+export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification, fetchOrder}) => {
     const { date, time } = DateAndTimeUtils(order.updatedAt)
     const [dishes, setDishes] = useState([])
     const [openDishCompleted,setOpenDishCompleted] = useState(false)
@@ -16,7 +16,6 @@ export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification
         try {
             const response = await getFullAllOrderDetail(order.id)
             setDishes(response.data)
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -87,11 +86,11 @@ export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification
 
             {openDishCompleted && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
             <DishCompletedForm setOpenDishCompleted={setOpenDishCompleted} setNotification={setNotification} 
-            selectedDish={selectedDish} fetchOrderDetail={fetchOrderDetail} reload={reload} setReload={setReload}/></div>}   
+            selectedDish={selectedDish} fetchOrderDetail={fetchOrderDetail}/></div>}   
 
             {openOrderCompleted && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
             <OrderCompletedForm setOpenOrderCompleted={setOpenOrderCompleted} setNotification={setNotification} 
-            fetchOrder={fetchOrder} setOpenOrderDetail={setOpenOrderDetail} reload={reload} setReload={setReload} /></div>}   
+            fetchOrder={fetchOrder} setOpenOrderDetail={setOpenOrderDetail} /></div>}   
 
         </div>
 

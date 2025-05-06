@@ -3,13 +3,11 @@ import { getAllOrderDetails } from "../services/order_detailService"
 import { DateAndTimeUtils } from "../utils/DateAndTimeUtils";
 import { getTableById } from "../services/tableService";
 import { getRewardByUserId } from "../services/rewardService";
-import { CompletedOrderForm } from "../features/customer/components/CompletedOrderForm";
 
 export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) => {
     const [orderCart, setOrderCart] = useState([])
     const { date, time } = DateAndTimeUtils(selectedOrder.createdAt);
     const [table, setTable] = useState({});
-    const [openConfirmation, setOpenConfirmation] = useState(false)
     const [tier, setTier] = useState("")
 
     useEffect(() => {
@@ -100,7 +98,7 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
                         <h1 className="text-red-600">{discount()}</h1>
                     </div>
 
-                    <div className="flex gap-2 text-xl justify-between font-bold mt-2 mb-6">
+                    <div className="flex gap-2 text-xl justify-between font-bold my-2">
                         <h1 className=" "> TOTAL  </h1>
                         <h1 className="text-green-700">{formattedAmount}</h1>
                     </div>        
@@ -116,17 +114,6 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
                 src={qrURL}
                 alt="Payment QR Code"
                 className="w-60 mx-auto" />}
-
-            {isPayment && <div className="w-full mt-4 flex justify-center ">
-                <button 
-                onClick={()=> {setOpenConfirmation(true)}}
-                className="w-[80%] py-2 bg-green-600 rounded-xl text-lg hover:cursor-pointer  
-                transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">Confirmation</button>
-            </div>  }  
-
-            {openConfirmation && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
-            <CompletedOrderForm   setOpenConfirmation={setOpenConfirmation}         /></div>}
-
         </div>
     )
 }

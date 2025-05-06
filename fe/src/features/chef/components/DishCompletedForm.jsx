@@ -1,14 +1,12 @@
 import {updateOrderDetailStatus } from "../../../services/order_detailService";
 
-export const DishCompletedForm = ({setOpenDishCompleted, setNotification, selectedDish, fetchOrderDetail, reload, setReload}) => {
+export const DishCompletedForm = ({setOpenDishCompleted, setNotification, selectedDish, fetchOrderDetail}) => {
     const handleCompleteDish = async () => {
         try {
             const response = await updateOrderDetailStatus(selectedDish)
             setNotification({message: response.data.message, status: "success"})
             fetchOrderDetail();
             setOpenDishCompleted(false)
-            setReload(!reload)
-
         } catch (error) {
             setNotification(error)
         }

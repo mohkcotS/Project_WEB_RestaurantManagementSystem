@@ -2,7 +2,7 @@ import { MdAccessTime } from "react-icons/md";
 import { DateAndTimeUtils } from "../../../utils/DateAndTimeUtils";
 import { useEffect, useState } from "react";
 import { getFullAllOrderDetail } from "../../../services/order_detailService";
-export const ChefOrderCard = ({ setOpenOrderDetail, order, setSelectedOrder, reload}) => {
+export const ChefOrderCard = ({ setOpenOrderDetail, order, setSelectedOrder}) => {
     const { date, time } = DateAndTimeUtils(order.updatedAt)
     const [dishes, setDishes] = useState([])
     useEffect(() => {
@@ -15,7 +15,7 @@ export const ChefOrderCard = ({ setOpenOrderDetail, order, setSelectedOrder, rel
             }
         }
         fetchOrderDetail()
-    }, [reload,order])
+    }, [order])
 
     const countPreparing = dishes.filter(dish => dish.status === "preparing").length;
 

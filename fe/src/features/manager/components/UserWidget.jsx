@@ -1,5 +1,3 @@
-
-
 export const UserWidget = ({userCounted}) => {
     return (
         <div className="border-2 h-44 border-white py-6 px-8 rounded-3xl text-center">

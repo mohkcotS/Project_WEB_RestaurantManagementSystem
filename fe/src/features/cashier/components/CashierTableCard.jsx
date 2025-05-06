@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { PaymentScreen } from "./PaymentScreen"
 
-export const CashierTableCard = ({ tb, setNotification, updateTableList }) => {
+export const CashierTableCard = ({ tb, setNotification, updateTableList, checkoutIds }) => {
     const [openPayment,setOpenPayment] = useState(false)
     const [selectedTable, setSelectedTable] = useState({})
     return (
-        <div className={`relative w-[400px] h-[200px] border-4 p-8 rounded-3xl 
+        <div className={`relative w-[400px] h-[200px] border-4 p-8 rounded-3xl ${checkoutIds.includes(tb.id) ? "border-yellow-300" : ""}
         ${tb.status === "available" ? " border-white" : "border-white/20"}`}>
             <div className="flex justify-between mb-5">
                 <h1 className={`text-2xl font-bold text-white ${tb.status === "available" ? "" : "z-10"}`}>{tb.name}</h1>

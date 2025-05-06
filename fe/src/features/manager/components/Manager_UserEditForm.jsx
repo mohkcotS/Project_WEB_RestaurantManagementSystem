@@ -1,20 +1,15 @@
 import { getUserById, updateUserById } from "../../../services/userService";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom'
-import { jwtDecode } from "jwt-decode"
+import socket from "../../../socket";
 
-
-export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , updateUserList, currentUser, setCurrentUser, getUserInformation }) => {
+export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , updateUserList}) => {
     const [user, setUser] = useState({ name: "", role: "" });
-    const [currentRole,setCurrentRole] = useState("")
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const response = await getUserById(editId);
                 setUser(response.data); 
-                setCurrentRole(response.data.role)
             } catch (error) {
                 console.error("Error fetching user:", error);
             }
@@ -29,24 +24,10 @@ export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , u
             const response = await updateUserById(editId,user)
             updateUserList();
             setOpenEdit(false)
-            if(currentUser.id === editId){
-                if(currentRole !== user.role){
-                    sessionStorage.clear()
-                    sessionStorage.setItem("message", JSON.stringify({message: "Your role is changed. Please login again." ,status: "error"}));
-                    navigate("/")
-                }
-                else{
-                    const newToken = response.data.accessToken
-                    sessionStorage.setItem("accessToken", newToken)
-                    const decoded = jwtDecode(newToken);
-                    getUserInformation(decoded.id)
-                    setNotification({ message: response.data.message, status: "success" });
-                }
-                
-            }
-            else{
-                setNotification({ message: response.data.message , status: "success" })
-            }
+            socket.emit("user-update",user)
+            socket.emit("update-user-board")
+            setNotification({ message: response.data.message , status: "success" })
+            
         } catch (error) {
             setNotification({ message: error.response.data.message, status: "error" })
         }
@@ -81,7 +62,7 @@ export const Manager_UserEditForm = ({ editId , setOpenEdit, setNotification , u
                 <button 
                     className='mx-auto w-[50%] bg-gradient-to-r from-green-400 to-green-600 text-white py-2 rounded-lg font-semibold hover:from-green-600 hover:to-green-800 
                     hover:w-[70%] transition-all duration-700 cursor-pointer'>
-                    Submit
+                    Update
                 </button>
             </form>
         </div>

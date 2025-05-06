@@ -4,27 +4,42 @@ import {TableCreateForm} from "../components/TableCreateForm";
 import {TableEditForm} from "../components/TableEditForm";
 import {TableDeleteForm} from "../components/TableDeleteForm";
 import { useOutletContext } from "react-router-dom"
-import useCheckRole from "../../../Hooks/useCheckRole";
+import socket from "../../../socket";
 
 export const ManagerTable = () => {
-    const {setNotification, currentUser}  = useOutletContext()
+    const {setNotification}  = useOutletContext()
     const [tables, setTables] = useState([])
     const [openCreate,setOpenCreate] = useState(false)
     const [openEdit,setOpenEdit] = useState(false)
     const [openDelete,setOpenDelete] = useState(false)
 
     const [editId, seteditId] = useState(null);
-    useCheckRole(currentUser)
 
     const updateTableList = async () => {
             const response = await getAllTables();
             setTables(response.data);
         };
 
-    useEffect(() => {
-        updateTableList()
-    }, []);
-
+        useEffect(() => {
+            updateTableList();
+        
+            const handleTableStatusUpdate = () => {
+                updateTableList();
+            };
+        
+            const handleNewPayment = () => {
+                updateTableList();
+            };
+        
+            socket.on("update-for-new-order", handleTableStatusUpdate);
+            socket.on("receive-new-payment", handleNewPayment);
+        
+            return () => {
+                socket.off("update-for-new-order", handleTableStatusUpdate);
+                socket.off("receive-new-payment", handleNewPayment);
+            };
+        }, []);
+    
 
     return (
         <div className="w-[80%] h-auto mx-auto flex flex-col my-10 gap-20">

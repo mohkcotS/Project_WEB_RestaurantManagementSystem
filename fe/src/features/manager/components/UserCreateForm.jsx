@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { createUser } from '../../../services/userService'
+import socket from '../../../socket'
 
 export const UserCreateForm = ({setOpenForm,setNotification,updateUserList}) => {
 
@@ -25,6 +26,7 @@ export const UserCreateForm = ({setOpenForm,setNotification,updateUserList}) => 
             if (response.status === 201) {
                 updateUserList();
                 setNotification({ message: response.data.message, status: "success" })
+                socket.emit("update-user-board")
                 reset();
             }
 

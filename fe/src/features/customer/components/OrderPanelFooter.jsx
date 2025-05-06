@@ -1,10 +1,12 @@
 import cartIcon from "../../../assets/svg/pageicon/cart.svg"
-export const OrderPanelFooter = ({openPanel,setOpenPanel,order,cart,price,butTitle,color,style,rounded, setOpenSeeDetail, setNewOrder, setOrderConfirmation}) => {
+import socket from "../../../socket"
+export const OrderPanelFooter = ({openPanel,setOpenPanel,order,cart,price,butTitle,color,style,rounded, setOpenSeeDetail, setNewOrder, setOrderConfirmation, currentOrder}) => {
     const handleClick = () => {
         if (order === 1) {
             setOrderConfirmation(true)
         } else {
             setOpenSeeDetail(true);
+            socket.emit("checkout", {TableId: currentOrder.TableId})
         }
         
     }

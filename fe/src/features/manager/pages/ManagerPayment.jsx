@@ -1,4 +1,3 @@
-import useCheckRole from "../../../Hooks/useCheckRole.js";
 import { useOutletContext } from "react-router-dom"
 import { getAllPayments } from "../../../services/paymentService.jsx";
 import { CustomCalendar } from "../../../components/CustomCalendar.jsx";
@@ -9,8 +8,7 @@ import { PaymentEditForm } from "../components/PaymentEditForm.jsx";
 
 
 export const ManagerPayment = () => {
-    const { setNotification, currentUser } = useOutletContext()
-    useCheckRole(currentUser)
+    const { setNotification } = useOutletContext()
     const [payments, setPayments] = useState([])
     const [filteredPayments, setFilteredPayments] = useState([]);
     const [selectedDate, setSelectedDate] = useState()

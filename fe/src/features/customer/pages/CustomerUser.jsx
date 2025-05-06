@@ -6,7 +6,6 @@ import { getOrderByUserId } from "../../../services/userService";
 import { CustomerOrderCard1 } from "../components/CustomerOrderCard1";
 import { OrderDetailCard } from "../../../components/OrderDetailCard";
 import { CustomerEditForm } from "../components/CustomerEditForm";
-import useCheckRole from "../../../Hooks/useCheckRole";
 
 export const CustomerUser = () => {
     const {currentUser, setNotification , getUserInformation} = useOutletContext()
@@ -14,7 +13,7 @@ export const CustomerUser = () => {
     const [openSeeDetail,setOpenSeeDetail] = useState(false)
     const [selectedOrder,setSelectedOrder] = useState({})
     const [orders, setOrders] = useState([])
-    useCheckRole(currentUser)
+    
     const getUserOrder = async (id) => {
         try {
             const response = await getOrderByUserId(id)

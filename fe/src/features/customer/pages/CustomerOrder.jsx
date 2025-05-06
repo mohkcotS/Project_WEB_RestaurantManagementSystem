@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { getAllDishes } from "../../../services/DishService";
 import { useOutletContext, useNavigate } from "react-router-dom"
 import { createOrderDetail } from "../../../services/order_detailService";
-import useCheckRole from "../../../Hooks/useCheckRole";
 import { OrderConfirmation } from "../components/OrderConfirmation";
+import socket from "../../../socket";
 
 export const CustomerOrder = () => {
 
@@ -15,9 +15,8 @@ export const CustomerOrder = () => {
     const [cart, setCart] = useState([])
     const [openPanel, setOpenPanel] = useState(false)
     const [orderConfirmation, setOrderConfirmation] = useState(false)
-    const {setNotification, currentOrder , currentUser } = useOutletContext()
+    const {setNotification, currentOrder} = useOutletContext()
     const navigate = useNavigate();
-    useCheckRole(currentUser)
     const confirmation = JSON.parse(sessionStorage.getItem("confirmation"));
     if (!confirmation) {
         setNotification({ message: "Please select a table.", status: "error" });
@@ -64,6 +63,7 @@ export const CustomerOrder = () => {
                 setNotification({ message: response.data.message, status: "success" });
                 setCart([])
                 setOrderConfirmation(false)
+                socket.emit("new-order-placed")
             }
 
             else {

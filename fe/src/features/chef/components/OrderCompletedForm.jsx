@@ -1,11 +1,10 @@
 
-export const OrderCompletedForm = ({setOpenOrderCompleted, setNotification, fetchOrder, setOpenOrderDetail, reload, setReload}) => {
+export const OrderCompletedForm = ({setOpenOrderCompleted, setNotification, fetchOrder, setOpenOrderDetail}) => {
     const handleCompleteOrder = () => {
 
         setNotification({message: "Order completed successfully", status: "success"})
         setOpenOrderCompleted(false);
         setOpenOrderDetail(false)
-        setReload(!reload)
         fetchOrder();
         
 

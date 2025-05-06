@@ -74,8 +74,8 @@ export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel, cur
                     {newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} order={1} 
                     cart={cart} price={totalPrice} butTitle={"Place Order"} color={"bg-green-500"} style={""} rounded={""} setOrderConfirmation={setOrderConfirmation}/>}
 
-                    {!newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} setOpenSeeDetail={setOpenSeeDetail} order={0}
-                    cart={orderedCart} price={totalPriceOrdered} butTitle={"Payment"} color={"bg-blue-500"} style={""} rounded={""} setOrderConfirmation={setOrderConfirmation}/>}
+                    {!newOrder && <OrderPanelFooter openPanel={openPanel} setOpenPanel={setOpenPanel} setOpenSeeDetail={setOpenSeeDetail} order={0} currentOrder={currentOrder}
+                    cart={orderedCart} price={totalPriceOrdered} butTitle={"Request to Pay"} color={"bg-blue-500"} style={""} rounded={""} setOrderConfirmation={setOrderConfirmation}/>}
                     
                     
                 </div>) :
