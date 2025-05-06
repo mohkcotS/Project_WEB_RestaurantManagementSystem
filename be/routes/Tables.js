@@ -81,7 +81,7 @@ router.delete("/:id", validateToken, checkRole(["Manager"]),  async(req,res,next
 })
 
 //get table from id
-router.get("/:id", validateToken, checkRole(["Manager","Customer"]), async (req, res, next) => {
+router.get("/:id", validateToken, checkRole(["Manager","Customer","Cashier"]), async (req, res, next) => {
     try {
         const { id } = req.params; 
         const table = await Tables.findByPk(id);
