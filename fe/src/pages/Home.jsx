@@ -95,7 +95,7 @@ export const Home = () => {
      
 
       {isVisible && <div className='fixed top-50 left-0 w-screen h-screen bg-black/50 flex justify-center z-20'>
-          <LoginAndRegisterForm isLogin={isLogin} isVisible={isVisible} setIsVisible={setIsVisible} setIsLogin={setIsLogin}/>
+          <LoginAndRegisterForm isLogin={isLogin} isVisible={isVisible} setIsVisible={setIsVisible} setIsLogin={setIsLogin} setNotification={setNotification}/>
         </div>  }
 
     </div>

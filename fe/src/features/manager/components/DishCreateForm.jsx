@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { createDish } from '../../../services/dishService'
+import { createDish } from '../../../services/DishService'
 
 export const DishCreateForm = ({setOpenCreate,setNotification, updateDishList}) => {
 
