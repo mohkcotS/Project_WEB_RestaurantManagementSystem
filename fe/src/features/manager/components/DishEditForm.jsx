@@ -88,7 +88,7 @@ export const DishEditForm = ({ editId , setOpenEdit, setNotification , updateDis
                 <button 
                     className='mx-auto w-[50%] bg-gradient-to-r from-green-400 to-green-600 text-white py-2 rounded-lg font-semibold hover:from-green-600 hover:to-green-800 
                     hover:w-[70%] transition-all duration-700 cursor-pointer'>
-                    Submit
+                    Update
                 </button>
             </form>
         </div>

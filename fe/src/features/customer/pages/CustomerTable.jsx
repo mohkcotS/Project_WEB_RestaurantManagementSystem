@@ -42,7 +42,7 @@ export const CustomerTable = () => {
                         className="px-8 py-3 border-2 border-white rounded-xl text-xl hover:cursor-pointer
                         hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95
                          text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed">
-                        Confirmation
+                        Confirm
                     </button>
                     
                 </div>

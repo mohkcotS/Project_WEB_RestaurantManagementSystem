@@ -17,16 +17,17 @@ export const CashierHome = () => {
     };
 
     const handleCheckout = async(data) => {
-        setCheckoutIds(prevCheckoutIds => {
-            if (prevCheckoutIds.includes(data.TableId)) {
-                return prevCheckoutIds;
-            } else {
-                return [...prevCheckoutIds, data.TableId];
-            }
+        setCheckoutIds(prev => {
+            const isAlreadyInList = prev.includes(data.TableId);
+            const newCheckoutIds = isAlreadyInList
+                ? prev
+                : [...prev, data.TableId];
+            return newCheckoutIds; 
         });
-        const response = await getTableById(data.TableId)
-        setNotification({message: "Table " + response.data.name + " wants to checkout" ,status:"success"})
+        const response = await getTableById(data.TableId);
+        setNotification({message: "Table " + response.data.name + " wants to checkout", status:"success"});
     }
+    
 
     const handleNewPayment = (data) => {
         setCheckoutIds(prevCheckoutIds => {
@@ -36,8 +37,6 @@ export const CashierHome = () => {
                 return [...prevCheckoutIds, data.TableId];
             }
         });
-
-        console.log(checkoutIds)
     }
 
     useEffect(() => {
