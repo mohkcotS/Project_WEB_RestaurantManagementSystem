@@ -39,7 +39,13 @@ export const Cashier = () => {
         }
         getUserInformation(decode.id);
 
+        const savedList = JSON.parse(sessionStorage.getItem("paymentList") || "[]");
+        setCheckoutIds(prevCheckoutIds => [...prevCheckoutIds, ...savedList]);
     }, [decode.id, location.pathname, navigate]);
+
+    useEffect(() => {
+        sessionStorage.setItem("paymentList", JSON.stringify(checkoutIds));
+    }, [checkoutIds]);
 
     return (
         <div className="max-w-screen flex relative bg-center" style={{ backgroundImage: `url(${bgImage})` }}>
