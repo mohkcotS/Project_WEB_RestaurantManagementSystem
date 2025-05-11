@@ -1,30 +1,15 @@
 import { FaCheck } from "react-icons/fa";
 import { DateAndTimeUtils } from "../../../utils/DateAndTimeUtils";
-import { useEffect, useState } from "react";
-import { getFullAllOrderDetail} from "../../../services/order_detailService";
 import { DishCompletedForm } from "../components/DishCompletedForm";
 import { OrderCompletedForm } from "./OrderCompletedForm";
+import { useState } from "react";
 
-export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification, fetchOrder}) => {
+export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification, dishes, fetchOrderDishes, load}) => {
     const { date, time } = DateAndTimeUtils(order.updatedAt)
-    const [dishes, setDishes] = useState([])
     const [openDishCompleted,setOpenDishCompleted] = useState(false)
     const [openOrderCompleted,setOpenOrderCompleted] = useState(false)
     const [selectedDish,setSelectedDish] = useState(0)
     
-    const fetchOrderDetail = async () => {
-        try {
-            const response = await getFullAllOrderDetail(order.id)
-            setDishes(response.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    useEffect(() => {
-        fetchOrderDetail()
-
-    }, [order.id])
-
     const sortedDishes = dishes.sort((a, b) => {
         if (a.status === "completed" && b.status !== "completed") return 1; 
         if (a.status !== "completed" && b.status === "completed") return -1; 
@@ -86,11 +71,11 @@ export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification
 
             {openDishCompleted && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
             <DishCompletedForm setOpenDishCompleted={setOpenDishCompleted} setNotification={setNotification} 
-            selectedDish={selectedDish} fetchOrderDetail={fetchOrderDetail}/></div>}   
+            selectedDish={selectedDish} fetchOrderDishes={fetchOrderDishes}  id={order.id}/></div>}   
 
             {openOrderCompleted && <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"> 
             <OrderCompletedForm setOpenOrderCompleted={setOpenOrderCompleted} setNotification={setNotification} 
-            fetchOrder={fetchOrder} setOpenOrderDetail={setOpenOrderDetail} /></div>}   
+            setOpenOrderDetail={setOpenOrderDetail} load={load} /></div>}   
 
         </div>
 

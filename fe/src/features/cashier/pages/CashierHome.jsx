@@ -34,7 +34,7 @@ export const CashierHome = () => {
             if (prevCheckoutIds.includes(data.TableId)) {
                 return prevCheckoutIds.filter(id => id !== data.TableId);
             } else {
-                return [...prevCheckoutIds, data.TableId];
+                return prevCheckoutIds;
             }
         });
     }
