@@ -1,21 +1,7 @@
 import { MdAccessTime } from "react-icons/md";
 import { DateAndTimeUtils } from "../../../utils/DateAndTimeUtils";
-import { useEffect, useState } from "react";
-import { getFullAllOrderDetail } from "../../../services/order_detailService";
-export const ChefOrderCard = ({ setOpenOrderDetail, order, setSelectedOrder}) => {
+export const ChefOrderCard = ({ setOpenOrderDetail, order, setSelectedOrder, dishes }) => {
     const { date, time } = DateAndTimeUtils(order.updatedAt)
-    const [dishes, setDishes] = useState([])
-    useEffect(() => {
-        const fetchOrderDetail = async () => {
-            try {
-                const response = await getFullAllOrderDetail(order.id)
-                setDishes(response.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchOrderDetail()
-    }, [order])
 
     const countPreparing = dishes.filter(dish => dish.status === "preparing").length;
 

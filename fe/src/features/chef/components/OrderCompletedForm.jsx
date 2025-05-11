@@ -1,13 +1,10 @@
 
-export const OrderCompletedForm = ({setOpenOrderCompleted, setNotification, fetchOrder, setOpenOrderDetail}) => {
+export const OrderCompletedForm = ({setOpenOrderCompleted, setNotification,setOpenOrderDetail,load}) => {
     const handleCompleteOrder = () => {
-
+        load();
         setNotification({message: "Order completed successfully", status: "success"})
         setOpenOrderCompleted(false);
         setOpenOrderDetail(false)
-        fetchOrder();
-        
-
     }
     return (
         <div className='w-[450px] h-auto rounded-3xl bg-gray-100 p-6 space-y-6'>
