@@ -1,5 +1,6 @@
 import { getTableById, updateTableById } from "../../../services/tableService";
 import { useEffect, useState } from "react";
+import socket from "../../../socket";
 
 export const TableEditForm = ({ editId , setOpenEdit, setNotification , updateTableList}) => {
     const [table, setTable] = useState({ name: "", type: "", status: "" });
@@ -24,6 +25,7 @@ export const TableEditForm = ({ editId , setOpenEdit, setNotification , updateTa
             updateTableList();
             setOpenEdit(false)
             setNotification({ message: response.data.message , status: "success" })
+            socket.emit("update-tables-status")
             
         } catch (error) {
             setNotification({ message: error.response.data.message, status: "error" })

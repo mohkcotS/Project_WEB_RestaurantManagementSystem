@@ -45,11 +45,13 @@ export const CashierHome = () => {
 
     useEffect(() => {
         socket.on("update-for-new-order",updateTableList)
+        socket.on("receive-update-tables-status",updateTableList)
         socket.on("receive-checkout", handleCheckout)
         socket.on("receive-new-payment",handleNewPayment)
 
         return () => {
             socket.off("update-for-new-order", updateTableList);
+            socket.off("receive-update-tables-status",updateTableList)
             socket.off("receive-checkout",handleCheckout)
             socket.off("receive-new-payment",handleNewPayment)
         };

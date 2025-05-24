@@ -28,6 +28,10 @@ const initSocket = (server) => {
             io.emit("receive-new-payment", data);
         });
 
+        socket.on("update-tables-status", (data) => {
+            io.emit("receive-update-tables-status", data);
+        });
+
         socket.on("checkout", (data) => {
             socket.broadcast.emit("receive-checkout", data);
         });

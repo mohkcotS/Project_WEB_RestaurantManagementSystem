@@ -5,7 +5,6 @@ import { TableConfirmation } from "../components/TableConfirmation";
 import { CustomerTableCard } from "../components/CustomerTableCard";
 import socket from "../../../socket";
 
-
 export const CustomerTable = () => {
     const [tables, setTables] = useState([])
     const [openEdit, setOpenEdit] = useState(false)
@@ -14,19 +13,21 @@ export const CustomerTable = () => {
             const response = await getAllTables();
             setTables(response.data);
         };
+
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await getAllTables();
-            setTables(response.data);
-        };
-        fetchData();
-        socket.on("update-for-new-order",()=>{
-            fetchData();
-        })
+        updateTableList(); 
+    }, []);
+
+    useEffect(()=>{
+        socket.on("update-for-new-order",updateTableList)
+        socket.on("receive-update-tables-status",updateTableList)
+
         return () => {
             socket.off("update-for-new-order");
+            socket.off("receive-update-tables-status",updateTableList)
+
         };
-    }, []);
+    },[])
 
 
     return (
