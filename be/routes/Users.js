@@ -4,6 +4,8 @@ const { Users ,Rewards, Orders } = require("../models")
 const bcrypt = require("bcrypt")
 const {sign} = require('jsonwebtoken')
 const {validateToken , checkRole} = require('../middlewares/AuthMiddlewares')
+require('dotenv').config();
+
 
 // Get post put delete get:id
 
@@ -98,7 +100,7 @@ router.post("/login", async (req, res, next) => {
             return next({ statusCode: 401, message: "Wrong password" }); 
         }
 
-        const accessToken = sign({id: user.id, role : user.role},"importantsecret")
+        const accessToken = sign({id: user.id, role : user.role},process.env.DEV_SECRETJWT)
         return res.status(200).json({ accessToken, message: "Login Successfully" });
 
     } catch (error) {
@@ -181,7 +183,7 @@ router.patch("/:id", validateToken, async (req, res, next) => {
 
         let accessToken = null;
         if (role !== undefined) {
-            accessToken = sign({ id: user.id, role: user.role }, "importantsecret");
+            accessToken = sign({ id: user.id, role: user.role }, process.env.DEV_SECRETJWT);
             return res.status(200).json({
                 message: "User updated successfully",
                 accessToken,
