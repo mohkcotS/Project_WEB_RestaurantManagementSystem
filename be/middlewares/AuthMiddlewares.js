@@ -1,4 +1,6 @@
 const { verify } = require('jsonwebtoken');
+require('dotenv').config();
+
 
 const validateToken = (req, res, next) => {
     const accessToken = req.header("Authorization")?.split(" ")[1]; // Lấy token từ header
@@ -6,7 +8,7 @@ const validateToken = (req, res, next) => {
     if (!accessToken) return res.status(401).json({ error: "User not logged in" });
 
     try {
-        const validToken = verify(accessToken, "importantsecret");
+        const validToken = verify(accessToken, process.env.DEV_SECRETJWT);
         
         req.user = validToken; // Lưu thông tin user để sử dụng trong các API khác
 

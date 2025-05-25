@@ -1,9 +1,10 @@
 const express = require("express")
+require('dotenv').config(); 
 const app = express()
 const cors = require("cors")
 const { initSocket } = require("./socket"); // Import initSocket từ file socket.js
 
-// === Tích hợp WebSocket ===
+// === WebSocket ===
 const http = require("http"); 
 const server = http.createServer(app);
 initSocket(server);
@@ -48,7 +49,7 @@ app.use(errorHandler);
 
 //Database connection
 db.sequelize.sync().then(() => {
-    const PORT = 3001;
+    const PORT = process.env.DEV_PORT || 3001;
     server.listen(PORT, () => {
         console.log(`🚀 Server is running on http://localhost:${PORT}`);
     });
