@@ -51,7 +51,7 @@ export const ManagerOrder = () => {
 
             </div>  
 
-            <div className="w-full grid grid-cols-[2fr_3fr_3fr_3fr_3fr] text-2xl font-bold text-yellow-300 px-10 text-center">
+            <div className="w-full grid grid-cols-[2fr_3fr_3fr_3fr_3fr] text-lg font-bold text-yellow-300 px-10 text-center">
                 <div>ORDER ID</div>
                 <div >DATE</div>
                 <div>TOTAL PRICE</div>
@@ -59,7 +59,7 @@ export const ManagerOrder = () => {
                 <div>ACTION</div>
             </div>
             <hr className="text-white/70" />
-            <div className="w-full overflow-y-auto max-h-[630px] overflow-x-visible px-10" >
+            <div className="w-full overflow-y-auto max-h-[480px] overflow-x-visible space-y-3 px-10" >
                 {filteredOrders && filteredOrders.length > 0 ? (
                     filteredOrders.map(order => (
                         <ManagerOrderCard order={order} setOpenSeeDetail={setOpenSeeDetail} setSelectedOrder={setSelectedOrder} setOpenEdit={setOpenEdit} />

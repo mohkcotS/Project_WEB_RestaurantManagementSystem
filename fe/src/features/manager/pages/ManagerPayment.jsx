@@ -47,7 +47,7 @@ export const ManagerPayment = () => {
                         <CustomCalendar setSelectedDate={setSelectedDate} />
                     </div>  
         
-                    <div className="w-full grid grid-cols-7 text-2xl font-bold text-yellow-300 px-10 text-center">
+                    <div className="w-full grid grid-cols-7 text-lg font-bold text-yellow-300 px-10 text-center">
                         <div>PAYMENT ID</div>
                         <div>ORDER ID</div>
                         <div>DATE</div>
@@ -57,7 +57,7 @@ export const ManagerPayment = () => {
                         <div>ACTION</div>
                     </div>
                     <hr className="text-white/70" />
-                    <div className="w-full overflow-y-auto max-h-[630px] overflow-x-visible px-10" >
+                    <div className="w-full overflow-y-auto max-h-[630px] overflow-x-visible space-y-3 px-10" >
                         {filteredPayments && filteredPayments.length > 0 ? (
                             filteredPayments.map(payment => (
                                 <ManagerPaymentCard payment={payment} setSelectedPayment={setSelectedPayment} setOpenEdit={setOpenEdit} />

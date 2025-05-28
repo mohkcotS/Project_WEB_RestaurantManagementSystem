@@ -104,7 +104,7 @@ export const RevenueChart = ({selectedMonth , salesMonthData}) => {
         ticks: {
           color: '#ffffff',
           font: {
-            size: 14, // Thay đổi kích thước chữ của các nhãn trên trục y
+            size: 12, // Thay đổi kích thước chữ của các nhãn trên trục y
           },
           padding: 10, // Thêm khoảng cách giữa trục Y và nhãn
           stepSize: stepSize,
@@ -121,10 +121,10 @@ export const RevenueChart = ({selectedMonth , salesMonthData}) => {
           },
       tooltip: {
         titleFont: {
-          size: 20, // Thay đổi kích thước chữ của tiêu đề trong tooltip
+          size: 16, // Thay đổi kích thước chữ của tiêu đề trong tooltip
         },
         bodyFont: {
-          size: 18, // Thay đổi kích thước chữ của nội dung trong tooltip
+          size: 16, // Thay đổi kích thước chữ của nội dung trong tooltip
         },
       },
       title: {
@@ -132,18 +132,18 @@ export const RevenueChart = ({selectedMonth , salesMonthData}) => {
         text: `Revenue Chart ${monthString} - ${year}`, // Tiêu đề biểu đồ
         color: '#ffffff', // Màu của tiêu đề
         font: {
-          size: 24, // Kích thước font của tiêu đề
+          size: 20, // Kích thước font của tiêu đề
         },
         align: 'center',
         padding:{
-            bottom:20,
+            bottom:10,
         }
       },
     },
   };
 
   return (
-    <div style={{ width: '100%', height: '380px' }}>
+    <div style={{ width: '100%', height: '320px' }}>
       <Bar data={data} options={options} />
     </div>
   );

@@ -53,7 +53,7 @@ export const Chef = () => {
                 <Outlet context={{currentUser, setNotification}} />
             </div>
             {/* Toast */}
-            {notification?.message && <div className="z-10"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}
+            {notification?.message && <div className="z-100"><Toast message={notification.message} status={notification.status} onClose={() => setNotification(null)} /></div>}
         </div>
     )
 }

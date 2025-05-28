@@ -12,22 +12,22 @@ export const CustomerDishCard = ({ dish, cart , setCart }) => {
 
             <div className="flex-1 flex flex-col px-5 ">
                 <div className="w-full py-4">
-                    <h1 className=" text-xl mb-2 font-bold text-green-500">{dish.name}</h1>
-                    <h1 className="text-lg font-bold">${dish.price}</h1>
+                    <h1 className=" text-md mb-2 font-bold text-green-500">{dish.name}</h1>
+                    <h1 className="text-sm font-bold">${dish.price}</h1>
                 </div>
 
                 {order ? (
                     <div className="flex items-center  gap-5 text-white">
                         <button
                             onClick={() => decreaseFromCart(cart,setCart,dish)}
-                            className="w-8 h-8 py-4 px-4 rounded-xl border-2 flex justify-center items-center text-2xl hover:scale-105 active:scale-95 cursor-pointer"
+                            className="w-4 h-3 py-3 px-3 rounded-lg border-2 flex justify-center items-center text-md hover:scale-105 active:scale-95 cursor-pointer"
                         >
                             -
                         </button>
-                        <h1 className="text-2xl font-bold">{order.quantity}</h1>
+                        <h1 className="text-md font-bold">{order.quantity}</h1>
                         <button
                             onClick={() => addToCart(cart,setCart,dish)}
-                            className="w-8 h-8 py-4 px-4 rounded-xl border-2 flex justify-center items-center text-2xl hover:scale-105 active:scale-95 cursor-pointer"
+                            className="w-4 h-3 py-3 px-3 rounded-lg border-2 flex justify-center items-center text-md hover:scale-105 active:scale-95 cursor-pointer"
                         >
                             +
                         </button>
@@ -35,7 +35,7 @@ export const CustomerDishCard = ({ dish, cart , setCart }) => {
                 ) : (
                     <button
                         onClick={() => addToCart(cart,setCart,dish)}
-                        className="w-8 h-8 py-4 px-4 rounded-xl border-2 flex justify-center items-center text-2xl hover:scale-105 active:scale-95 cursor-pointer"
+                        className="w-4 h-3 py-3 px-3 rounded-lg border-2 flex justify-center items-center text-md hover:scale-105 active:scale-95 cursor-pointer"
                     >
                         +
                     </button>

@@ -132,15 +132,15 @@ export const ManagerHome = () => {
 
         <div className="w-[90%] h-auto mx-auto flex flex-col  my-10 gap-10">
             <div className="w-full flex gap-10">
-                <div className="w-[70%] flex flex-col gap-10">
-                    <div className="w-full grid grid-cols-[4fr_6fr] gap-x-10">
+                <div className="w-[70%] flex flex-col gap-6">
+                    <div className="w-full grid grid-cols-[4fr_6fr] gap-x-8">
                         <TableWidget tableCounted={tableCounted} />
                         <UserWidget userCounted={userCounted} />
                     </div>
-                    <div className="w-ful grid grid-cols-[4fr_6fr] gap-x-10">
+                    <div className="w-ful grid grid-cols-[4fr_6fr] gap-x-8">
                         <MonthlyRevenueWidget setSelectedMonth={setSelectedMonth} totalMonthAmount={totalMonthAmount} />
 
-                        <div className="w-full grid grid-cols-2 gap-x-10">
+                        <div className="w-full grid grid-cols-2 gap-x-6">
                             <SaleTodayWidget salesToday={salesToday} />
                             <OrderTodayWidget todayOrder={todayOrder} />
                         </div>

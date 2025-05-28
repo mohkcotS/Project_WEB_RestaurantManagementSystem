@@ -47,10 +47,10 @@ export const ManagerUser = () => {
                         placeholder="Search user..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="px-10 py-4 border-2 border-white rounded-xl text-white focus:outline-none text-xl"
+                        className="px-10 py-3 border-2 border-white rounded-xl text-white focus:outline-none text-md"
                     />
 
-                    <select name="" id="" className="px-10 py-4 border-2 border-white rounded-xl text-white focus:outline-none text-xl"
+                    <select name="" id="" className="px-10 py-3 border-2 border-white rounded-xl text-white focus:outline-none text-md"
                         value={selectedRole}
                         onChange={(e) => setSelectedRole(e.target.value)}>
                         <option value="All" className="text-black">All</option>
@@ -64,7 +64,7 @@ export const ManagerUser = () => {
 
                 <div>
                     <button onClick={() => setOpenForm(true)}
-                        className="px-8 py-3 border-2 border-white rounded-xl text-xl hover:cursor-pointer hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
+                        className="px-8 py-3 border-2 border-white rounded-xl text-md hover:cursor-pointer hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
                         Create user
                     </button>
                 </div>
@@ -72,7 +72,7 @@ export const ManagerUser = () => {
 
 
             <div className="w-full">
-                <div className="grid grid-cols-[2fr_2fr_2fr_3fr] text-yellow-300 text-center text-2xl font-bold px-10 ">
+                <div className="grid grid-cols-[2fr_2fr_2fr_3fr] text-yellow-300 text-center text-lg font-bold px-10 ">
                     <div>ID</div>
                     <div>NAME</div>
                     <div>ROLE</div>
@@ -80,7 +80,7 @@ export const ManagerUser = () => {
                 </div>
 
                 <hr className="text-white m-5" />
-                <div className=" overflow-y-auto max-h-[600px] overflow-x-visible px-10">
+                <div className=" overflow-y-auto max-h-[490px] overflow-x-visible px-10 space-y-3">
                     {filteredUsers && filteredUsers.length > 0 ? (
                         filteredUsers.map(user => (
                             <CustomerCard user={user} setEditId={setEditId} setOpenEdit={setOpenEdit} setOpenDelete={setOpenDelete}/>
