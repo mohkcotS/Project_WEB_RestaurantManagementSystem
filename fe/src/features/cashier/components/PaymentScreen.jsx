@@ -73,18 +73,18 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
     }
 
     return (
-        <div className='relative w-[800px] h-[500px] rounded-3xl  bg-gray-100 '>
+        <div className='relative w-[700px] h-[450px] rounded-3xl  bg-gray-100 '>
             <div className='absolute top-5 right-5 text-2xl font-bold'>
                 <button
                     onClick={() => { setOpenPayment(false) }}
                     className='text-gray-500 hover:text-red-600 cursor-pointer'>&#10006;</button>
             </div>
             <div className="flex w-full h-full gap-5">
-                <div className="w-[450px] h-full  px-6 py-6 overflow-y-auto scrollbar-hide max-h-[95%]" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+                <div className="w-[400px] h-full  px-6 py-6 overflow-y-auto scrollbar-hide max-h-[95%]" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
                     <h1 className="text-xl font-bold text-center">La Ratatouille Restaurant</h1>
                     <hr className="border-1 border-dashed border-gray-700 my-4" />
 
-                    <div className="grid grid-cols-2 gap-x-10 text-lg ">
+                    <div className="grid grid-cols-2 gap-x-10 text-md ">
                         <h1> <strong>Date:</strong> {date} </h1>
                         <h1> <strong>Time:</strong> {time} </h1>
                         <h1> <strong>Order ID:</strong> {order.id}</h1>
@@ -95,47 +95,47 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
 
                     {cart.map(dish => (
                         <div >
-                            <h1 className="font-bold text-lg">{dish.name}</h1>
+                            <h1 className="font-bold text-md">{dish.name}</h1>
                             <div className="flex justify-between">
-                                <div className="flex gap-20">
+                                <div className="flex gap-20 text-sm">
                                     <h1>{dish.quantity}x</h1>
                                     <h1>{dish.price}</h1>
                                 </div>
-                                <h1>{dish.totalPrice.toFixed(2)}</h1>
+                                <h1 className="text-sm">{dish.totalPrice.toFixed(2)}</h1>
                             </div>
                         </div>
                     ))}
 
                 </div>
 
-                <div className="w-[350px] border-l-1 pt-10 px-6 space-y-8">
+                <div className="w-[300px] border-l-1 pt-10 px-6 space-y-8">
 
                     <div className="space-y-2 mt-6">
                         <div className="flex justify-between">
-                            <h1 className="text-lg font-bold">Sub total</h1>
-                            <h1 className="text-lg">{subTotal.toFixed(2)}</h1>
+                            <h1 className="text-md font-bold">Sub total</h1>
+                            <h1 className="text-md">{subTotal.toFixed(2)}</h1>
                         </div>
 
                         <div className="flex justify-between">
-                            <h1 className="text-lg font-bold">Membership discount</h1>
-                            <h1 className="text-lg text-red-500">{discount()}</h1>
+                            <h1 className="text-md font-bold">Membership discount</h1>
+                            <h1 className="text-md text-red-500">{discount()}</h1>
                         </div>
 
                         <hr className="border-gray-400 my-2" />
 
                         <div className="flex justify-between">
-                            <h1 className="text-2xl font-bold">TOTAL</h1>
-                            <h1 className="text-2xl font-bold text-green-600">{total.toFixed(2)}</h1>
+                            <h1 className="text-xl font-bold">TOTAL</h1>
+                            <h1 className="text-xl font-bold text-green-600">{total.toFixed(2)}</h1>
                         </div>
 
                         <div className="flex justify-between">
-                            <h1 className="text-lg font-bold">Loyalty points</h1>
-                            <h1 className="text-lg text-blue-700">{loyaltyPoints.toFixed(2)}</h1>
+                            <h1 className="text-md font-bold">Loyalty points</h1>
+                            <h1 className="text-md text-blue-700">{loyaltyPoints.toFixed(2)}</h1>
                         </div>
                     </div>
 
                     <div>
-                        <h1 className="text-lg font-bold mb-1">Payment Method</h1>
+                        <h1 className="text-md font-bold mb-1">Payment Method</h1>
                         <select 
                         onChange={(e)=>{setPaymentMethod(e.target.value)}}
                         className="w-full border border-gray-400 rounded-md p-2 text-sm">
@@ -147,12 +147,12 @@ export const PaymentScreen = ({ selectedTable, setOpenPayment, setNotification, 
                     </div>
 
                     <div className="flex flex-col gap-4 mt-4">
-                        <button className="rounded-xl cursor-pointer bg-yellow-500 hover:scale-105 active:scale-95 duration-300 text-white font-bold py-2">
+                        <button className="rounded-xl text-sm cursor-pointer bg-yellow-500 hover:scale-105 active:scale-95 duration-300 text-white font-bold py-2">
                             Print Bill
                         </button>
                         <button 
                             onClick={handleConfirmation}
-                            className="rounded-xl cursor-pointer bg-green-500 hover:scale-105 active:scale-95 duration-300 text-white font-bold py-2">
+                            className="rounded-xl text-sm cursor-pointer bg-green-500 hover:scale-105 active:scale-95 duration-300 text-white font-bold py-2">
                             Confirmation
                         </button>
                     </div>

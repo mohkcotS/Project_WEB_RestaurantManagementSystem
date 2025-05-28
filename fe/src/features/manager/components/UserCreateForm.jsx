@@ -39,12 +39,12 @@ export const UserCreateForm = ({setOpenForm,setNotification,updateUserList}) => 
     }
 
     return (
-        <div className='w-[450px] h-auto rounded-3xl border-3 bg-gray-100 p-6 space-y-6 shadow-lg '>
-            <div className='flex justify-between items-center text-2xl font-bold'>
+        <div className='w-[400px] h-auto rounded-3xl border-3 bg-gray-100 p-6 space-y-6 shadow-lg '>
+            <div className='flex justify-between items-center text-xl font-bold'>
                 <h2 className='text-blue-500'>Create User</h2>
                 <button onClick={()=>setOpenForm(false)} className='text-gray-500 hover:text-red-600 cursor-pointer'>&#10006;</button>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-4 '>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-3 text-sm '>
                 <input className='px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-400' type="text" placeholder='Name...' {...register("name")} />
                 < select className='px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-400' {...register("role")}>
                     <option value="">Select Role</option>

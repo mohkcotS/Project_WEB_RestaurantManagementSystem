@@ -35,12 +35,12 @@ export const CustomerTable = () => {
             <div className="w-[100%] text-white flex flex-col gap-10">
                 <div className="flex justify-between">
                     <div className="flex gap-20">
-                        <h1 className="text-white text-4xl">Your selected table: </h1>
-                        <h1 className="text-yellow-300 text-4xl font-bold">{selectedTable.name}</h1>
+                        <h1 className="text-white text-3xl">Your selected table: </h1>
+                        <h1 className="text-yellow-300 text-3xl font-bold">{selectedTable.name}</h1>
                     </div>
                     
-                    <button disabled={confirmation} onClick={()=> {setOpenEdit(true)}}
-                        className="px-8 py-3 border-2 border-white rounded-xl text-xl hover:cursor-pointer
+                    <button disabled={confirmation || selectedTable.id == null} onClick={()=> {setOpenEdit(true)}}
+                        className="px-8 py-2 border-2 border-white rounded-xl text-lg hover:cursor-pointer
                         hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95
                          text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed">
                         Confirm
@@ -48,7 +48,7 @@ export const CustomerTable = () => {
                     
                 </div>
                 <div className="flex flex-col gap-10">
-                    <div className="w-[100%] grid grid-cols-3 gap-x-30 gap-y-15 mx-auto ">
+                    <div className="w-[100%] grid grid-cols-3 gap-x-20 gap-y-10 mx-auto ">
                         {tables
                             .map(tb => (
                                 <CustomerTableCard tb={tb} selectedTable={selectedTable} confirmation={confirmation} setSelectedTable={setSelectedTable}/>

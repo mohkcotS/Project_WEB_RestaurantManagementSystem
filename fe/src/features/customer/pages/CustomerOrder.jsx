@@ -76,10 +76,10 @@ export const CustomerOrder = () => {
         }
     };
     return (
-        <div className="w-[90%] h-auto mx-auto flex flex-col my-10 gap-20 p-10">
+        <div className="w-[90%] h-auto mx-auto flex flex-col gap-16 p-10">
             <div className="flex flex-col gap-10">
                 <div className="flex justify-between items-center w-full ">
-                    <div className="w-full text-2xl text-white flex">
+                    <div className="w-full text-xl text-white flex">
                         {foodCategory.map((item) => (
                             <div
                                 key={item.value}
@@ -103,7 +103,7 @@ export const CustomerOrder = () => {
                         placeholder="Search dish..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-[30%] px-10 py-4 border-2 border-white rounded-xl text-white focus:outline-none text-xl"
+                        className="w-[20%] px-10 py-3 border-2 border-white rounded-xl text-white focus:outline-none text-sm"
                     />
                 </div>
 

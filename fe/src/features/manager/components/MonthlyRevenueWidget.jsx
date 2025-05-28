@@ -16,9 +16,9 @@ export const MonthlyRevenueWidget = ({setSelectedMonth , totalMonthAmount}) => {
         
       };
     return (
-        <div className="border-2 h-40 border-white py-6 px-8 rounded-3xl ">
+        <div className="border-2 h-30 border-white py-4 px-8 rounded-3xl ">
             <div className="flex justify-between items-center relative">
-                <h3 className="text-xl font-semibold text-yellow-600">MONTHLY REVENUES</h3>
+                <h3 className="text-md font-semibold text-yellow-600">MONTHLY REVENUES</h3>
                 <div className="relative"> {/* Bọc riêng icon + calendar */}
                     <CiCalendarDate
                         onClick={() => { setOpenCalendar(!openCalendar) }}
@@ -35,17 +35,17 @@ export const MonthlyRevenueWidget = ({setSelectedMonth , totalMonthAmount}) => {
                                     setSelectedMonth(selectedMonth)
                                 }}
                                 value={month}
-                                className="rounded-2xl shadow-lg shadow-black"
+                                className="shadow-lg shadow-black"
                             />
                         </div>
                     )}
                 </div>
             </div>
 
-            <hr className="mb-6 mt-2 text-white" />
-            <div className="flex justify-between ">
-                <h1 className="font-bold text-2xl text-green-500 items-center">{totalMonthAmount.toFixed(2)} $</h1>
-                <h1 className="text-gray-400 text-lg">[{formatMonthAndYear(month).month} {formatMonthAndYear(month).year}  ]</h1>
+            <hr className="mb-4 mt-2 text-white" />
+            <div className="flex justify-between items-center ">
+                <h1 className="font-bold text-xl text-green-500 items-center">{totalMonthAmount.toFixed(2)} $</h1>
+                <h1 className="text-gray-400 text-sm">[{formatMonthAndYear(month).month} {formatMonthAndYear(month).year}  ]</h1>
             </div>
         </div>
     )

@@ -49,11 +49,11 @@ export const ManagerDish = () => {
     
    
     return (
-        <div className="w-[80%] h-auto mx-auto flex flex-col my-10 gap-20">
+        <div className="w-[80%] h-auto mx-auto flex flex-col my-10 gap-10">
             <div className="flex flex-col gap-10">
                 <div className="flex justify-between items-center">
 
-                    <div className="text-2xl text-white flex gap-20">
+                    <div className="text-lg text-white flex gap-20">
                         {foodCategory.map((item) => (
                             <div
                                 key={item.value}
@@ -72,7 +72,7 @@ export const ManagerDish = () => {
 
                     <button
                     onClick={()=>{setOpenCreate(true)}}
-                        className="px-8 py-3 border-2 border-white rounded-xl text-xl hover:cursor-pointer hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
+                        className="px-8 py-3 border-2 border-white rounded-xl text-sm hover:cursor-pointer hover:text-green-400  transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
                         Create Dish
                     </button>
                 </div>
@@ -83,7 +83,7 @@ export const ManagerDish = () => {
                         placeholder="Search dish..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-[30%] px-10 py-4 border-2 border-white rounded-xl text-white focus:outline-none text-xl"
+                        className="w-[30%] px-10 py-3 border-2 border-white rounded-xl text-white focus:outline-none text-sm"
                     />
                 </div>
 

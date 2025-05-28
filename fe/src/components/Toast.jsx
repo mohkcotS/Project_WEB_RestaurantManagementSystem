@@ -18,8 +18,8 @@ export const Toast = ({ message, status, onClose }) => {
 
   return (
     <div
-      className={`fixed top-5 right-5 min-h-[60px] w-[320px] bg-gray-800 shadow-2xl rounded-xl 
-      p-4 flex items-center gap-3 transition-all duration-500 ease-out border-b-2 border-gray-200 text-lg
+      className={`fixed top-5 right-5 h-[50px] w-[250px] bg-gray-800 shadow-2xl rounded-xl
+      p-4 flex items-center gap-3 transition-all duration-500 ease-out border-b-2 border-gray-200 text-sm
       ${visible ? "translate-x-0 opacity-100" : "translate-x-[120%] opacity-0"}
       ${status === "success" ? "shadow-green-500/40" : "shadow-red-500/40"}`}
     >

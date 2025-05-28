@@ -35,11 +35,11 @@ export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel, cur
             </div>}
             
             {openPanel ?
-                (<div className="h-[800px] bg-black rounded-3xl flex flex-col overflow-hidden border-2 border-gray-300">
+                (<div className="h-[700px] bg-black rounded-3xl flex flex-col overflow-hidden border-2 border-gray-300">
 
-                    <div className="flex-1 flex flex-col gap-5 overflow-hidden">
+                    <div className="flex-1 flex flex-col gap-3 overflow-hidden">
 
-                        <div className="h-[70px] p-5 text-2xl text-white grid grid-cols-2 ">
+                        <div className="h-[70px] p-5 text-xl text-white grid grid-cols-2 font-bold ">
                             <div
                             onClick={()=>setNewOrder(true)}
                              className={`text-center py-4 cursor-pointer ${newOrder ? "text-yellow-300" :""}`}>New Order</div>
@@ -50,19 +50,19 @@ export const CustomerOrderPanel = ({ cart, setCart, openPanel, setOpenPanel, cur
 
                         <hr className="text-white/70 "/>
 
-                        <div className="grid grid-cols-[5fr_2fr_3fr] gap-5 text-gray-500 px-10 font-bold text-xl ">
-                            <h1 className="  ">Name</h1>
-                            <h1 className="  text-center">Price</h1>
-                            <h1 className="  text-center">Quantity</h1>
+                        <div className="grid grid-cols-[5fr_2fr_3fr] gap-5 text-gray-400 px-6 font-bold text-md ">
+                            <h1 className="  w-48 ">Name</h1>
+                            <h1 className="  ">Price</h1>
+                            <h1 className="  ">Quantity</h1>
                         </div>
 
-                        {newOrder && <div className="flex-1 flex flex-col overflow-y-auto px-4 ">
+                        {newOrder && <div className="flex-1 flex flex-col overflow-y-auto px-6 ">
                             {cart.map(order => (
                                 <CustomerOrderCard order={order} cart={cart} setCart={setCart} />
                             ))}
                         </div>}
 
-                        {!newOrder &&<div className="flex-1 flex flex-col overflow-y-auto px-4">
+                        {!newOrder &&<div className="flex-1 flex flex-col overflow-y-auto px-6">
                             {orderedCart.map(order => (
                                 <CustomerOrderedCard order={order} />
                             ))}

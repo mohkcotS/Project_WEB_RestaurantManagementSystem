@@ -50,12 +50,12 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
 
     return (
         
-        <div className="w-[450px] relative rounded-3xl border-3 bg-white p-6 overflow-y-auto max-h-[80vh]" >
+        <div className="w-[400px] relative rounded-3xl border-3 bg-white p-6 overflow-y-auto max-h-[80vh]" >
 
             <h1 className="text-xl font-bold text-center mt-4">La Ratatouille Restaurant</h1>
             <hr className="border-1 border-dashed border-gray-700 my-4" />
 
-            <div className="grid grid-cols-2 gap-x-20 text-lg ">
+            <div className="grid grid-cols-2 gap-x-20 text-md ">
                 <h1> <strong>Date:</strong> {date} </h1>
                 <h1> <strong>Time:</strong> {time} </h1>
                 <h1> <strong>Order ID:</strong> {selectedOrder.id}</h1>
@@ -66,8 +66,8 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
   
                 {orderCart.map(order => (
                     <div >
-                        <h1 className="font-bold text-lg">{order.name}</h1>
-                        <div className="flex justify-between">
+                        <h1 className="font-bold text-sm">{order.name}</h1>
+                        <div className="flex justify-between text-sm">
                             <div className="flex gap-20">
                                 <h1>{order.quantity}x</h1>
                                 <h1>{order.price}</h1>
@@ -81,14 +81,14 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
 
             <div className="flex justify-between">
                 <div className="flex flex-col gap-2 ">
-                    <h1 className="text-lg"> {orderCart.length} items</h1>
-                    <div className="flex gap-2 justify-between">
-                        <h1 className="font-bold "> Loyalty points  </h1>
-                        <h1 className="text-blue-600">{loyaltyPoints}</h1>
+                    <h1 className="text-md"> {orderCart.length} items</h1>
+                    <div className="flex gap-3 justify-between">
+                        <h1 className="font-bold text-sm "> Loyalty points  </h1>
+                        <h1 className="text-blue-600 text-sm">{loyaltyPoints}</h1>
                     </div>
                 </div>              
                 
-                <div className="w-[180px] text-lg flex flex-col ">
+                <div className="w-[180px] text-sm flex flex-col ">
                     <div className="flex gap-2 justify-between">
                         <h1 className="font-bold"> Sub total  </h1>
                         <h1>{subTotal.toFixed(2)}</h1>
@@ -98,7 +98,7 @@ export const OrderDetailCard = ({ setOpenSeeDetail, selectedOrder, isPayment }) 
                         <h1 className="text-red-600">{discount()}</h1>
                     </div>
 
-                    <div className="flex gap-2 text-xl justify-between font-bold my-2">
+                    <div className="flex gap-2 text-lg justify-between font-bold my-2">
                         <h1 className=" "> TOTAL  </h1>
                         <h1 className="text-green-700">{formattedAmount}</h1>
                     </div>        

@@ -86,7 +86,7 @@ export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin, setNoti
         }
     }
     return (
-        <div className={`w-[800px] h-[500px] rounded-3xl border-12 border-white bg-gray-200 flex justify-between overflow-hidden relative transition-all ease-out duration-700`}>
+        <div className={`w-[600px] h-[350px] rounded-3xl border-8 border-white bg-gray-200 flex justify-between overflow-hidden relative transition-all ease-out duration-700`}>
 
         <button onClick={() => {setIsVisible(false);lReset();rReset();}} className={`text-2xl hover:text-red-600 absolute top-5 right-8 active:scale-95 transition-colors duration-300 z-30 cursor-pointer ${isLogin ? 'text-[#ffd900]' : 'text-black'}`} >&#10006;</button>
 
@@ -94,19 +94,19 @@ export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin, setNoti
 
         <div className={`absolute inset-0 flex w-full ${isLogin ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}>
 
-          <div className={`h-full w-[450px] py-10 px-6 flex flex-col justify-center items-center gap-y-6 transition-transform duration-1000 ease-out ${isLogin ? '' : 'translate-x-full'}`}>
-            <h2 className="text-blue-800 text-5xl font-bold">Login</h2>
-            <form onSubmit={lHandleSubmit(onLogin)} className="flex flex-col gap-y-8 w-[350px]">
+          <div className={`h-full w-[350px] py-10 px-6 flex flex-col justify-center items-center gap-y-6 transition-transform duration-1000 ease-out ${isLogin ? '' : 'translate-x-full'}`}>
+            <h2 className="text-blue-800 text-3xl font-bold">Login</h2>
+            <form onSubmit={lHandleSubmit(onLogin)} className="flex flex-col gap-y-4 text-xs w-[300px]">
               <input className="px-4 py-2 border bg-[#eeeeee] border-gray-300 rounded-lg focus:outline-none" type="text" placeholder="Name" {...lRegister("name")} />
               <input className="px-4 py-2 border bg-[#eeeeee] border-gray-300 rounded-lg focus:outline-none" type="password" placeholder="Password" {...lRegister("password")} />
               <button className="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-lg font-semibold cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-500">Login</button>
             </form>
           </div>
 
-          <div className={`h-full w-[350px] bg-gradient-to-b from-blue-800 via-blue-600 to-purple-700 flex flex-col text-white rounded-l-[50px] justify-center items-center gap-y-6 transition-transform duration-1000 ease-out ${isLogin ? 'z-20' : '-translate-x-full'}`}>
-            <h2 className="font-bold text-3xl">Welcome Back!</h2>
-            <h3>Don't have an account?</h3>
-            <button onClick={() => setIsLogin(false)} className="py-2 px-10 rounded-lg font-semibold border-2 hover:px-16 active:scale-95 cursor-pointer transition-all duration-500">Register</button>
+          <div className={`h-full w-[250px] bg-gradient-to-b from-blue-800 via-blue-600 to-purple-700 flex flex-col text-white rounded-l-[50px] justify-center items-center gap-y-3 transition-transform duration-1000 ease-out ${isLogin ? 'z-20' : '-translate-x-full'}`}>
+            <h2 className="font-bold text-xl">Welcome Back!</h2>
+            <h3 className='text-sm'>Don't have an account?</h3>
+            <button onClick={() => setIsLogin(false)} className="text-xs py-2 px-10 rounded-lg font-semibold border-2 hover:px-16 active:scale-95 cursor-pointer transition-all duration-500">Register</button>
           </div>
 
         </div>
@@ -117,15 +117,15 @@ export const LoginAndRegisterForm = ({isLogin, setIsVisible, setIsLogin, setNoti
         <div
           className={`absolute inset-0 flex w-full transition-transform duration-700 ease-in-out ${isLogin ? 'opacity-0 z-0' : 'opacity-100 z-20'}`}>
 
-          <div className={`h-full w-[350px] bg-gradient-to-b from-blue-800 via-blue-600 to-purple-700 flex flex-col text-white rounded-r-[50px] justify-center items-center gap-y-6 transition-transform duration-1000 ease-out ${isLogin ? 'translate-x-full' : 'z-20'}`}>
-            <h2 className="font-bold text-3xl">Join Us Today!</h2>
-            <h3>Already have an account?</h3>
-            <button onClick={() => setIsLogin(true)} className="py-2 px-10 rounded-lg font-semibold border-2 hover:px-16 active:scale-95 cursor-pointer transition-all duration-500">Login</button>
+          <div className={`h-full w-[250px] bg-gradient-to-b from-blue-800 via-blue-600 to-purple-700 flex flex-col text-white rounded-r-[50px] justify-center items-center gap-y-3 transition-transform duration-1000 ease-out ${isLogin ? 'translate-x-full' : 'z-20'}`}>
+            <h2 className="font-bold text-xl">Join Us Today!</h2>
+            <h3 className='text-sm'>Already have an account?</h3>
+            <button onClick={() => setIsLogin(true)} className="text-xs py-2 px-10 rounded-lg font-semibold border-2 hover:px-16 active:scale-95 cursor-pointer transition-all duration-500">Login</button>
           </div>
 
-          <div className={`h-full w-[450px] py-10 px-6 flex flex-col items-center justify-center gap-y-6 transition-transform duration-1000 ease-out ${isLogin ? '-translate-x-full' : ''}`}>
-            <h2 className="text-blue-800 text-5xl font-bold">Register</h2>
-            <form onSubmit={rHandleSubmit(onRegister)} className="flex flex-col gap-y-8 w-[350px]">
+          <div className={`h-full w-[350px] py-10 px-6 flex flex-col items-center justify-center gap-y-6 transition-transform duration-1000 ease-out ${isLogin ? '-translate-x-full' : ''}`}>
+            <h2 className="text-blue-800 text-3xl font-bold">Register</h2>
+            <form onSubmit={rHandleSubmit(onRegister)} className="flex flex-col gap-y-4 text-xs w-[300px]">
               <input className="px-4 py-2 border bg-[#eeeeee] border-gray-300 rounded-lg focus:outline-none" type="text" placeholder="Name" {...rRegister("name")} />
               <input className="px-4 py-2 border bg-[#eeeeee] border-gray-300 rounded-lg focus:outline-none" type="password" placeholder="Password" {...rRegister("password")} />
               <input className="px-4 py-2 border bg-[#eeeeee] border-gray-300 rounded-lg focus:outline-none" type="password" placeholder="Confirmed password" {...rRegister("confirmedPassword")} />

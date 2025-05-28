@@ -17,19 +17,19 @@ export const ManagerNavBarSide = () => {
         { id: "logout", src: svg.logout },
     ]
     const selectedIndex = icons.findIndex((icon) => icon.id === location.pathname.split("/")[2]);
-    const translateY = selectedIndex * 96;
+    const translateY = selectedIndex * 84;
     return (
         <div>
             <div className="flex flex-col flex-shrink-0 px-4
-                            gap-y-6 items-center pt-32  min-h-screen z-20 sticky top-0 ">
+                            gap-y-5 items-center pt-32  min-h-screen z-20 sticky top-0 ">
 
 
-                <div className="absolute w-[72px] h-[72px] border-4  border-cyan-500 rounded-3xl transition-transform duration-500"
+                <div className="absolute w-[64px] h-[64px] border-4  border-cyan-500 rounded-3xl transition-transform duration-500"
                     style={{ transform: `translateY(${translateY}px)` }}></div>
 
 
                 {icons.map((icon) => (
-                    <img key={icon.id} src={icon.src} className="h-[72px] w-[72px] rounded-3xl p-4 cursor-pointer transition-all duration-300 z-10"
+                    <img key={icon.id} src={icon.src} className="h-[64px] w-[64px] rounded-3xl p-4 cursor-pointer transition-all duration-300 z-10"
                         onClick={() => {
 
                             if (icon.id === "logout") {

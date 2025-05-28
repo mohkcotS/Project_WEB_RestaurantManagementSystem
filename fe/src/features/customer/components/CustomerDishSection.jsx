@@ -6,7 +6,7 @@ export const CustomerDishSection = ({title, dishes, choose, cart , setCart}) => 
     }
     return (
         <div className="flex flex-col gap-10">
-            <h1 className="text-yellow-300 text-3xl font-bold">{title}</h1>
+            <h1 className="text-yellow-300 text-2xl font-bold">{title}</h1>
             <div className="w-[100%] grid grid-cols-3 gap-10">
                 {dishes
                 .filter(dish => dish.type === title)

@@ -22,8 +22,8 @@ export const CustomCalendar = ({setSelectedDate}) => {
                         onClick={toggleCalendar}
                     />
 
-                    <h1 className="text-2xl text-white font-bold">Selected date: </h1>
-                    <div className="w-60 text-white text-2xl">
+                    <h1 className="text-lg text-white font-bold">Selected date: </h1>
+                    <div className="w-60 text-white text-lg">
                         {date === undefined ? "" : DateAndTimeUtils(date).date}
                     </div>
                 </div>
@@ -31,11 +31,11 @@ export const CustomCalendar = ({setSelectedDate}) => {
                 <div className="flex items-center gap-8">
                     <button
                         onClick={() => setShowCalendar(false)}
-                        className="w-[100px] px-4 py-3 border-2 border-white rounded-xl text-lg hover:cursor-pointer hover:text-green-400  
+                        className="w-[100px] px-4 py-3 border-2 border-white rounded-xl text-sm hover:cursor-pointer hover:text-green-400  
                     transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">Choose</button>
                     <button
                         onClick={() => {setDate(undefined); setSelectedDate(undefined)}}
-                        className="w-[100px] px-4 py-3 border-2 border-white rounded-xl text-lg hover:cursor-pointer hover:text-red-400  
+                        className="w-[100px] px-4 py-3 border-2 border-white rounded-xl text-sm hover:cursor-pointer hover:text-red-400  
                     transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">Clear</button>
                 </div>
                 

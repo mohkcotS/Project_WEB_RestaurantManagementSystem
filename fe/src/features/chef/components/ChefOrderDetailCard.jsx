@@ -19,27 +19,27 @@ export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification
     const preparingdDishesCount = dishes.filter(dish => dish.status === "preparing").length;
 
     return (
-        <div className="w-[550px] relative rounded-3xl border-3 bg-gray-100 p-6 overflow-y-auto max-h-[80vh]" >
-            <h1 className="text-2xl font-bold text-center my-4">Order# {order.id}</h1>
+        <div className="w-[450px] relative rounded-3xl border-3 bg-gray-100 p-6 overflow-y-auto max-h-[80vh]" >
+            <h1 className="text-xl font-bold text-center my-4">Order# {order.id}</h1>
             <div className="flex justify-between">
                 <h1> <strong>Date: </strong>{date}</h1>
                 <h1> <strong>Time: </strong>{time}</h1>
             </div>
-            <hr className="border-1  border-gray-700 my-4" />
+            <hr className="border-1  border-gray-700 my-3" />
 
             {sortedDishes.map(dish => (
                 <div  className="grid grid-cols-[3fr_1fr_1fr] mb-3">
-                    <div className={`text-lg ${dish.status === "completed" ? "text-gray-400" : ""}`}>
-                        <h1 >{dish.Dish.name}</h1>
+                    <div className={`text- ${dish.status === "completed" ? "text-gray-400" : ""}`}>
+                        <h1 className="text-sm" >{dish.Dish.name}</h1>
                         <h1 >{dish.quantity}x</h1>
                     </div>
 
-                    <h1 className={`text-center ${dish.status === "completed" ? "text-green-600" : "text-orange-500"}  text-xl font-semibold`}>{dish.status}</h1>
+                    <h1 className={`text-center ${dish.status === "completed" ? "text-green-600" : "text-orange-500"}  text-md font-semibold`}>{dish.status}</h1>
 
                     {dish.status === "preparing" && <div className="w-full h-full flex justify-end ">
                         <button
                             onClick={() => {setOpenDishCompleted(true); setSelectedDish(dish.id)}}
-                            className=" h-[70%] border-black px-3 rounded-xl text-md hover:cursor-pointer bg-blue-500 transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
+                            className=" h-[70%] border-black px-3 rounded-xl text-sm hover:cursor-pointer bg-blue-500 transition-all duration-500 hover:scale-105 active:scale-95 text-white font-bold">
                             <FaCheck />
                         </button>
                     </div>}
@@ -50,12 +50,12 @@ export const ChefOrderDetailCard = ({ setOpenOrderDetail, order, setNotification
 
             <hr className="border-1 border-dashed border-gray-700 my-4" />
             <div className="flex justify-between">
-                <h1>{dishes.length} items</h1>
+                <h1 className="text-sm">{dishes.length} items</h1>
                 <div className="flex justify-center ">
                     <button
                         onClick={()=>{setOpenOrderCompleted(true)}}
                         disabled={preparingdDishesCount >0}
-                        className="border-black px-6 py-2 rounded-xl text-lg hover:cursor-pointer bg-green-600 transition-all 
+                        className="border-black px-6 py-2 rounded-xl text-md hover:cursor-pointer bg-green-600 transition-all 
                         duration-500 hover:scale-105 active:scale-95 text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed">
                         Order Complete
                     </button>
