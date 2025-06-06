@@ -45,7 +45,7 @@ export const MonthlyRevenueWidget = ({setSelectedMonth , totalMonthAmount}) => {
             <hr className="mb-4 mt-2 text-white" />
             <div className="flex justify-between items-center ">
                 <h1 className="font-bold text-xl text-green-500 items-center">{totalMonthAmount.toFixed(2)} $</h1>
-                <h1 className="text-gray-400 text-sm">[{formatMonthAndYear(month).month} {formatMonthAndYear(month).year}  ]</h1>
+                <h1 className="text-gray-400 text-sm">[{formatMonthAndYear(month).month} {formatMonthAndYear(month).year}]</h1>
             </div>
         </div>
     )
